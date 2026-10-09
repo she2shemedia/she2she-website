@@ -1,8 +1,10 @@
 ---
 import Base from '../layouts/Base.astro';
 import CtaBand from '../components/CtaBand.astro';
+import LoopVideo from '../components/LoopVideo.astro';
 
 // Each project uses the same short format. Screenshots live in /images/work/ (set `image`, `w` and `h`).
+// Add `video` (an .mp4 in /images/work/) to show a looping screen recording, with `image` as its still frame.
 // A project with `soon: true` shows a "Launching soon" ribbon and no link until it goes live.
 const projects = [
   {
@@ -24,7 +26,8 @@ const projects = [
     needed: 'A home for the recipes that sends people to the YouTube videos where the recipes come to life.',
     built: "A searchable recipe database with filters by ingredient, diet and meal type, in a playful brand that doesn't get in the way of the food.",
     image: '/images/work/dogs-that-cook.jpg',
-    w: 1400, h: 723,
+    video: '/images/work/dogs-that-cook.mp4',
+    w: 1400, h: 716,
   },
   {
     name: 'A. M. French',
@@ -35,7 +38,8 @@ const projects = [
     needed: 'A home for the first book and a place readers can follow along as the series grows.',
     built: 'A site that introduces the book and points readers to where to buy it.',
     image: '/images/work/am-french.jpg',
-    w: 1400, h: 695,
+    video: '/images/work/am-french.mp4',
+    w: 1400, h: 694,
   },
 ];
 ---
@@ -64,7 +68,9 @@ const projects = [
           ) : (
             <a href={p.url} class="browser" aria-label={`Visit ${p.name}`}>
               <span class="chrome" aria-hidden="true"><i></i><i></i><i></i><b>{p.domain}</b></span>
-              {p.image
+              {p.video
+                ? <LoopVideo src={p.video} poster={p.image} alt={`A screen recording of the ${p.name} website homepage and its animations`} width={p.w} height={p.h} />
+                : p.image
                 ? <img class="shot-img" src={p.image} alt={`The ${p.name} website homepage`} width={p.w} height={p.h} loading="lazy" />
                 : <span class="shot"><span class="shot-title">{p.name}</span><span class="shot-sub">{p.line}</span></span>}
             </a>
@@ -103,7 +109,7 @@ const projects = [
   .soon { position: relative; }
   .ribbon { position: absolute; top: 72px; right: -46px; z-index: 2; transform: rotate(35deg); background: var(--magenta); color: #fff; font-size: 13px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; padding: 8px 56px; box-shadow: 0 6px 16px rgba(0,0,0,.18); }
   .soon-note { font-weight: 600; color: var(--magenta-dark); }
-  .browser:hover .shot-img { transform: scale(1.02); }
-  @media (prefers-reduced-motion: no-preference) { .shot-img { transition: transform .8s cubic-bezier(.22,.61,.36,1); } }
+  .browser:hover :global(.shot-img) { transform: scale(1.02); }
+  @media (prefers-reduced-motion: no-preference) { :global(.browser .shot-img) { transition: transform .8s cubic-bezier(.22,.61,.36,1); } }
   @media (max-width: 860px) { .two { grid-template-columns: 1fr; gap: 32px; } }
 </style>
