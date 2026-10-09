@@ -1,0 +1,43 @@
+---
+import Base from '../../layouts/Base.astro';
+import CtaBand from '../../components/CtaBand.astro';
+import { posts, formatDate } from '../../posts';
+---
+<Base
+  title="Website & Marketing Tips for Women Business Owners | She2She Media"
+  description="Practical, jargon-free advice on websites, SEO and social media for women who run their own businesses."
+>
+  <section class="section intro">
+    <div class="container narrow">
+      <span class="eyebrow">Blog</span>
+      <h1>Website and marketing tips</h1>
+      <p class="lead">Practical, jargon-free advice for women who run their own businesses.</p>
+    </div>
+  </section>
+  <section class="section list">
+    <div class="container grid">
+      {posts.map((p) => (
+        <a class="post" href={`/post/${p.slug}`}>
+          <img src={p.frontmatter.image} alt="" width="940" height="788" loading="lazy" />
+          <span class="date">{formatDate(p.frontmatter.date)}</span>
+          <h2>{p.frontmatter.title}</h2>
+          <p>{p.frontmatter.description}</p>
+        </a>
+      ))}
+    </div>
+  </section>
+  <CtaBand heading="Rather talk it through?" body="A free 30-minute consultation is often faster than another blog post." />
+</Base>
+<style>
+  .intro { padding-bottom: 16px; }
+  .list { padding-top: 32px; }
+  .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; }
+  .post { text-decoration: none; color: var(--text); display: flex; flex-direction: column; }
+  .post img { border-radius: 18px; margin-bottom: 16px; border: 1px solid var(--line); }
+  .post h2 { font-size: 1.2rem; line-height: 1.35; margin-bottom: .4em; }
+  .post:hover h2 { color: var(--magenta-dark); text-decoration: underline; text-underline-offset: 4px; }
+  .post p { color: var(--muted); font-size: 15px; }
+  .date { font-size: 13px; color: var(--muted); margin-bottom: 6px; }
+  @media (max-width: 900px) { .grid { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 560px) { .grid { grid-template-columns: 1fr; } }
+</style>

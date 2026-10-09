@@ -1,0 +1,141 @@
+---
+import Base from '../layouts/Base.astro';
+import Torn from '../components/Torn.astro';
+import CtaBand from '../components/CtaBand.astro';
+---
+<Base
+  title="Websites & Marketing for Women-Owned Businesses | She2She Media"
+  description="Clear, fast websites and social media for women-owned businesses. Plain language, real prices, and a free 30-minute consultation."
+>
+  <section class="hero">
+    <div class="container hero-grid">
+      <div class="copy">
+        <span class="eyebrow">She2She Media</span>
+        <h1>Websites and marketing for <span class="underline">women-owned businesses</span></h1>
+        <p class="lead">I build clear, fast websites and handle the social media you don't have time for, so your business looks as good online as it is in real life.</p>
+        <a href="/book-online" class="btn">Book a free consultation</a>
+        <p class="small">30 minutes on Zoom. No pitch deck, no pressure.</p>
+      </div>
+      <div class="photo">
+        <div class="frame">
+          <img src="/images/anita.jpg" alt="Anita, founder of She2She Media, smiling in a magenta blouse with a castle behind her" width="720" height="765" fetchpriority="high" />
+        </div>
+        <div class="waves deco" aria-hidden="true"></div>
+        <div class="hatch deco2" aria-hidden="true"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="special">
+    <div class="container special-inner">
+      <p><strong>Website rebrand special:</strong> for the first 5 women business owners who book a free consultation. Full rebrand plus a 3-page site for $497, or a 3-page site in your current branding for $297.</p>
+      <a href="/pricing#special">See the details</a>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container narrow problem">
+      <h2>You're running the business. The website can't be another job.</h2>
+      <p class="lead">Most of the owners I work with built their own site at some point, usually late at night, and it shows. Not because they did it badly, but because a website is a lot of small decisions, and they had a business to run. That's the part I take off your plate.</p>
+    </div>
+  </section>
+
+  <Torn top="#fff" bottom="var(--cream)" />
+  <section class="section cream">
+    <div class="container">
+      <span class="eyebrow">What I do</span>
+      <h2>Three ways I can help</h2>
+      <div class="cards">
+        <a class="card svc" href="/services#websites">
+          <h3>Websites</h3>
+          <p>A clear, mobile-first site built around one thing: getting the right people to contact you.</p>
+          <p class="price">From $1,300</p>
+        </a>
+        <a class="card svc" href="/services#social">
+          <h3>Social media</h3>
+          <p>12 posts a month, 3 a week, planned, written, designed and scheduled in your brand, with your final OK before anything goes out.</p>
+          <p class="price">$500<small>/month</small></p>
+        </a>
+        <a class="card svc" href="/services#care">
+          <h3>Ongoing care</h3>
+          <p>Updates, checks and small improvements every month, so your site doesn't quietly go stale.</p>
+          <p class="price">$150<small>/month for 2 hours of work</small></p>
+        </a>
+      </div>
+    </div>
+  </section>
+  <Torn top="var(--cream)" bottom="#fff" flip />
+
+  <section class="section">
+    <div class="container">
+      <span class="eyebrow">How it works</span>
+      <h2>Four stages, no black box</h2>
+      <ol class="steps">
+        <li><span class="num">1</span><h3>Free consultation</h3><p>We talk about your business, your customers and what the site needs to do.</p></li>
+        <li><span class="num">2</span><h3>Words first</h3><p>We plan the pages and the copy before any design. This is the step that makes everything else faster.</p></li>
+        <li><span class="num">3</span><h3>Design and build</h3><p>Your brand, real photos, built for phones first.</p></li>
+        <li><span class="num">4</span><h3>Launch and care</h3><p>SEO basics and a speed check at launch, then regular updates if you want them.</p></li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="section tight">
+    <div class="container work">
+      <a href="https://dogsthatcook.com" class="browser" aria-label="Visit dogsthatcook.com">
+        <span class="chrome" aria-hidden="true"><i></i><i></i><i></i><b>dogsthatcook.com</b></span>
+        <span class="shot">
+          <!-- TODO: replace with a real screenshot at /images/work/dogs-that-cook.jpg -->
+          <span class="shot-title">Dogs That Cook</span>
+          <span class="shot-sub">Recipes for humans, hosted by two Jack Russell terriers</span>
+        </span>
+      </a>
+      <div>
+        <span class="eyebrow">Recent work</span>
+        <h2>Dogs That Cook</h2>
+        <p>A real recipe blog, hosted by two Jack Russell terriers. I built a searchable recipe database with filters by ingredient, diet and meal type, in a playful brand that doesn't get in the way of the food.</p>
+        <a href="/work">See more work</a>
+      </div>
+    </div>
+  </section>
+
+  <CtaBand heading="Not sure what you need yet?" body="That's what the call is for. Bring your current site, or the lack of one, and we'll work out the next step together." />
+</Base>
+
+<style>
+  .hero { padding: 64px 0 72px; overflow: hidden; }
+  .hero-grid { display: grid; grid-template-columns: 1.15fr .85fr; gap: 56px; align-items: center; }
+  .copy .lead { margin-bottom: 32px; }
+  .small { font-size: 14px; color: var(--muted); margin-top: 14px; }
+  .photo { position: relative; }
+  .frame { position: relative; z-index: 1; border-radius: var(--radius); overflow: hidden; box-shadow: 0 24px 48px rgba(168,37,111,.18); border: 8px solid #fff; }
+  .deco { position: absolute; right: -28px; bottom: -36px; width: 120px; height: 220px; z-index: 0; }
+  .deco2 { position: absolute; left: -26px; top: 36px; width: 110px; height: 70px; z-index: 0; opacity: .85; }
+  .special { background: var(--ink); color: #fff; font-size: 15px; }
+  .special-inner { display: flex; justify-content: space-between; align-items: center; gap: 16px 32px; padding-top: 16px; padding-bottom: 16px; flex-wrap: wrap; }
+  .special p { margin: 0; }
+  .special a { color: #fff; font-weight: 600; white-space: nowrap; }
+  .problem { text-align: center; }
+  .problem .lead { margin: 0 auto; }
+  .cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 32px; }
+  .svc { text-decoration: none; color: var(--text); display: flex; flex-direction: column; border-top: 6px solid var(--magenta); }
+  .svc:hover { border-color: var(--line); border-top-color: var(--magenta-dark); box-shadow: 0 12px 28px rgba(0,0,0,.06); color: var(--text); }
+  .svc .price { margin-top: auto; font-size: 1.5rem; }
+  .steps { list-style: none; padding: 0; margin: 32px 0 0; display: grid; grid-template-columns: repeat(4, 1fr); gap: 28px; }
+  .num { display: inline-flex; width: 52px; height: 52px; border-radius: 50%; background: var(--magenta); color: #fff; font-weight: 700; font-size: 22px; align-items: center; justify-content: center; margin-bottom: 16px; }
+  .work { display: grid; grid-template-columns: 1.1fr .9fr; gap: 48px; align-items: center; }
+  .browser { display: block; border-radius: 18px; overflow: hidden; border: 1px solid var(--line); box-shadow: 0 18px 40px rgba(0,0,0,.08); text-decoration: none; }
+  .chrome { display: flex; align-items: center; gap: 6px; background: #f1edef; padding: 12px 16px; }
+  .chrome i { width: 10px; height: 10px; border-radius: 50%; background: var(--lilac); }
+  .chrome b { margin-left: 12px; font-weight: 500; font-size: 13px; color: var(--muted); background: #fff; padding: 4px 12px; border-radius: 999px; }
+  .shot { display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; aspect-ratio: 16 / 10; background: var(--magenta-soft); padding: 24px; }
+  .shot-title { font-size: 1.8rem; font-weight: 700; color: var(--ink); }
+  .shot-sub { color: var(--muted); }
+  @media (max-width: 900px) {
+    .hero { padding-top: 40px; }
+    .hero-grid, .work { grid-template-columns: 1fr; gap: 40px; }
+    .photo { max-width: 420px; margin: 0 auto; }
+    .cards { grid-template-columns: 1fr; }
+    .steps { grid-template-columns: 1fr 1fr; }
+  }
+  @media (max-width: 520px) { .steps { grid-template-columns: 1fr; } .deco { right: -12px; } .deco2 { left: -10px; } }
+</style>

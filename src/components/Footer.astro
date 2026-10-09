@@ -1,0 +1,56 @@
+---
+const year = new Date().getFullYear();
+---
+<footer class="foot">
+  <div class="container grid">
+    <div class="about">
+      <img src="/images/she2she-logo.png" alt="She2She Media" width="413" height="125" loading="lazy" />
+      <p>Websites and marketing for women-owned businesses. Based in the US, working online with women-owned businesses everywhere.</p>
+    </div>
+    <nav aria-label="Footer">
+      <h2>Pages</h2>
+      <a href="/services">Services</a>
+      <a href="/pricing">Pricing</a>
+      <a href="/work">Work</a>
+      <a href="/about">About</a>
+      <a href="/blog">Blog</a>
+    </nav>
+    <div>
+      <h2>Contact</h2>
+      <a href="mailto:anita@she2shemedia.com">anita@she2shemedia.com</a>
+      <a href="tel:+16784359858">+1 678-435-9858</a>
+      <a href="https://wa.me/16784356262">WhatsApp</a>
+      <div class="social">
+        <a href="https://www.linkedin.com/company/she2shemedia">LinkedIn</a>
+        <a href="https://instagram.com/she2shemedia">Instagram</a>
+        <a href="https://facebook.com/she2shemedia">Facebook</a>
+      </div>
+    </div>
+  </div>
+  <div class="container legal">
+    <span>&copy; {year} She2She Media, LLC</span>
+    <nav aria-label="Legal">
+      <a href="/privacy">Privacy policy</a>
+      <a href="/terms">Terms</a>
+      <a href="/disclaimer">Disclaimer</a>
+      <a href="/accessibility">Accessibility</a>
+    </nav>
+  </div>
+  <div class="hatch strip" aria-hidden="true"></div>
+</footer>
+
+<style>
+  .foot { background: var(--cream); border-top: 1px solid var(--line); padding: 64px 0 0; font-size: 15px; margin-top: 0; }
+  .grid { display: grid; grid-template-columns: 1.6fr 1fr 1fr; gap: 40px; }
+  .about img { width: 150px; margin-bottom: 16px; }
+  .about p { max-width: 340px; color: var(--muted); }
+  h2 { font-size: 14px; letter-spacing: .12em; text-transform: uppercase; margin-bottom: 14px; }
+  nav, .grid > div:last-child { display: flex; flex-direction: column; gap: 8px; }
+  a:not(.btn) { color: var(--text); text-decoration: none; }
+  a:not(.btn):hover { color: var(--magenta-dark); text-decoration: underline; }
+  .social { display: flex; gap: 16px; margin-top: 8px; flex-wrap: wrap; }
+  .legal { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px 24px; padding-top: 32px; padding-bottom: 24px; margin-top: 40px; border-top: 1px solid var(--line); color: var(--muted); font-size: 14px; }
+  .legal nav { flex-direction: row; flex-wrap: wrap; gap: 8px 20px; }
+  .strip { height: 14px; opacity: .8; }
+  @media (max-width: 760px) { .grid { grid-template-columns: 1fr 1fr; } .about { grid-column: 1 / -1; } }
+</style>

@@ -1,0 +1,17 @@
+# Old Wix URLs → new pages (Cloudflare Pages reads this file)
+/start-here               /                 301
+/our-services             /services         301
+/how-it-works             /services         301
+/about-us                 /about            301
+/our-work                 /work             301
+/privacy-policy           /privacy          301
+/copy-of-disclaimer       /terms            301
+/copy-of-privacy-policy   /disclaimer       301
+/accessibility-statement  /accessibility    301
+/blog/categories/*        /blog             301
+
+# July 2025 posts held back from the new site (see README); remove a line here to restore that post
+/post/unlocking-success-for-women-owned-businesses                    /blog  301
+/post/helping-women-owned-businesses-thrive                           /blog  301
+/post/empowering-women-entrepreneurs-through-digital-marketing-strategies  /blog  301
+/post/maximize                                                        /blog  301

@@ -1,0 +1,17 @@
+---
+// Wrapper for simple text pages (legal pages). Markdown pages set `layout` to this file.
+import Base from './Base.astro';
+const { frontmatter } = Astro.props;
+---
+<Base title={frontmatter.title} description={frontmatter.description}>
+  <section class="section">
+    <div class="container narrow prose">
+      <h1>{frontmatter.heading}</h1>
+      <slot />
+    </div>
+  </section>
+</Base>
+<style>
+  .prose :global(h2) { font-size: 1.35rem; margin-top: 1.8em; }
+  .prose :global(li) { margin-bottom: .35em; }
+</style>

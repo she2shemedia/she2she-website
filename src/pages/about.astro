@@ -1,0 +1,51 @@
+---
+import Base from '../layouts/Base.astro';
+import CtaBand from '../components/CtaBand.astro';
+---
+<Base
+  title="About Anita, Founder of She2She Media"
+  description="I build websites and handle marketing for women-owned businesses. Former executive assistant, children's book author, systems fan."
+  image="/images/anita.jpg"
+>
+  <section class="section">
+    <div class="container about">
+      <div class="photo">
+        <img src="/images/anita.jpg" alt="Anita, founder of She2She Media, in a magenta blouse and pearls with a castle behind her" width="720" height="765" />
+        <div class="waves deco" aria-hidden="true"></div>
+      </div>
+      <div class="story">
+        <span class="eyebrow">About</span>
+        <h1>Hi, I'm Anita.</h1>
+        <p class="lead">I run She2She Media, a small web design and marketing studio for women-owned businesses. It's me, not a team, which means you talk to the person doing the work.</p>
+        <p>Before She2She, I spent years as an executive assistant across many industries including legal, avionics, and most recently in the franchise world. Franchising runs on systems: the same standards, the same playbook, location after location. That's where I learned that most "marketing problems" are really process problems, and that the person running a business doesn't need more ideas. She needs fewer decisions.</p>
+        <p>After experiencing a layoff in 2023, I decided it was time to take my years of experience and launch my own business, as many women who have been cast aside in the corporate world do.</p>
+        <p>These days I work online and live my dream of traveling the world as a digital nomad, which is a good test of whether a system actually works. Everything I do for clients is written down, planned ahead and checked, because nothing can live in my head when the view out the window changes frequently.</p>
+        <p>I also write children's books as A. M. French. Writing for kids turns out to be decent copywriting training: every word has to earn its place, and if the reader gets lost, that's on the writer.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section cream">
+    <div class="container narrow">
+      <h2>What you can expect from me</h2>
+      <ul class="expect">
+        <li>Plain language, no jargon</li>
+        <li>Honest advice, including when you don't need what you came to buy</li>
+        <li>Your final OK before anything goes live</li>
+        <li>Systems you can understand, not a black box</li>
+      </ul>
+    </div>
+  </section>
+
+  <CtaBand above="var(--cream)" heading="If you've read this far, we'd probably get on." />
+</Base>
+
+<style>
+  .about { display: grid; grid-template-columns: .8fr 1.2fr; gap: 64px; align-items: start; }
+  .photo { position: sticky; top: calc(var(--header-h) + 32px); }
+  .photo img { border-radius: var(--radius); border: 8px solid #fff; box-shadow: 0 24px 48px rgba(168,37,111,.18); position: relative; z-index: 1; }
+  .deco { position: absolute; left: -28px; bottom: -32px; width: 110px; height: 200px; }
+  .expect { list-style: none; padding: 0; margin: 24px 0 0; display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .expect li { background: #fff; border-radius: 16px; padding: 20px 22px; border-left: 0; border-top: 5px solid var(--magenta); font-weight: 500; }
+  @media (max-width: 860px) { .about { grid-template-columns: 1fr; gap: 40px; } .photo { position: relative; top: 0; max-width: 380px; } .expect { grid-template-columns: 1fr; } }
+</style>

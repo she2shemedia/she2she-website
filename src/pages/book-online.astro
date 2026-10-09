@@ -1,0 +1,41 @@
+---
+import Base from '../layouts/Base.astro';
+---
+<Base
+  title="Book a Free Website Consultation | She2She Media"
+  description="Book a free 30-minute call about your website or social media. You'll leave with a clear next step."
+>
+  <section class="section">
+    <div class="container book">
+      <div class="info">
+        <span class="eyebrow">Free consultation</span>
+        <h1>Book a free consultation</h1>
+        <p class="lead">30 minutes on Zoom. We'll talk about your business, what your website or social media needs to do, and what it would take. You'll leave with a clear next step, whether or not that's working with me.</p>
+        <h2>What to bring</h2>
+        <ul class="check">
+          <li>Your current website, if you have one</li>
+          <li>A rough idea of your budget</li>
+        </ul>
+        <div class="me">
+          <img src="/images/anita-square.jpg" alt="" width="400" height="400" />
+          <p>You'll be talking to me, Anita. Prefer email? <a href="mailto:anita@she2shemedia.com">anita@she2shemedia.com</a></p>
+        </div>
+      </div>
+      <div class="cal">
+        <div class="calendly-inline-widget" data-url="https://calendly.com/she2shemedia/30min?hide_gdpr_banner=1&primary_color=ca328d" style="min-width:300px;height:720px;"></div>
+        <noscript><p><a href="https://calendly.com/she2shemedia/30min">Book on Calendly</a></p></noscript>
+      </div>
+    </div>
+  </section>
+  <script is:inline type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>
+</Base>
+
+<style>
+  .book { display: grid; grid-template-columns: .85fr 1.15fr; gap: 48px; align-items: start; }
+  h2 { font-size: 1.15rem; margin-top: 1.5em; }
+  .cal { background: #fff; border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; }
+  .me { display: flex; gap: 16px; align-items: center; margin-top: 28px; background: var(--cream); border-radius: 16px; padding: 16px; }
+  .me img { width: 72px; height: 72px; border-radius: 50%; flex: none; }
+  .me p { margin: 0; font-size: 15px; }
+  @media (max-width: 900px) { .book { grid-template-columns: 1fr; } }
+</style>

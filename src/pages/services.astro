@@ -1,0 +1,107 @@
+---
+import Base from '../layouts/Base.astro';
+import CtaBand from '../components/CtaBand.astro';
+---
+<Base
+  title="Website Design, Social Media & Website Care | She2She Media"
+  description="Three services for women-owned businesses: websites built to get you contacted, social media in your voice, and monthly website care."
+>
+  <section class="section intro">
+    <div class="container narrow">
+      <span class="eyebrow">Services</span>
+      <h1>Three ways I can help</h1>
+      <p class="lead">You can start with one and add the others later, or not at all. Most people start with the website, because everything else points to it.</p>
+    </div>
+  </section>
+
+  <section id="websites" class="section svc">
+    <div class="container two">
+      <div>
+        <span class="tag">01</span>
+        <h2>Websites</h2>
+        <p class="lead">A website that tells visitors what you do in five seconds and makes it easy to contact you.</p>
+        <p class="price">From $1,300</p>
+      </div>
+      <div>
+        <h3>What's included</h3>
+        <ul class="check">
+          <li>Page plan and copy guidance</li>
+          <li>Design in your brand</li>
+          <li>Mobile-first build</li>
+          <li>Contact form or booking link</li>
+          <li>Basic SEO: page titles, descriptions, Google Search Console</li>
+          <li>Speed check at launch</li>
+        </ul>
+        <h3>Good for</h3>
+        <p>Launching your first site, replacing a DIY site you've outgrown, or a rebrand.</p>
+        <h3>What I'll need from you</h3>
+        <p>Your words (or rough notes I'll shape), photos of you and your work, and logins for your domain.</p>
+        <div class="note">
+          <strong>One honest note:</strong> I build sites with modern code, not a drag-and-drop editor, so they load fast and don't break when a builder changes its plans. It also means changes go through me, which is what the care plan is for.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="social" class="section svc cream">
+    <div class="container two">
+      <div>
+        <span class="tag">02</span>
+        <h2>Social media</h2>
+        <p class="lead">Posts that sound like you, planned a month at a time, so you can stop wondering what to post.</p>
+        <p class="price">$500<small>/month</small></p>
+      </div>
+      <div>
+        <h3>What's included</h3>
+        <ul class="check">
+          <li>A brand standards doc: colors, fonts, voice</li>
+          <li>12 posts a month (3 a week)</li>
+          <li>A monthly content calendar</li>
+          <li>Captions and graphics for LinkedIn, Instagram and Facebook</li>
+          <li>Scheduling after your weekly approval</li>
+        </ul>
+        <h3>Good for</h3>
+        <p>Owners who know they should be posting and aren't, or are posting at 11pm and hate it.</p>
+        <h3>How access works</h3>
+        <p>You add me as a partner on your accounts. No password sharing, and you can remove access any time.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="care" class="section svc">
+    <div class="container two">
+      <div>
+        <span class="tag">03</span>
+        <h2>Website care</h2>
+        <p class="lead">Websites aren't done the day they launch. This keeps yours working.</p>
+        <p class="price">$150<small>/month</small></p>
+      </div>
+      <div>
+        <h3>What's included each month</h3>
+        <ul class="check">
+          <li>Content updates</li>
+          <li>Testing every form, link and booking button</li>
+          <li>A speed and mobile check</li>
+          <li>One small improvement based on what visitors actually do</li>
+        </ul>
+        <p>Up to 2 hours of work a month; bigger projects are quoted and billed separately.</p>
+        <h3>Good for</h3>
+        <p>Anyone with a site I've built, and anyone whose contact form hasn't been tested since it went live.</p>
+      </div>
+    </div>
+  </section>
+
+  <CtaBand heading="Not sure which one you need?" body="We'll work it out on the call." />
+</Base>
+
+<style>
+  .intro { padding-bottom: 24px; }
+  .svc { border-top: 1px solid var(--line); }
+  .two { display: grid; grid-template-columns: .9fr 1.1fr; gap: 56px; }
+  .tag { display: inline-block; font-weight: 700; color: var(--magenta-dark); border: 2px solid var(--magenta); border-radius: 999px; padding: 2px 14px; margin-bottom: 16px; font-size: 14px; }
+  h3 { margin-top: 1.4em; }
+  h3:first-child { margin-top: 0; }
+  .note { background: var(--magenta-soft); border-radius: 16px; padding: 20px 24px; margin-top: 24px; }
+  .cream .note { background: #fff; }
+  @media (max-width: 860px) { .two { grid-template-columns: 1fr; gap: 24px; } }
+</style>

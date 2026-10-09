@@ -1,0 +1,114 @@
+---
+import Base from '../layouts/Base.astro';
+import CtaBand from '../components/CtaBand.astro';
+
+const builds = [
+  { name: 'Starter', pages: 'Up to 3 pages', price: '$1,300', items: ['Design in your brand', 'Mobile-first build', 'Contact form or booking link', 'Basic SEO', '14 days of post-launch fixes'] },
+  { name: 'Standard', pages: '4 to 6 pages', price: '$1,750', items: ['Everything in Starter', 'Lead capture', 'Page plan and copy editing', '30 days of post-launch fixes'], featured: true },
+  { name: 'Premium', pages: '7 to 10 pages', price: '$4,000', items: ['Everything in Standard', 'Blog setup', 'Email signup integration', 'Advanced SEO', '30 days of priority support'] },
+];
+---
+<Base
+  title="Website & Marketing Prices for Small Businesses | She2She Media"
+  description="Website builds from $1,300, monthly website care and social media plans. Real prices up front, before you book a call."
+>
+  <section class="section intro">
+    <div class="container narrow">
+      <span class="eyebrow">Pricing</span>
+      <h1>Prices, up front</h1>
+      <p class="lead">Every project starts with a free consultation, but you shouldn't have to book one just to find out what things cost.</p>
+    </div>
+  </section>
+
+  <section id="special" class="container">
+    <div class="special">
+      <div class="special-head">
+        <span class="pill">Limited offer</span>
+        <h2>Website rebrand special</h2>
+        <p>For the first 5 women business owners who book a free consultation.</p>
+      </div>
+      <div class="offers">
+        <div class="offer">
+          <h3>Full rebrand + 3-page website</h3>
+          <p class="price">$497 <s>$2,050</s></p>
+          <p>New color palette and fonts, a brand style guide, and a 3-page website in your new brand.</p>
+        </div>
+        <div class="offer">
+          <h3>3-page website</h3>
+          <p class="price">$297 <s>$1,300</s></p>
+          <p>Home, About and Contact pages in your current branding, mobile responsive, with a contact form.</p>
+        </div>
+      </div>
+      <a href="/book-online" class="btn white">Claim a spot</a>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <h2>Website builds <span class="sub">one-time</span></h2>
+      <div class="tiers">
+        {builds.map((b) => (
+          <div class:list={['card', 'tier', { featured: b.featured }]}>
+            {b.featured && <span class="pill">Recommended</span>}
+            <h3>{b.name}</h3>
+            <p class="pages">{b.pages}</p>
+            <p class="price">{b.price}</p>
+            <ul class="check">{b.items.map((i) => <li>{i}</li>)}</ul>
+          </div>
+        ))}
+      </div>
+      <p class="fine">Extra pages are $150 each. Sites are built in modern code and hosted on Cloudflare, so they load fast and don't depend on a website builder's subscription.</p>
+    </div>
+  </section>
+
+  <section class="section cream">
+    <div class="container">
+      <h2>Monthly</h2>
+      <div class="monthly">
+        <div class="card">
+          <h3>Website care</h3>
+          <p class="price">$150<small>/month</small></p>
+          <ul class="check">
+            <li>Content updates</li>
+            <li>Monthly testing of forms and links</li>
+            <li>Speed and mobile check</li>
+            <li>One small improvement</li>
+          </ul>
+          <p class="fine">Up to 2 hours of work a month. Additional projects are quoted and billed separately.</p>
+        </div>
+        <div class="card">
+          <h3>Social media</h3>
+          <p class="price">$500<small>/month</small></p>
+          <ul class="check">
+            <li>12 posts a month (3 a week)</li>
+            <li>Monthly content calendar</li>
+            <li>Captions and graphics for LinkedIn, Instagram and Facebook</li>
+            <li>Scheduling after your weekly approval</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <CtaBand above="var(--cream)" heading="Not sure which package fits?" body="We'll work it out on the call." />
+</Base>
+
+<style>
+  .intro { padding-bottom: 32px; }
+  .sub { font-size: 1rem; font-weight: 500; color: var(--muted); margin-left: 8px; letter-spacing: 0; }
+  .pill { display: inline-block; background: #fff; color: var(--magenta-dark); font-size: 12px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; border-radius: 999px; padding: 6px 14px; margin-bottom: 14px; }
+  .special { background: var(--magenta); color: #fff; border-radius: var(--radius); padding: 40px; }
+  .special h2, .special h3 { color: #fff; }
+  .offers { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin: 24px 0 28px; }
+  .offer { background: rgba(255,255,255,.12); border: 1px solid rgba(255,255,255,.35); border-radius: 18px; padding: 24px; }
+  .offer .price { color: #fff; }
+  .offer s { font-size: 1.1rem; font-weight: 500; opacity: .85; margin-left: 6px; }
+  .tiers { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 24px; align-items: start; }
+  .tier { position: relative; }
+  .tier.featured { border: 2px solid var(--magenta); }
+  .tier .pill { background: var(--magenta); color: #fff; position: absolute; top: -14px; left: 28px; margin: 0; }
+  .pages { color: var(--muted); margin-bottom: .4em; }
+  .fine { font-size: 14px; color: var(--muted); margin-top: 20px; }
+  .monthly { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 24px; }
+  @media (max-width: 860px) { .tiers, .monthly, .offers { grid-template-columns: 1fr; } .special { padding: 28px 22px; } .tier.featured { margin-top: 12px; } }
+</style>

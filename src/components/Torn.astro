@@ -1,0 +1,15 @@
+---
+// A torn-paper edge between two sections, matching the She2She social graphics.
+// `top` is the color above the tear, `bottom` the color below it.
+interface Props { top: string; bottom: string; flip?: boolean }
+const { top, bottom, flip = false } = Astro.props;
+---
+<div class="torn" style={`background:${top}`} aria-hidden="true">
+  <svg viewBox="0 0 1440 48" preserveAspectRatio="none" style={flip ? 'transform:scaleX(-1)' : undefined}>
+    <path fill={bottom} d="M0 30 L38 22 L61 31 L95 18 L122 27 L150 16 L171 29 L210 20 L236 33 L268 19 L301 26 L327 14 L359 28 L391 21 L420 32 L452 17 L480 25 L515 13 L543 27 L572 20 L606 31 L633 18 L667 26 L698 15 L724 29 L759 21 L790 33 L816 19 L851 27 L880 16 L909 30 L942 22 L968 32 L1001 18 L1030 25 L1062 14 L1091 28 L1119 20 L1152 31 L1180 17 L1213 26 L1241 15 L1272 29 L1300 21 L1334 32 L1362 19 L1395 27 L1440 18 L1440 48 L0 48 Z" />
+  </svg>
+</div>
+<style>
+  .torn { line-height: 0; margin-bottom: -1px; }
+  .torn svg { width: 100%; height: 34px; display: block; }
+</style>
