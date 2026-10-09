@@ -43,5 +43,37 @@ const ogImage = new URL(image, Astro.site);
     <Header />
     <main id="main"><slot /></main>
     <Footer />
+    <script is:inline>
+      // Gentle glide-up-and-fade as sections scroll into view. Groups marked data-stagger
+      // reveal their items one after another. Skipped entirely for reduced-motion visitors.
+      (function () {
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches || !('IntersectionObserver' in window)) return;
+        var root = document.documentElement;
+        var targets = [];
+        document.querySelectorAll('main [data-stagger]').forEach(function (group) {
+          Array.prototype.forEach.call(group.children, function (el, i) {
+            el.classList.add('reveal');
+            el.style.setProperty('--d', i * 140 + 'ms');
+          });
+        });
+        document.querySelectorAll('main .container > *').forEach(function (el) {
+          if (el.matches('[data-stagger]') || el.querySelector('[data-stagger]')) return;
+          el.classList.add('reveal');
+        });
+        document.querySelectorAll('main .reveal').forEach(function (el) { targets.push(el); });
+        root.classList.add('motion');
+        var io = new IntersectionObserver(function (entries) {
+          entries.forEach(function (en) {
+            if (!en.isIntersecting) return;
+            var el = en.target;
+            el.classList.add('in');
+            io.unobserve(el);
+            // Clear the stagger delay once revealed so hover effects respond instantly.
+            setTimeout(function () { el.style.removeProperty('--d'); }, 1800);
+          });
+        }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+        targets.forEach(function (el) { io.observe(el); });
+      })();
+    </script>
   </body>
 </html>

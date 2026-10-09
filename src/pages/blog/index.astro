@@ -15,7 +15,7 @@ import { posts, formatDate } from '../../posts';
     </div>
   </section>
   <section class="section list">
-    <div class="container grid">
+    <div class="container grid" data-stagger>
       {posts.map((p) => (
         <a class="post" href={`/post/${p.slug}`}>
           <img src={p.frontmatter.image} alt="" width="940" height="788" loading="lazy" />

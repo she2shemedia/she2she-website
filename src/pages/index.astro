@@ -9,14 +9,14 @@ import CtaBand from '../components/CtaBand.astro';
 >
   <section class="hero">
     <div class="container hero-grid">
-      <div class="copy">
+      <div class="copy" data-stagger>
         <span class="eyebrow">She2She Media</span>
         <h1>Websites and marketing for <span class="underline">women-owned businesses</span></h1>
         <p class="lead">I build clear, fast websites and handle the social media you don't have time for, so your business looks as good online as it is in real life.</p>
         <a href="/book-online" class="btn">Book a free consultation</a>
         <p class="small">30 minutes on Zoom. No pitch deck, no pressure.</p>
       </div>
-      <div class="photo">
+      <div class="photo reveal" style="--d:300ms">
         <div class="frame">
           <img src="/images/anita.jpg" alt="Anita, founder of She2She Media, smiling in a magenta blouse with a castle behind her" width="720" height="765" fetchpriority="high" />
         </div>
@@ -45,7 +45,7 @@ import CtaBand from '../components/CtaBand.astro';
     <div class="container">
       <span class="eyebrow">What I do</span>
       <h2>Three ways I can help</h2>
-      <div class="cards">
+      <div class="cards" data-stagger>
         <a class="card svc" href="/services#websites">
           <h3>Websites</h3>
           <p>A clear, mobile-first site built around one thing: getting the right people to contact you.</p>
@@ -70,7 +70,7 @@ import CtaBand from '../components/CtaBand.astro';
     <div class="container">
       <span class="eyebrow">How it works</span>
       <h2>Four stages, no black box</h2>
-      <ol class="steps">
+      <ol class="steps" data-stagger>
         <li><span class="num">1</span><h3>Free consultation</h3><p>We talk about your business, your customers and what the site needs to do.</p></li>
         <li><span class="num">2</span><h3>Words first</h3><p>We plan the pages and the copy before any design. This is the step that makes everything else faster.</p></li>
         <li><span class="num">3</span><h3>Design and build</h3><p>Your brand, real photos, built for phones first.</p></li>
@@ -117,8 +117,12 @@ import CtaBand from '../components/CtaBand.astro';
   .problem { text-align: center; }
   .problem .lead { margin: 0 auto; }
   .cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 32px; }
-  .svc { text-decoration: none; color: var(--text); display: flex; flex-direction: column; border-top: 6px solid var(--magenta); }
-  .svc:hover { border-color: var(--line); border-top-color: var(--magenta-dark); box-shadow: 0 12px 28px rgba(0,0,0,.06); color: var(--text); }
+  .cards { perspective: 1200px; }
+  .svc { text-decoration: none; color: var(--text); display: flex; flex-direction: column; border-top: 6px solid var(--magenta); will-change: transform; }
+  .svc.reveal.in { transition: opacity 1s ease, transform .6s cubic-bezier(.22,.61,.36,1), box-shadow .6s ease; }
+  .cards .svc:hover, .cards .svc:focus-visible { color: var(--text); transform: translateY(-14px) scale(1.04); box-shadow: 0 28px 50px rgba(168,37,111,.20); z-index: 2; }
+  .svc:hover .price { color: var(--magenta-dark); }
+  @media (prefers-reduced-motion: reduce) { .cards .svc:hover, .cards .svc:focus-visible { transform: none; } }
   .svc .price { margin-top: auto; font-size: 1.5rem; }
   .steps { list-style: none; padding: 0; margin: 32px 0 0; display: grid; grid-template-columns: repeat(4, 1fr); gap: 28px; }
   .num { display: inline-flex; width: 52px; height: 52px; border-radius: 50%; background: var(--magenta); color: #fff; font-weight: 700; font-size: 22px; align-items: center; justify-content: center; margin-bottom: 16px; }

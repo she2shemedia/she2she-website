@@ -12,7 +12,7 @@ const isCurrent = (href: string) => path === href || (href === '/blog' && path.s
 <header class="site-header">
   <div class="container bar">
     <a href="/" class="brand" aria-label="She2She Media home">
-      <img src="/images/she2she-logo.png" alt="She2She Media" width="413" height="125" />
+      <img src="/images/she2she-logo.png" alt="She2She Media" width="400" height="400" />
     </a>
     <nav aria-label="Main">
       <div class="links desktop">
@@ -32,7 +32,8 @@ const isCurrent = (href: string) => path === href || (href === '/blog' && path.s
 <style>
   .site-header { position: sticky; top: 0; z-index: 50; background: rgba(255,255,255,.96); backdrop-filter: blur(6px); border-bottom: 1px solid var(--line); height: var(--header-h); display: flex; align-items: center; }
   .bar { display: flex; align-items: center; justify-content: space-between; gap: 24px; }
-  .brand img { width: 150px; }
+  .brand img { width: 82px; height: 82px; }
+  .brand { display: block; }
   nav { display: flex; align-items: center; gap: 28px; }
   .menu { display: none; }
   .links { display: flex; gap: 28px; }
@@ -41,7 +42,7 @@ const isCurrent = (href: string) => path === href || (href === '/blog' && path.s
   .cta { padding: 13px 22px; font-size: 15px; white-space: nowrap; }
   .short { display: none; }
   @media (max-width: 900px) {
-    .brand img { width: 120px; }
+    .brand img { width: 68px; height: 68px; }
     nav { gap: 12px; }
     .desktop { display: none; }
     .menu { display: block; position: static; }
@@ -53,5 +54,5 @@ const isCurrent = (href: string) => path === href || (href === '/blog' && path.s
     .cta { padding: 11px 16px; font-size: 14px; }
   }
   @media (max-width: 520px) { .long { display: none; } .short { display: inline; } }
-  @media (max-width: 420px) { .brand img { width: 104px; } .cta { font-size: 13px; padding: 10px 14px; } }
+  @media (max-width: 420px) { .brand img { width: 62px; height: 62px; } .cta { font-size: 13px; padding: 10px 14px; } }
 </style>

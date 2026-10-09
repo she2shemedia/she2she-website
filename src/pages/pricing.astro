@@ -27,7 +27,7 @@ const builds = [
         <h2>Website rebrand special</h2>
         <p>For the first 5 women business owners who book a free consultation.</p>
       </div>
-      <div class="offers">
+      <div class="offers" data-stagger>
         <div class="offer">
           <h3>Full rebrand + 3-page website</h3>
           <p class="price">$497 <s>$2,050</s></p>
@@ -46,7 +46,7 @@ const builds = [
   <section class="section">
     <div class="container">
       <h2>Website builds <span class="sub">one-time</span></h2>
-      <div class="tiers">
+      <div class="tiers" data-stagger>
         {builds.map((b) => (
           <div class:list={['card', 'tier', { featured: b.featured }]}>
             {b.featured && <span class="pill">Recommended</span>}
@@ -64,7 +64,7 @@ const builds = [
   <section class="section cream">
     <div class="container">
       <h2>Monthly</h2>
-      <div class="monthly">
+      <div class="monthly" data-stagger>
         <div class="card">
           <h3>Website care</h3>
           <p class="price">$150<small>/month</small></p>

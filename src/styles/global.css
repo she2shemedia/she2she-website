@@ -13,7 +13,7 @@
   --line: #e9e3e6;
   --sans: "Poppins", Arial, Helvetica, sans-serif;
   --max: 1120px;
-  --header-h: 80px;
+  --header-h: 96px;
   --radius: 24px;
   color-scheme: light;
 }
@@ -56,4 +56,9 @@ a:focus-visible, button:focus-visible, summary:focus-visible { outline: 3px soli
 .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 .skip { position: absolute; left: -999px; top: 8px; background: #fff; padding: 10px 16px; z-index: 100; }
 .skip:focus { left: 8px; }
-@media (max-width: 760px) { .section { padding: 64px 0; } body { font-size: 16px; } }
+@media (max-width: 760px) { :root { --header-h: 80px; } .section { padding: 64px 0; } body { font-size: 16px; } }
+
+/* Scroll animations: content glides up and fades in. Added by the script in Base.astro only when
+   the visitor hasn't asked for reduced motion, so the page is fully visible without JavaScript. */
+.motion .reveal { opacity: 0; transform: translateY(32px); transition: opacity 1s cubic-bezier(.22,.61,.36,1) var(--d, 0ms), transform 1.2s cubic-bezier(.22,.61,.36,1) var(--d, 0ms); }
+.motion .reveal.in { opacity: 1; transform: none; }
