@@ -9,7 +9,7 @@
   --paper: #fff;
   --cream: #f7f5f4;
   --lilac: #d6aacd;
-  --teal: #00c8dc;
+  --teal: #000000;
   --line: #e9e3e6;
   --sans: "Poppins", Arial, Helvetica, sans-serif;
   --max: 1120px;
@@ -29,7 +29,7 @@ h3 { font-size: 1.25rem; line-height: 1.3; }
 p { margin: 0 0 1em; }
 a { color: var(--magenta-dark); text-underline-offset: 3px; }
 a:hover { color: var(--magenta); }
-a:focus-visible, button:focus-visible, summary:focus-visible { outline: 3px solid var(--teal); outline-offset: 3px; border-radius: 4px; }
+a:focus-visible, button:focus-visible, summary:focus-visible { outline: 3px solid var(--magenta); outline-offset: 3px; border-radius: 4px; }
 .container { width: 100%; max-width: var(--max); margin: 0 auto; padding: 0 24px; }
 .narrow { max-width: 760px; }
 .section { padding: 88px 0; position: relative; }
