@@ -3,7 +3,19 @@ import Base from '../layouts/Base.astro';
 import CtaBand from '../components/CtaBand.astro';
 
 // Each project uses the same short format. Screenshots live in /images/work/ (set `image`, `w` and `h`).
+// A project with `soon: true` shows a "Launching soon" ribbon and no link until it goes live.
 const projects = [
+  {
+    name: 'Elevare Franchise Solutions',
+    label: 'Launching soon',
+    soon: true,
+    domain: 'elevarefranchise.com',
+    line: 'Fractional franchise leadership, strategy and execution for emerging and growing franchise brands.',
+    needed: 'A website, brand and email presence that match the level of the work: clear for franchise founders, and built to turn visits into consultations.',
+    built: 'A new website on modern hosting, a brand standards guide, a HubSpot contact form, branded email templates and an email signature.',
+    image: '/images/work/elevare.jpg',
+    w: 1400, h: 724,
+  },
   {
     name: 'Dogs That Cook',
     url: 'https://dogsthatcook.com',
@@ -42,12 +54,22 @@ const projects = [
   {projects.map((p, i) => (
     <section class:list={['section', 'project', { cream: i % 2 === 1 }]}>
       <div class="container two">
-        <a href={p.url} class="browser" aria-label={`Visit ${p.name}`}>
-          <span class="chrome" aria-hidden="true"><i></i><i></i><i></i><b>{p.domain}</b></span>
-          {p.image
-            ? <img class="shot-img" src={p.image} alt={`The ${p.name} website homepage`} width={p.w} height={p.h} loading="lazy" />
-            : <span class="shot"><span class="shot-title">{p.name}</span><span class="shot-sub">{p.line}</span></span>}
-        </a>
+        <Fragment>
+          {p.soon ? (
+            <div class="browser soon">
+              <span class="chrome" aria-hidden="true"><i></i><i></i><i></i><b>{p.domain}</b></span>
+              <span class="ribbon" aria-hidden="true">Coming soon</span>
+              <img class="shot-img" src={p.image} alt={`A preview of the new ${p.name} website homepage`} width={p.w} height={p.h} loading="lazy" />
+            </div>
+          ) : (
+            <a href={p.url} class="browser" aria-label={`Visit ${p.name}`}>
+              <span class="chrome" aria-hidden="true"><i></i><i></i><i></i><b>{p.domain}</b></span>
+              {p.image
+                ? <img class="shot-img" src={p.image} alt={`The ${p.name} website homepage`} width={p.w} height={p.h} loading="lazy" />
+                : <span class="shot"><span class="shot-title">{p.name}</span><span class="shot-sub">{p.line}</span></span>}
+            </a>
+          )}
+        </Fragment>
         <div>
           {p.label && <span class="tag">{p.label}</span>}
           <h2>{p.name}</h2>
@@ -56,7 +78,7 @@ const projects = [
           <p>{p.needed}</p>
           <h3>What I built</h3>
           <p>{p.built}</p>
-          <a href={p.url}>Visit the site</a>
+          {p.soon ? <p class="soon-note">The new site goes live soon.</p> : <a href={p.url}>Visit the site</a>}
         </div>
       </div>
     </section>
@@ -78,6 +100,9 @@ const projects = [
   .shot-title { font-size: 1.8rem; font-weight: 700; color: var(--ink); }
   .shot-sub { color: var(--muted); max-width: 320px; }
   .shot-img { width: 100%; display: block; }
+  .soon { position: relative; }
+  .ribbon { position: absolute; top: 72px; right: -46px; z-index: 2; transform: rotate(35deg); background: var(--magenta); color: #fff; font-size: 13px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; padding: 8px 56px; box-shadow: 0 6px 16px rgba(0,0,0,.18); }
+  .soon-note { font-weight: 600; color: var(--magenta-dark); }
   .browser:hover .shot-img { transform: scale(1.02); }
   @media (prefers-reduced-motion: no-preference) { .shot-img { transition: transform .8s cubic-bezier(.22,.61,.36,1); } }
   @media (max-width: 860px) { .two { grid-template-columns: 1fr; gap: 32px; } }
