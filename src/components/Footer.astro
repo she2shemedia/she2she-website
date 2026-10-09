@@ -4,7 +4,7 @@ const year = new Date().getFullYear();
 <footer class="foot">
   <div class="container grid">
     <div class="about">
-      <img src="/images/she2she-logo.png" alt="She2She Media" width="400" height="400" loading="lazy" />
+      <img src="/images/she2she-logo-white.png" alt="She2She Media" width="400" height="400" loading="lazy" />
       <p>Websites and marketing for women-owned businesses. Based in the US, working online with women-owned businesses everywhere.</p>
     </div>
     <nav aria-label="Footer">
@@ -40,16 +40,16 @@ const year = new Date().getFullYear();
 </footer>
 
 <style>
-  .foot { background: var(--cream); border-top: 1px solid var(--line); padding: 64px 0 0; font-size: 15px; margin-top: 0; }
+  .foot { background: var(--ink); color: #fff; padding: 64px 0 0; font-size: 15px; margin-top: 0; }
   .grid { display: grid; grid-template-columns: 1.6fr 1fr 1fr; gap: 40px; }
   .about img { width: 120px; margin-bottom: 16px; }
-  .about p { max-width: 340px; color: var(--muted); }
-  h2 { font-size: 14px; letter-spacing: .12em; text-transform: uppercase; margin-bottom: 14px; }
+  .about p { max-width: 340px; color: #cfc6cb; }
+  h2 { font-size: 14px; letter-spacing: .12em; text-transform: uppercase; margin-bottom: 14px; color: #fff; }
   nav, .grid > div:last-child { display: flex; flex-direction: column; gap: 8px; }
-  a:not(.btn) { color: var(--text); text-decoration: none; }
-  a:not(.btn):hover { color: var(--magenta-dark); text-decoration: underline; }
+  a:not(.btn) { color: #fff; text-decoration: none; }
+  a:not(.btn):hover { color: #fff; text-decoration: underline; text-decoration-color: var(--magenta); text-decoration-thickness: 2px; text-underline-offset: 4px; }
   .social { display: flex; gap: 16px; margin-top: 8px; flex-wrap: wrap; }
-  .legal { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px 24px; padding-top: 32px; padding-bottom: 24px; margin-top: 40px; border-top: 1px solid var(--line); color: var(--muted); font-size: 14px; }
+  .legal { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px 24px; padding-top: 32px; padding-bottom: 24px; margin-top: 40px; border-top: 1px solid #3a3337; color: #cfc6cb; font-size: 14px; }
   .legal nav { flex-direction: row; flex-wrap: wrap; gap: 8px 20px; }
   .strip { height: 14px; opacity: .8; }
   @media (max-width: 760px) { .grid { grid-template-columns: 1fr 1fr; } .about { grid-column: 1 / -1; } }

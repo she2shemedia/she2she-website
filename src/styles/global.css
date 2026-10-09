@@ -44,7 +44,11 @@ a:focus-visible, button:focus-visible, summary:focus-visible { outline: 3px soli
 .btn.white { background: #fff; color: var(--magenta-dark); border-color: #fff; }
 .btn.white:hover { background: var(--ink); border-color: var(--ink); color: #fff; }
 @media (prefers-reduced-motion: no-preference) { .btn { transition: background .15s, color .15s, border-color .15s; } }
-.underline { background: linear-gradient(transparent 68%, rgba(202,50,141,.28) 68%, rgba(202,50,141,.28) 92%, transparent 92%); padding: 0 2px; }
+.underline { background-image: linear-gradient(rgba(202,50,141,.3), rgba(202,50,141,.3)); background-repeat: no-repeat; background-size: 90% 26%; background-position: 0% 88%; padding: 0 2px; -webkit-box-decoration-break: clone; box-decoration-break: clone; }
+@media (prefers-reduced-motion: no-preference) {
+  .underline { animation: hl-slide 4.5s ease-in-out infinite alternate; }
+  @keyframes hl-slide { from { background-position: 0% 88%; } to { background-position: 100% 88%; } }
+}
 .hatch { background: repeating-linear-gradient(-55deg, var(--teal) 0 3px, transparent 3px 14px); }
 .waves { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='26' height='120' viewBox='0 0 26 120'%3E%3Cpath d='M13 0c-8 15 8 15 0 30s8 15 0 30 8 15 0 30 8 15 0 30' fill='none' stroke='%23D6AACD' stroke-width='4'/%3E%3C/svg%3E"); background-repeat: repeat; }
 .card { background: #fff; border: 1px solid var(--line); border-radius: var(--radius); padding: 32px; }
