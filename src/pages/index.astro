@@ -108,11 +108,7 @@ import CtaBand from '../components/CtaBand.astro';
     <div class="container work">
       <a href="https://dogsthatcook.com" class="browser" aria-label="Visit dogsthatcook.com">
         <span class="chrome" aria-hidden="true"><i></i><i></i><i></i><b>dogsthatcook.com</b></span>
-        <span class="shot">
-          <!-- TODO: replace with a real screenshot at /images/work/dogs-that-cook.jpg -->
-          <span class="shot-title">Dogs That Cook</span>
-          <span class="shot-sub">Recipes for humans, hosted by two Jack Russell terriers</span>
-        </span>
+        <img class="shot-img" src="/images/work/dogs-that-cook.jpg" alt="The Dogs That Cook website homepage" width="1400" height="723" loading="lazy" />
       </a>
       <div>
         <span class="eyebrow">Recent work</span>
@@ -190,9 +186,9 @@ import CtaBand from '../components/CtaBand.astro';
   .chrome { display: flex; align-items: center; gap: 6px; background: #f1edef; padding: 12px 16px; }
   .chrome i { width: 10px; height: 10px; border-radius: 50%; background: var(--lilac); }
   .chrome b { margin-left: 12px; font-weight: 500; font-size: 13px; color: var(--muted); background: #fff; padding: 4px 12px; border-radius: 999px; }
-  .shot { display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; aspect-ratio: 16 / 10; background: var(--magenta-soft); padding: 24px; }
-  .shot-title { font-size: 1.8rem; font-weight: 700; color: var(--ink); }
-  .shot-sub { color: var(--muted); }
+  .shot-img { width: 100%; display: block; }
+  .browser:hover .shot-img { transform: scale(1.02); }
+  @media (prefers-reduced-motion: no-preference) { .shot-img { transition: transform .8s cubic-bezier(.22,.61,.36,1); } }
   @media (max-width: 900px) {
     .hero { padding-top: 40px; }
     .hero-grid, .work { grid-template-columns: 1fr; gap: 40px; }

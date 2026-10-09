@@ -2,7 +2,7 @@
 import Base from '../layouts/Base.astro';
 import CtaBand from '../components/CtaBand.astro';
 
-// Each project uses the same short format. Add a screenshot at /images/work/<file> and set `image` to show it.
+// Each project uses the same short format. Screenshots live in /images/work/ (set `image`, `w` and `h`).
 const projects = [
   {
     name: 'Dogs That Cook',
@@ -11,7 +11,8 @@ const projects = [
     line: 'A real recipe blog, hosted by two Jack Russell terriers.',
     needed: 'A home for the recipes that sends people to the YouTube videos where the recipes come to life.',
     built: "A searchable recipe database with filters by ingredient, diet and meal type, in a playful brand that doesn't get in the way of the food.",
-    image: '',
+    image: '/images/work/dogs-that-cook.jpg',
+    w: 1400, h: 723,
   },
   {
     name: 'A. M. French',
@@ -21,7 +22,8 @@ const projects = [
     line: "The author site for my children's book series, Hunkie Dorie.",
     needed: 'A home for the first book and a place readers can follow along as the series grows.',
     built: 'A site that introduces the book and points readers to where to buy it.',
-    image: '',
+    image: '/images/work/am-french.jpg',
+    w: 1400, h: 695,
   },
 ];
 ---
@@ -43,7 +45,7 @@ const projects = [
         <a href={p.url} class="browser" aria-label={`Visit ${p.name}`}>
           <span class="chrome" aria-hidden="true"><i></i><i></i><i></i><b>{p.domain}</b></span>
           {p.image
-            ? <img src={p.image} alt={`The ${p.name} website`} loading="lazy" />
+            ? <img class="shot-img" src={p.image} alt={`The ${p.name} website homepage`} width={p.w} height={p.h} loading="lazy" />
             : <span class="shot"><span class="shot-title">{p.name}</span><span class="shot-sub">{p.line}</span></span>}
         </a>
         <div>
@@ -75,5 +77,8 @@ const projects = [
   .shot { display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; aspect-ratio: 16 / 10; background: var(--magenta-soft); padding: 24px; }
   .shot-title { font-size: 1.8rem; font-weight: 700; color: var(--ink); }
   .shot-sub { color: var(--muted); max-width: 320px; }
+  .shot-img { width: 100%; display: block; }
+  .browser:hover .shot-img { transform: scale(1.02); }
+  @media (prefers-reduced-motion: no-preference) { .shot-img { transition: transform .8s cubic-bezier(.22,.61,.36,1); } }
   @media (max-width: 860px) { .two { grid-template-columns: 1fr; gap: 32px; } }
 </style>
