@@ -38,9 +38,13 @@ const isCurrent = (href: string) => path === href || (href === '/blog' && path.s
   .menu { display: none; }
   .links { display: flex; gap: 28px; }
   .links a { color: var(--ink); font-size: 15px; font-weight: 500; text-decoration: none; padding: 6px 0; }
-  .links a:hover, .links a[aria-current='page'] { text-decoration: underline; text-decoration-color: var(--magenta); text-decoration-thickness: 3px; text-underline-offset: 8px; }
+  .mobile a:hover, .mobile a[aria-current='page'] { text-decoration: underline; text-decoration-color: var(--magenta); text-decoration-thickness: 3px; text-underline-offset: 8px; }
   /* Menu words lift toward the visitor on hover, like the homepage cards */
-  .desktop a { display: inline-block; }
+  .desktop a { display: inline-block; position: relative; }
+  /* Magenta line slides in from the left on hover and slides out to the right; stays under the current page */
+  .desktop a::after { content: ""; position: absolute; left: 0; right: 0; bottom: -2px; height: 3px; border-radius: 2px; background: var(--magenta); transform: scaleX(0); transform-origin: right; }
+  .desktop a:hover::after, .desktop a:focus-visible::after, .desktop a[aria-current='page']::after { transform: scaleX(1); transform-origin: left; }
+  @media (prefers-reduced-motion: no-preference) { .desktop a::after { transition: transform .45s cubic-bezier(.22,.61,.36,1); } }
   .desktop a:hover, .desktop a:focus-visible { transform: translateY(-4px) scale(1.08); text-shadow: 0 8px 14px rgba(168,37,111,.28); }
   @media (prefers-reduced-motion: no-preference) { .desktop a { transition: transform .35s cubic-bezier(.22,.61,.36,1), text-shadow .35s ease; } }
   @media (prefers-reduced-motion: reduce) { .desktop a:hover, .desktop a:focus-visible { transform: none; } }
