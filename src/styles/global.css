@@ -38,7 +38,7 @@ a:focus-visible, button:focus-visible, summary:focus-visible { outline: 3px soli
 .eyebrow { display: inline-block; font-size: 13px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--magenta-dark); margin-bottom: 14px; }
 .lead { font-size: 1.15rem; color: var(--muted); max-width: 640px; }
 .btn { display: inline-block; font: 600 16px/1 var(--sans); background: var(--magenta); color: #fff; padding: 17px 30px; border-radius: 999px; text-decoration: none; border: 2px solid var(--magenta); }
-.btn:hover { background: var(--magenta-dark); border-color: var(--magenta-dark); color: #fff; }
+.btn:hover { background: var(--ink); border-color: var(--ink); color: #fff; }
 .btn.ghost { background: transparent; color: var(--ink); border-color: var(--ink); }
 .btn.ghost:hover { background: var(--ink); color: #fff; }
 .btn.white { background: #fff; color: var(--magenta-dark); border-color: #fff; }
