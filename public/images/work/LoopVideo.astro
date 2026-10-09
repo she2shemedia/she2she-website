@@ -1,0 +1,46 @@
+---
+// A short, silent screen recording that plays on a loop, like a moving screenshot.
+// The still image shows while the video loads, and is all that reduced-motion visitors see.
+interface Props {
+  src: string;      // the .mp4 file, e.g. /images/work/dogs-that-cook.mp4
+  poster: string;   // the still image, e.g. /images/work/dogs-that-cook.jpg
+  alt: string;      // what the recording shows, read out by screen readers
+  width: number;
+  height: number;
+}
+const { src, poster, alt, width, height } = Astro.props;
+---
+<video
+  class="shot-img loop-video"
+  src={src}
+  poster={poster}
+  width={width}
+  height={height}
+  aria-label={alt}
+  muted
+  loop
+  playsinline
+  preload="none"
+  disablepictureinpicture
+></video>
+
+<script>
+  // Plays each video only while it's on screen, so it doesn't use data or battery out of view.
+  // Visitors who've turned on "reduce motion" keep the still image.
+  const videos = document.querySelectorAll<HTMLVideoElement>('video.loop-video');
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (!reduce && 'IntersectionObserver' in window) {
+    const io = new IntersectionObserver((entries) => {
+      for (const e of entries) {
+        const v = e.target as HTMLVideoElement;
+        v.muted = true; // some browsers only allow autoplay once this is set in code
+        if (e.isIntersecting) { v.play().catch(() => {}); } else { v.pause(); }
+      }
+    }, { threshold: 0.25 });
+    videos.forEach((v) => io.observe(v));
+  }
+</script>
+
+<style>
+  .loop-video { width: 100%; height: auto; display: block; background: #fff; }
+</style>
