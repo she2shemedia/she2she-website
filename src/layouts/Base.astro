@@ -6,6 +6,7 @@ import '@fontsource/poppins/700.css';
 import '../styles/global.css';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import ChatWidget from '../components/ChatWidget.astro';
 
 interface Props {
   title: string;
@@ -43,6 +44,7 @@ const ogImage = new URL(image, Astro.site);
     <Header />
     <main id="main"><slot /></main>
     <Footer />
+    <ChatWidget />
     <script is:inline>
       // Gentle glide-up-and-fade as sections scroll into view. Groups marked data-stagger
       // reveal their items one after another. Skipped entirely for reduced-motion visitors.
