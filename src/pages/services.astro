@@ -3,13 +3,13 @@ import Base from '../layouts/Base.astro';
 import CtaBand from '../components/CtaBand.astro';
 ---
 <Base
-  title="Website Design, Social Media & Website Care | She2She Media"
-  description="Three services for women-owned businesses: websites built to get you contacted, social media in your voice, and monthly website care."
+  title="Website Design, Social Media, Website Care & Branding | She2She Media"
+  description="Four services for women-owned businesses: websites built to get you contacted, social media in your voice, monthly website care and branding."
 >
   <section class="section intro">
     <div class="container">
       <span class="eyebrow">Services</span>
-      <h1>Three ways I can help</h1>
+      <h1>Four ways I can help</h1>
       <p class="lead">You can start with one and add the others later, or not at all. Most people start with the website, because everything else points to it.</p>
     </div>
   </section>
@@ -91,7 +91,29 @@ import CtaBand from '../components/CtaBand.astro';
     </div>
   </section>
 
-  <CtaBand heading="Not sure which one you need?" body="We'll work it out on the call." />
+  <section id="branding" class="section svc cream">
+    <div class="container two">
+      <div>
+        <span class="tag">04</span>
+        <h2>Branding</h2>
+        <p class="lead">A look that's consistent everywhere, so people recognize you before they read a word.</p>
+        <p class="price">$750</p>
+      </div>
+      <div>
+        <h3>What's included</h3>
+        <ul class="check">
+          <li>A color palette built around your business and your customers</li>
+          <li>A font pairing for headings and body text</li>
+          <li>A brand style guide that shows how to use them</li>
+        </ul>
+        <h3>Good for</h3>
+        <p>New businesses that haven't settled on a look yet, and owners whose website, social media and business cards all look like they came from different companies.</p>
+        <h3>How it fits with the rest</h3>
+        <p>Branding works on its own, but it's built to be used. The style guide becomes the starting point for your website and your social media graphics, so everything matches from day one.</p>
+      </div>
+    </div>
+  </section>
+  <CtaBand above="var(--cream)" heading="Not sure which one you need?" body="We'll work it out on the call." />
 </Base>
 
 <style>
