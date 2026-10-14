@@ -43,6 +43,13 @@ const email = 'mailto:anita@she2shemedia.com?subject=' + encodeURIComponent('Que
     </div>
   </div>
 
+  <div class="teaser" id="chat-teaser" hidden>
+    <button type="button" class="teaser-open" id="chat-teaser-open">Hi there 👋 Got a question? I'm here.</button>
+    <button type="button" class="teaser-x" id="chat-teaser-x" aria-label="Dismiss">
+      <svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true" focusable="false"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/></svg>
+    </button>
+  </div>
+
   <button type="button" class="launcher" id="chat-launcher" aria-expanded="false" aria-controls="chat-panel">
     <svg class="icon-open" viewBox="0 0 24 24" width="28" height="28" aria-hidden="true" focusable="false"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3h11A2.5 2.5 0 0 1 20 5.5v8a2.5 2.5 0 0 1-2.5 2.5H10l-4.2 3.6c-.5.4-1.3.1-1.3-.6V16A2.5 2.5 0 0 1 4 13.5z" fill="currentColor"/><circle cx="8.5" cy="9.5" r="1.2" fill="var(--magenta)"/><circle cx="12" cy="9.5" r="1.2" fill="var(--magenta)"/><circle cx="15.5" cy="9.5" r="1.2" fill="var(--magenta)"/></svg>
     <svg class="icon-close" viewBox="0 0 24 24" width="26" height="26" aria-hidden="true" focusable="false"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg>
@@ -56,15 +63,25 @@ const email = 'mailto:anita@she2shemedia.com?subject=' + encodeURIComponent('Que
     var panel = document.getElementById('chat-panel');
     var closeBtn = document.getElementById('chat-close');
     var root = document.getElementById('chat');
+    var teaser = document.getElementById('chat-teaser');
     if (!launcher || !panel) return;
 
-    function open() {
+    var SEEN_KEY = 's2s-chat-greeted';
+    var DELAY = 10000; // how long before the chat greets a visitor, in milliseconds
+    var timer = null;
+
+    function markSeen() { try { sessionStorage.setItem(SEEN_KEY, '1'); } catch (e) {} }
+    function seen() { try { return sessionStorage.getItem(SEEN_KEY) === '1'; } catch (e) { return false; } }
+    function hideTeaser() { if (teaser) teaser.hidden = true; }
+
+    function open(auto) {
+      clearTimeout(timer); markSeen(); hideTeaser();
       panel.hidden = false;
       root.classList.add('is-open');
       launcher.setAttribute('aria-expanded', 'true');
       requestAnimationFrame(function () { root.classList.add('shown'); });
-      var first = panel.querySelector('.action');
-      if (first) first.focus();
+      // Only move keyboard focus when the visitor opened it themselves.
+      if (!auto) { var first = panel.querySelector('.action'); if (first) first.focus(); }
     }
     function close(returnFocus) {
       root.classList.remove('shown', 'is-open');
@@ -74,12 +91,52 @@ const email = 'mailto:anita@she2shemedia.com?subject=' + encodeURIComponent('Que
     }
 
     launcher.addEventListener('click', function () {
-      launcher.getAttribute('aria-expanded') === 'true' ? close(false) : open();
+      launcher.getAttribute('aria-expanded') === 'true' ? close(false) : open(false);
     });
     closeBtn.addEventListener('click', function () { close(true); });
     document.addEventListener('keydown', function (e) {
       if (e.key === 'Escape' && root.classList.contains('is-open')) close(true);
     });
+    document.getElementById('chat-teaser-open').addEventListener('click', function () { open(false); });
+    document.getElementById('chat-teaser-x').addEventListener('click', function () { hideTeaser(); markSeen(); });
+
+    // A soft two-note chime. Browsers only allow sound after the visitor has clicked,
+    // tapped or typed on the page, so on a first, untouched visit it stays silent.
+    var interacted = false;
+    ['pointerdown', 'keydown'].forEach(function (ev) {
+      document.addEventListener(ev, function () { interacted = true; }, { once: true, capture: true });
+    });
+    function chime() {
+      if (!interacted) return;
+      try {
+        var Ctx = window.AudioContext || window.webkitAudioContext;
+        var ctx = new Ctx();
+        [[880, 0], [1318.5, 0.13]].forEach(function (n) {
+          var osc = ctx.createOscillator(), gain = ctx.createGain(), t = ctx.currentTime + n[1];
+          osc.type = 'sine'; osc.frequency.value = n[0];
+          gain.gain.setValueAtTime(0.0001, t);
+          gain.gain.exponentialRampToValueAtTime(0.09, t + 0.02);
+          gain.gain.exponentialRampToValueAtTime(0.0001, t + 0.45);
+          osc.connect(gain).connect(ctx.destination);
+          osc.start(t); osc.stop(t + 0.5);
+        });
+        setTimeout(function () { ctx.close(); }, 1200);
+      } catch (e) {}
+    }
+
+    // Greet once per visit, never on the booking page, and not if they've already opened it.
+    if (!seen() && location.pathname.indexOf('/book-online') !== 0) {
+      timer = setTimeout(function () {
+        if (seen() || root.classList.contains('is-open')) return;
+        markSeen();
+        chime();
+        if (window.matchMedia('(min-width: 768px)').matches) {
+          open(true);
+        } else if (teaser) {
+          teaser.hidden = false;
+        }
+      }, DELAY);
+    }
   })();
 </script>
 
@@ -91,6 +148,14 @@ const email = 'mailto:anita@she2shemedia.com?subject=' + encodeURIComponent('Que
   .launcher .icon-close { display: none; }
   .is-open .launcher .icon-open { display: none; }
   .is-open .launcher .icon-close { display: block; }
+
+  .teaser { position: absolute; right: 0; bottom: 76px; display: flex; align-items: flex-start; gap: 4px; background: #fff; border-radius: 18px 18px 4px 18px; box-shadow: 0 14px 36px rgba(29,26,28,.18); padding: 6px 6px 6px 4px; width: max-content; max-width: min(260px, calc(100vw - 32px)); animation: pop .35s cubic-bezier(.22,.61,.36,1) both; }
+  .teaser[hidden] { display: none; }
+  .teaser-open { background: none; border: 0; text-align: left; cursor: pointer; font: 500 15px/1.45 var(--sans); color: var(--text); padding: 8px 4px 8px 12px; }
+  .teaser-open:hover { color: var(--magenta-dark); }
+  .teaser-x { flex: none; background: none; border: 0; color: var(--muted); width: 28px; height: 28px; border-radius: 50%; display: grid; place-items: center; cursor: pointer; }
+  .teaser-x:hover { background: var(--magenta-soft); color: var(--magenta-dark); }
+  @keyframes pop { from { opacity: 0; transform: translateY(10px) scale(.96); } to { opacity: 1; transform: none; } }
 
   .panel { position: absolute; right: 0; bottom: 78px; width: 360px; max-width: calc(100vw - 32px); background: #fff; border-radius: 22px; overflow: hidden; box-shadow: 0 24px 60px rgba(29,26,28,.22); opacity: 0; transform: translateY(12px) scale(.98); transform-origin: bottom right; transition: opacity .2s, transform .2s; }
   .shown .panel { opacity: 1; transform: none; }
@@ -123,9 +188,10 @@ const email = 'mailto:anita@she2shemedia.com?subject=' + encodeURIComponent('Que
 
   @media (max-width: 480px) {
     .chat { right: 14px; bottom: 14px; }
+    .teaser { bottom: 68px; }
     .launcher { width: 56px; height: 56px; }
     .panel { bottom: 70px; right: -2px; width: calc(100vw - 24px); }
   }
   @media print { .chat { display: none; } }
-  @media (prefers-reduced-motion: reduce) { .panel, .launcher, .action { transition: none; } }
+  @media (prefers-reduced-motion: reduce) { .panel, .launcher, .action { transition: none; } .teaser { animation: none; } }
 </style>
