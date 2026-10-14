@@ -1,41 +1,240 @@
 ---
 import Base from '../layouts/Base.astro';
+
+// Web3Forms access key (free at web3forms.com). Messages from the "Send a note" form
+// are emailed to the address the key was created with. While this is empty, the form
+// opens the visitor's email app with their message filled in instead.
+const WEB3FORMS_KEY = '';
 ---
 <Base
   title="Book a Free Website Consultation | She2She Media"
-  description="Book a free 30-minute call about your website or social media. You'll leave with a clear next step."
+  description="Book a free 30-minute call about your website or social media, or send a note. You'll leave with a clear next step."
 >
   <section class="section">
     <div class="container book">
       <div class="info">
         <span class="eyebrow">Free consultation</span>
-        <h1>Book a free consultation</h1>
-        <p class="lead">30 minutes on Zoom. We'll talk about your business, what your website or social media needs to do, and what it would take. You'll leave with a clear next step, whether or not that's working with me.</p>
-        <h2>What to bring</h2>
-        <ul class="check">
-          <li>Your current website, if you have one</li>
-          <li>A rough idea of your budget</li>
-        </ul>
-        <div class="me">
-          <img src="/images/anita-square.jpg" alt="" width="400" height="400" />
-          <p>You'll be talking to me, Anita. Prefer email? <a href="mailto:anita@she2shemedia.com">anita@she2shemedia.com</a></p>
+        <h1>Let's talk about what your business needs.</h1>
+        <span class="rule" aria-hidden="true"></span>
+        <p class="lead">Book time directly on my calendar, or send a note and I'll reply personally as soon as I can.</p>
+
+        <div class="block">
+          <h2 class="label">What to expect</h2>
+          <p>30 minutes on Zoom with me. We'll talk about your business, what your website or social media needs to do, and what it would take. You'll leave with a clear next step, whether or not that's working with me.</p>
+        </div>
+
+        <div class="block">
+          <h2 class="label">What to bring</h2>
+          <ul class="check">
+            <li>Your current website, if you have one</li>
+            <li>A rough idea of your budget</li>
+          </ul>
+        </div>
+
+        <div class="direct">
+          <div class="me">
+            <img src="/images/anita-square.jpg" alt="" width="400" height="400" />
+            <div>
+              <p class="direct-title">Prefer to talk it through? Reach me directly.</p>
+              <p class="who">Anita, Founder of She2She Media</p>
+            </div>
+          </div>
+          <ul class="contact">
+            <li>
+              <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1C10.6 21 3 13.4 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1L6.6 10.8z"/></svg>
+              <a href="tel:+16784359858">+1 678-435-9858</a>
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="2.5" y="5" width="19" height="14" rx="2" fill="currentColor"/><path d="M3.5 6.5l8.5 6.5 8.5-6.5" fill="none" stroke="#fff" stroke-width="1.6" stroke-linejoin="round"/></svg>
+              <a href="mailto:anita@she2shemedia.com">anita@she2shemedia.com</a>
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M12.05 0C5.5 0 .16 5.34.16 11.89c0 2.1.55 4.14 1.59 5.95L.06 24l6.3-1.65a11.88 11.88 0 0 0 5.68 1.45h.01c6.55 0 11.89-5.34 11.89-11.89 0-3.18-1.24-6.16-3.48-8.41A11.8 11.8 0 0 0 12.05 0zm5.42 14.38c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.65.07-.3-.15-1.26-.46-2.4-1.48-.89-.79-1.49-1.77-1.66-2.07-.17-.3-.02-.46.13-.61.14-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.08-.15-.67-1.61-.92-2.2-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.8.37-.27.3-1.04 1.02-1.04 2.48 0 1.46 1.07 2.88 1.21 3.07.15.2 2.1 3.2 5.08 4.49 2.97 1.28 2.97.85 3.56.8.57-.08 1.76-.72 2.01-1.41.25-.7.25-1.29.17-1.41-.07-.13-.27-.2-.57-.35z"/></svg>
+              <a href="https://wa.me/16784356262" target="_blank" rel="noopener noreferrer">WhatsApp<span class="sr-only"> (opens in a new tab)</span></a>
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M20.45 20.45h-3.56v-5.57c0-1.33-.03-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"/></svg>
+              <a href="https://www.linkedin.com/company/she2shemedia" target="_blank" rel="noopener noreferrer">She2She on LinkedIn<span class="sr-only"> (opens in a new tab)</span></a>
+            </li>
+          </ul>
         </div>
       </div>
-      <div class="cal">
-        <div class="calendly-inline-widget" data-url="https://calendly.com/she2shemedia/30min?hide_gdpr_banner=1&primary_color=ca328d" style="min-width:300px;height:720px;"></div>
-        <noscript><p><a href="https://calendly.com/she2shemedia/30min">Book on Calendly</a></p></noscript>
+
+      <div class="panel">
+        <div class="tabs" role="tablist" aria-label="Ways to get in touch">
+          <button type="button" role="tab" id="tab-book" aria-controls="panel-book" aria-selected="true">Book a time</button>
+          <button type="button" role="tab" id="tab-note" aria-controls="panel-note" aria-selected="false" tabindex="-1">Send a note</button>
+        </div>
+
+        <div role="tabpanel" id="panel-book" aria-labelledby="tab-book" class="tabpanel">
+          <div class="calendly-inline-widget" data-url="https://calendly.com/she2shemedia/30min?hide_gdpr_banner=1&primary_color=ca328d" style="min-width:300px;height:700px;"></div>
+          <noscript><p><a href="https://calendly.com/she2shemedia/30min">Book on Calendly</a></p></noscript>
+          <p class="switch">Not ready to book? <button type="button" class="link" data-goto="note">Send a note instead</button></p>
+        </div>
+
+        <div role="tabpanel" id="panel-note" aria-labelledby="tab-note" class="tabpanel" hidden>
+          <form id="note-form" class="note" action="https://api.web3forms.com/submit" method="POST" data-key={WEB3FORMS_KEY} novalidate>
+            <input type="hidden" name="access_key" value={WEB3FORMS_KEY} />
+            <input type="hidden" name="subject" value="New note from the She2She website" />
+            <input type="hidden" name="from_name" value="She2She Media website" />
+            <input type="checkbox" name="botcheck" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true" />
+
+            <p class="note-intro">Tell me a little about your business and what you're after. I'll reply personally.</p>
+
+            <div class="row">
+              <div class="field">
+                <label for="note-name">Your name</label>
+                <input id="note-name" name="name" type="text" autocomplete="name" required />
+              </div>
+              <div class="field">
+                <label for="note-email">Email</label>
+                <input id="note-email" name="email" type="email" autocomplete="email" required />
+              </div>
+            </div>
+            <div class="field">
+              <label for="note-site">Business name or website <span class="opt">(optional)</span></label>
+              <input id="note-site" name="business" type="text" autocomplete="organization" />
+            </div>
+            <div class="field">
+              <label for="note-msg">How can I help?</label>
+              <textarea id="note-msg" name="message" rows="6" required></textarea>
+            </div>
+
+            <p class="error" id="note-error" role="alert" hidden></p>
+            <button type="submit" class="btn">Send note</button>
+          </form>
+
+          <div class="sent" id="note-sent" hidden tabindex="-1">
+            <svg viewBox="0 0 48 48" width="48" height="48" aria-hidden="true" focusable="false"><circle cx="24" cy="24" r="22" fill="var(--magenta-soft)"/><path d="M15 24.5l6 6 12-13" fill="none" stroke="var(--magenta)" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <h2>Thank you, your note is on its way.</h2>
+            <p>I'll reply personally as soon as I can. In the meantime, the <a href="/faq">FAQ</a> covers the questions most people ask.</p>
+          </div>
+        </div>
       </div>
     </div>
   </section>
+
   <script is:inline type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>
+  <script is:inline>
+    (function () {
+      // Tabs: click, arrow keys, and /book-online#note opens the note tab directly.
+      var tabs = Array.prototype.slice.call(document.querySelectorAll('.tabs [role="tab"]'));
+      function select(tab, focus) {
+        tabs.forEach(function (t) {
+          var on = t === tab;
+          t.setAttribute('aria-selected', on ? 'true' : 'false');
+          t.tabIndex = on ? 0 : -1;
+          document.getElementById(t.getAttribute('aria-controls')).hidden = !on;
+        });
+        if (focus) tab.focus();
+      }
+      tabs.forEach(function (t, i) {
+        t.addEventListener('click', function () { select(t, false); });
+        t.addEventListener('keydown', function (e) {
+          if (e.key !== 'ArrowRight' && e.key !== 'ArrowLeft') return;
+          e.preventDefault();
+          select(tabs[(i + (e.key === 'ArrowRight' ? 1 : tabs.length - 1)) % tabs.length], true);
+        });
+      });
+      document.querySelectorAll('[data-goto="note"]').forEach(function (b) {
+        b.addEventListener('click', function () { select(document.getElementById('tab-note'), true); });
+      });
+      if (location.hash === '#note') select(document.getElementById('tab-note'), false);
+
+      // Note form: sends through Web3Forms when a key is set, otherwise opens an email draft.
+      var form = document.getElementById('note-form');
+      var err = document.getElementById('note-error');
+      var sent = document.getElementById('note-sent');
+      if (!form) return;
+      form.addEventListener('submit', function (e) {
+        e.preventDefault();
+        err.hidden = true;
+        if (!form.checkValidity()) {
+          err.textContent = 'Please add your name, a valid email and a message.';
+          err.hidden = false;
+          var bad = form.querySelector(':invalid');
+          if (bad) bad.focus();
+          return;
+        }
+        var data = new FormData(form);
+        if (data.get('botcheck')) return;
+
+        if (!form.dataset.key) {
+          var body = data.get('message') + '\n\n' + data.get('name') + '\n' + data.get('email') + (data.get('business') ? '\n' + data.get('business') : '');
+          location.href = 'mailto:anita@she2shemedia.com?subject=' + encodeURIComponent('Note from the She2She website') + '&body=' + encodeURIComponent(body);
+          return;
+        }
+
+        var btn = form.querySelector('button[type="submit"]');
+        btn.disabled = true; btn.textContent = 'Sending...';
+        fetch(form.action, { method: 'POST', headers: { Accept: 'application/json' }, body: data })
+          .then(function (r) { return r.json(); })
+          .then(function (res) {
+            if (!res.success) throw new Error();
+            form.hidden = true; sent.hidden = false; sent.focus();
+          })
+          .catch(function () {
+            err.innerHTML = 'Sorry, that didn\'t send. Please email me at <a href="mailto:anita@she2shemedia.com">anita@she2shemedia.com</a> instead.';
+            err.hidden = false;
+            btn.disabled = false; btn.textContent = 'Send note';
+          });
+      });
+    })();
+  </script>
 </Base>
 
 <style>
-  .book { display: grid; grid-template-columns: .85fr 1.15fr; gap: 48px; align-items: start; }
-  h2 { font-size: 1.15rem; margin-top: 1.5em; }
-  .cal { background: #fff; border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; }
-  .me { display: flex; gap: 16px; align-items: center; margin-top: 28px; background: var(--cream); border-radius: 16px; padding: 16px; }
-  .me img { width: 72px; height: 72px; border-radius: 50%; flex: none; }
-  .me p { margin: 0; font-size: 15px; }
-  @media (max-width: 900px) { .book { grid-template-columns: 1fr; } }
+  .book { display: grid; grid-template-columns: minmax(0, .85fr) minmax(0, 1.15fr); gap: 64px; align-items: start; }
+  h1 { font-size: clamp(2.2rem, 4.4vw, 3.2rem); margin-bottom: 0; }
+  .rule { display: block; width: 56px; height: 4px; border-radius: 2px; background: var(--magenta); margin: 24px 0; }
+  .lead { margin-bottom: 0; }
+  .block { border-top: 1px solid var(--line); margin-top: 32px; padding-top: 24px; }
+  .label { font-size: 13px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--magenta-dark); margin: 0 0 10px; }
+  .block p { margin: 0; }
+  .block .check { margin: 0; }
+
+  .direct { border-top: 1px solid var(--line); margin-top: 32px; padding-top: 28px; }
+  .me { display: flex; gap: 16px; align-items: center; margin-bottom: 18px; }
+  .me img { width: 64px; height: 64px; border-radius: 50%; flex: none; }
+  .direct-title { margin: 0; font-weight: 600; color: var(--ink); }
+  .who { margin: 2px 0 0; color: var(--muted); font-size: 15px; }
+  .contact { list-style: none; margin: 0; padding: 0; display: grid; gap: 12px; }
+  .contact li { display: flex; align-items: center; gap: 14px; }
+  .contact svg { flex: none; width: 20px; height: 20px; color: var(--magenta); }
+  .contact a { color: var(--text); text-decoration: none; }
+  .contact a:hover { color: var(--magenta-dark); text-decoration: underline; text-decoration-color: var(--magenta); text-underline-offset: 4px; }
+
+  .panel { background: #fff; border: 1px solid var(--line); border-top: 4px solid var(--magenta); border-radius: var(--radius); padding: 28px 32px 32px; box-shadow: 0 24px 48px rgba(168,37,111,.08); }
+  .tabs { display: flex; gap: 28px; border-bottom: 1px solid var(--line); margin-bottom: 24px; }
+  .tabs [role="tab"] { background: none; border: 0; padding: 10px 0 14px; margin-bottom: -1px; font: 600 16px/1 var(--sans); color: var(--muted); cursor: pointer; border-bottom: 3px solid transparent; }
+  .tabs [role="tab"][aria-selected="true"] { color: var(--ink); border-bottom-color: var(--magenta); }
+  .tabs [role="tab"]:hover { color: var(--magenta-dark); }
+
+  .switch { margin: 16px 0 0; text-align: center; font-size: 15px; color: var(--muted); }
+  .link { background: none; border: 0; padding: 0; font: 600 15px var(--sans); color: var(--magenta-dark); text-decoration: underline; text-decoration-color: var(--magenta); text-decoration-thickness: 2px; text-underline-offset: 5px; cursor: pointer; }
+  .link:hover { color: var(--magenta); }
+
+  .note-intro { color: var(--muted); margin-bottom: 20px; }
+  .row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .field { display: grid; gap: 6px; margin-bottom: 16px; }
+  .field label { font-weight: 600; font-size: 15px; color: var(--ink); }
+  .opt { font-weight: 400; color: var(--muted); }
+  .field input, .field textarea { font: 400 16px/1.5 var(--sans); color: var(--text); background: #fff; border: 1px solid #d8ced3; border-radius: 12px; padding: 12px 14px; width: 100%; }
+  .field textarea { resize: vertical; min-height: 140px; }
+  .field input:focus, .field textarea:focus { outline: none; border-color: var(--magenta); box-shadow: 0 0 0 3px rgba(202,50,141,.18); }
+  .hp { position: absolute; left: -9999px; }
+  .error { background: var(--magenta-soft); color: var(--magenta-dark); border-radius: 10px; padding: 12px 14px; font-size: 15px; }
+  .note .btn { width: 100%; cursor: pointer; }
+  .note .btn:disabled { opacity: .7; cursor: default; }
+
+  .sent { text-align: center; padding: 40px 12px; }
+  .sent svg { margin: 0 auto 16px; }
+  .sent h2 { font-size: 1.5rem; }
+  .sent p { color: var(--muted); margin: 0; }
+
+  @media (max-width: 900px) {
+    .book { grid-template-columns: 1fr; gap: 40px; }
+    .panel { padding: 22px 18px 24px; }
+    .row { grid-template-columns: 1fr; gap: 0; }
+  }
 </style>
