@@ -3,7 +3,7 @@ title: "Do You Need a Rebrand or Just a Website Refresh?"
 date: "2026-10-14"
 author: "Anita Marie"
 description: "Something feels off about how your business looks online. Here's how to tell whether the problem is your brand or your website."
-image: "/images/blog/do-you-need-a-rebrand-or-a-website-refresh.jpg"
+image: "/images/blog/do-you-need-a-rebrand-or-a-website-refresh.png"
 ---
 
 Most business owners reach a point where something about their online presence feels off. Maybe you hesitate before sending someone your website link. Maybe you've stopped mentioning it altogether. You know it isn't working the way it should, but it's hard to say exactly why.
