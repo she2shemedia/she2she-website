@@ -1,5 +1,6 @@
 ---
 import Base from '../layouts/Base.astro';
+import Waves from '../components/Waves.astro';
 import CtaBand from '../components/CtaBand.astro';
 ---
 <Base
@@ -11,7 +12,7 @@ import CtaBand from '../components/CtaBand.astro';
     <div class="container about">
       <div class="photo">
         <img src="/images/anita.jpg" alt="Anita, founder of She2She Media, in a magenta blouse and pearls with a castle behind her" width="720" height="765" />
-        <div class="waves deco" aria-hidden="true"></div>
+        <div class="deco" aria-hidden="true"><Waves width={110} height={200} /></div>
       </div>
       <div class="story">
         <span class="eyebrow">About</span>
