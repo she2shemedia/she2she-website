@@ -102,25 +102,37 @@ const email = 'mailto:anita@she2shemedia.com?subject=' + encodeURIComponent('Que
 
     // A soft two-note chime. Browsers only allow sound after the visitor has clicked,
     // tapped or typed on the page, so on a first, untouched visit it stays silent.
-    var interacted = false;
-    ['pointerdown', 'keydown'].forEach(function (ev) {
-      document.addEventListener(ev, function () { interacted = true; }, { once: true, capture: true });
-    });
-    function chime() {
-      if (!interacted) return;
+    // The audio is unlocked during that first click (Safari requires this), then reused.
+    var ctx = null;
+    function unlockAudio() {
       try {
         var Ctx = window.AudioContext || window.webkitAudioContext;
-        var ctx = new Ctx();
-        [[880, 0], [1318.5, 0.13]].forEach(function (n) {
-          var osc = ctx.createOscillator(), gain = ctx.createGain(), t = ctx.currentTime + n[1];
+        if (!Ctx) return;
+        if (!ctx) ctx = new Ctx();
+        if (ctx.state === 'suspended') ctx.resume();
+        // A silent, near-instant blip during the click makes Safari treat audio as allowed.
+        var b = ctx.createBuffer(1, 1, 22050), src = ctx.createBufferSource();
+        src.buffer = b; src.connect(ctx.destination); src.start(0);
+      } catch (e) {}
+    }
+    ['pointerdown', 'touchend', 'keydown'].forEach(function (ev) {
+      document.addEventListener(ev, function once() {
+        unlockAudio();
+        ['pointerdown', 'touchend', 'keydown'].forEach(function (e2) { document.removeEventListener(e2, once, true); });
+      }, true);
+    });
+    function chime() {
+      if (!ctx || ctx.state !== 'running') return;
+      try {
+        [[880, 0], [1318.5, 0.14]].forEach(function (n) {
+          var osc = ctx.createOscillator(), gain = ctx.createGain(), t = ctx.currentTime + 0.02 + n[1];
           osc.type = 'sine'; osc.frequency.value = n[0];
           gain.gain.setValueAtTime(0.0001, t);
-          gain.gain.exponentialRampToValueAtTime(0.09, t + 0.02);
-          gain.gain.exponentialRampToValueAtTime(0.0001, t + 0.45);
-          osc.connect(gain).connect(ctx.destination);
-          osc.start(t); osc.stop(t + 0.5);
+          gain.gain.exponentialRampToValueAtTime(0.12, t + 0.02);
+          gain.gain.exponentialRampToValueAtTime(0.0001, t + 0.5);
+          osc.connect(gain); gain.connect(ctx.destination);
+          osc.start(t); osc.stop(t + 0.55);
         });
-        setTimeout(function () { ctx.close(); }, 1200);
       } catch (e) {}
     }
 
