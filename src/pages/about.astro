@@ -21,6 +21,13 @@ import CtaBand from '../components/CtaBand.astro';
         <p>After experiencing a layoff in 2023, I decided it was time to take my years of experience and launch my own business, as many women who have been cast aside in the corporate world do.</p>
         <p>These days I work online and live my dream of traveling the world as a digital nomad, which is a good test of whether a system actually works. Everything I do for clients is written down, planned ahead and checked, because nothing can live in my head when the view out the window changes frequently.</p>
         <p>I also write children's books as A. M. French. Writing for kids turns out to be decent copywriting training: every word has to earn its place, and if the reader gets lost, that's on the writer.</p>
+
+        <aside class="bio" aria-labelledby="bio-heading">
+          <h2 id="bio-heading">Short bio</h2>
+          <p>Anita is the founder of She2She Media, a web design and marketing studio for women-owned businesses. After years as an executive assistant in the legal, avionics and franchise industries, she launched her own business in 2023. She builds clear, fast websites and handles social media for owners who'd rather be running their business, working online as a digital nomad. She also writes children's books as A. M. French.</p>
+          <p class="one-line"><strong>One line:</strong> Anita is the founder of She2She Media, building websites and handling social media for women-owned businesses.</p>
+          <p class="note">Need a bio or headshot for an event or article? Feel free to use these, or email <a href="mailto:anita@she2shemedia.com">anita@she2shemedia.com</a>.</p>
+        </aside>
       </div>
     </div>
   </section>
@@ -45,6 +52,11 @@ import CtaBand from '../components/CtaBand.astro';
   .photo { position: sticky; top: calc(var(--header-h) + 32px); }
   .photo img { border-radius: var(--radius); border: 8px solid #fff; box-shadow: 0 24px 48px rgba(168,37,111,.18); position: relative; z-index: 1; }
   .deco { position: absolute; left: -28px; bottom: -32px; width: 110px; height: 200px; }
+  .bio { margin-top: 36px; background: var(--cream); border-left: 5px solid var(--magenta); border-radius: 18px; padding: 26px 28px; }
+  .bio h2 { font-size: 13px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--magenta-dark); margin-bottom: 12px; }
+  .bio p { font-size: 16px; }
+  .bio .one-line { margin-bottom: 14px; }
+  .bio .note { font-size: 14px; color: var(--muted); margin: 0; }
   .expect { list-style: none; padding: 0; margin: 24px 0 0; display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
   .expect li { background: #fff; border-radius: 16px; padding: 20px 22px; border-left: 0; border-top: 5px solid var(--magenta); font-weight: 500; }
   @media (max-width: 860px) { .about { grid-template-columns: 1fr; gap: 40px; } .photo { position: relative; top: 0; max-width: 380px; } .expect { grid-template-columns: 1fr; } }
