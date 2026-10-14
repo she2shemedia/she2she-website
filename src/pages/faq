@@ -1,0 +1,103 @@
+---
+import Base from '../layouts/Base.astro';
+import CtaBand from '../components/CtaBand.astro';
+
+const faqs = [
+  {
+    q: 'Do you only work with women-owned businesses?',
+    a: "They're who I build for and who this site is written for. But if you've read this far and like how I work, I'm happy to talk, whoever owns the business.",
+  },
+  {
+    q: 'What happens on the free consultation?',
+    a: "It's 30 minutes on Zoom. We talk about your business, what your website or social media needs to do, and what it would take. You'll leave with a clear next step, whether or not that's working with me.",
+  },
+  {
+    q: 'How long does a website take?',
+    a: 'Most Starter sites take 2–3 weeks, Standard sites 3–5 weeks, and Premium sites 5–8 weeks. A rebrand adds a week or two. The clock starts once I have your words and photos, which is why we plan those first. The quicker the feedback, the quicker the launch.',
+  },
+  {
+    q: "I don't have copy or photos yet. Is that a problem?",
+    a: "No. Rough notes are fine; I'll shape them into page copy. For photos, real ones of you and your work are always best. If you don't have any you love, I can take a current photo of you and create an AI photoshoot from it, so your site has a consistent, professional set of images that still look like you. That's a $250 add-on.",
+  },
+  {
+    q: 'Can I edit the site myself?',
+    a: "I build with modern code rather than a drag-and-drop editor, so sites load fast and don't break when a builder changes its plans. The trade-off is that changes go through me. That's what the monthly care plan is for: $150 a month covers up to 2 hours of updates and checks.",
+  },
+  {
+    q: 'Do I own my website and domain?',
+    a: "Yes. Your domain is registered in your name from day one, and your words, photos and branding are always yours. Once the final invoice is paid, I hand the site over to your own accounts, so you own everything outright. If you're on the care plan, I keep access to do the work; if you ever stop, nothing needs moving and there's nothing to pay. No lock-in.",
+  },
+  {
+    q: 'Do I have to sign up for everything?',
+    a: 'No. You can start with one service and add others later, or not at all. Most people start with the website, because everything else points to it.',
+  },
+  {
+    q: 'Will you need my social media passwords?',
+    a: "No. You add me as a partner on your accounts, so there's no password sharing, and you can remove my access any time. Nothing gets posted without your OK.",
+  },
+  {
+    q: 'How does payment work?',
+    a: "Website builds are paid in three equal parts: a third up front to secure your start date, a third when the site is built, and the final third at handover, when the site moves into your own accounts. Monthly plans are billed in advance at the start of each month and run month to month, so you can cancel with 30 days' written notice. Payments for work that's already started aren't refundable. I invoice through Zoho, and you can pay by card or bank transfer.",
+  },
+  {
+    q: 'Where are you based?',
+    a: "I'm based in the US and work online with women-owned businesses everywhere.",
+  },
+];
+
+// FAQ schema, so Google can show these answers in search results.
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqs.map((f) => ({
+    '@type': 'Question',
+    name: f.q,
+    acceptedAnswer: { '@type': 'Answer', text: f.a },
+  })),
+};
+---
+<Base
+  title="Website Design FAQ: Process, Pricing & Ownership | She2She Media"
+  description="Answers to common questions about working with She2She Media: timelines, editing your site, ownership, payment and the free consultation."
+>
+  <script slot="head" type="application/ld+json" set:html={JSON.stringify(schema)} />
+
+  <section class="section intro">
+    <div class="container narrow">
+      <span class="eyebrow">FAQ</span>
+      <h1>Questions people ask before booking</h1>
+      <p class="lead">The things most owners want to know before a call. If yours isn't here, bring it to the consultation.</p>
+    </div>
+  </section>
+
+  <section class="section faq-wrap">
+    <div class="container narrow">
+      <div class="faqs" data-stagger>
+        {faqs.map((f, i) => (
+          <details class="faq" open={i === 0}>
+            <summary><span>{f.q}</span></summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <CtaBand heading="Still have a question?" body="That's what the call is for." />
+</Base>
+
+<style>
+  .intro { padding-bottom: 24px; }
+  .faq-wrap { padding-top: 24px; }
+  .faqs { display: grid; gap: 14px; }
+  .faq { background: #fff; border: 1px solid var(--line); border-radius: 18px; transition: border-color .15s, box-shadow .15s; }
+  .faq[open] { border-color: var(--magenta); box-shadow: 0 12px 28px rgba(168,37,111,.10); }
+  .faq summary { list-style: none; cursor: pointer; display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 22px 26px; font-weight: 600; color: var(--ink); font-size: 1.05rem; line-height: 1.4; }
+  .faq summary::-webkit-details-marker { display: none; }
+  .faq summary::after { content: ""; flex: none; width: 12px; height: 12px; border-right: 3px solid var(--magenta); border-bottom: 3px solid var(--magenta); transform: rotate(45deg) translate(-3px, -3px); transition: transform .2s; }
+  .faq[open] summary::after { transform: rotate(-135deg) translate(-3px, -3px); }
+  .faq summary:hover span { color: var(--magenta-dark); }
+  .faq p { padding: 0 26px 24px; margin: 0; color: var(--text); }
+  @media (max-width: 600px) { .faq summary { padding: 18px 20px; } .faq p { padding: 0 20px 20px; } }
+  @media (prefers-reduced-motion: reduce) { .faq, .faq summary::after { transition: none; } }
+</style>
