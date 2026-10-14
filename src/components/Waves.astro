@@ -1,0 +1,54 @@
+---
+// The pink wavy lines that sit behind Anita's photo, drawn as separate lines so each
+// one can ripple at its own speed. Same color, spacing and wave shape as the old
+// repeating pattern. Still for visitors who prefer reduced motion, and paused
+// whenever it's scrolled out of view.
+interface Props { width?: number; height?: number }
+const { width = 120, height = 220 } = Astro.props;
+
+const GAP = 26;     // space between lines, as in the original pattern
+const PERIOD = 30;  // height of one wave
+const cols = Math.ceil(width / GAP);
+
+// One wave line, a couple of waves longer than the box so it can slide without gaps.
+function line(x: number) {
+  let d = `M${x} ${-PERIOD * 2}`;
+  const waves = Math.ceil(height / PERIOD) + 4;
+  for (let i = 0; i < waves; i++) d += (i % 2 === 0 ? ` c-8 15 8 15 0 ${PERIOD}` : ` c8 15 -8 15 0 ${PERIOD}`);
+  return d;
+}
+
+// Different speed for every line (seconds per wave pair); alternate lines drift the other way.
+const speeds = [5.6, 3.8, 6.8, 4.4, 5.1, 3.4, 6.2];
+const lines = Array.from({ length: cols }, (_, i) => ({
+  d: line(13 + i * GAP),
+  dur: speeds[i % speeds.length],
+  rev: i % 2 === 1,
+  delay: -(i * 0.7),
+}));
+---
+<svg class="waves-anim" viewBox={`0 0 ${width} ${height}`} width={width} height={height} aria-hidden="true" focusable="false" data-waves>
+  {lines.map((l) => (
+    <path d={l.d} class:list={['wv', { rev: l.rev }]} style={`animation-duration:${l.dur}s;animation-delay:${l.delay}s`} />
+  ))}
+</svg>
+
+<script is:inline>
+  (function () {
+    if (!('IntersectionObserver' in window)) return;
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) { en.target.classList.toggle('paused', !en.isIntersecting); });
+    });
+    document.querySelectorAll('[data-waves]').forEach(function (el) { io.observe(el); });
+  })();
+</script>
+
+<style>
+  .waves-anim { display: block; width: 100%; height: 100%; overflow: hidden; }
+  .wv { fill: none; stroke: #d6aacd; stroke-width: 4; stroke-linecap: round; animation: flow linear infinite; will-change: transform; }
+  .wv.rev { animation-name: flow-rev; }
+  .paused .wv { animation-play-state: paused; }
+  @keyframes flow { from { transform: translateY(0); } to { transform: translateY(60px); } }
+  @keyframes flow-rev { from { transform: translateY(60px); } to { transform: translateY(0); } }
+  @media (prefers-reduced-motion: reduce) { .wv { animation: none; } }
+</style>
