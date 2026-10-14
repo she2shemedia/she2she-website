@@ -90,7 +90,20 @@ const builds = [
     </div>
   </section>
 
-  <CtaBand above="var(--cream)" heading="Not sure which package fits?" body="We'll work it out on the call." />
+  <section class="section addons">
+    <div class="container">
+      <h2>Add-ons</h2>
+      <div class="card addon">
+        <div>
+          <h3>AI photoshoot</h3>
+          <p>From a current photo of you, a consistent set of professional images for your site that still look like you. Real photos are always best; this is for when you don't have any you love.</p>
+        </div>
+        <p class="price">$250</p>
+      </div>
+    </div>
+  </section>
+
+  <CtaBand heading="Not sure which package fits?" body="We'll work it out on the call." />
 </Base>
 
 <style>
@@ -110,5 +123,9 @@ const builds = [
   .pages { color: var(--muted); margin-bottom: .4em; }
   .fine { font-size: 14px; color: var(--muted); margin-top: 20px; }
   .monthly { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 24px; }
+  .addon { display: flex; align-items: center; justify-content: space-between; gap: 32px; margin-top: 24px; }
+  .addon p:not(.price) { margin: 0; color: var(--muted); max-width: 640px; }
+  .addon .price { margin: 0; flex: none; }
+  @media (max-width: 860px) { .addon { flex-direction: column; align-items: flex-start; gap: 12px; } }
   @media (max-width: 860px) { .tiers, .monthly, .offers { grid-template-columns: 1fr; } .special { padding: 28px 22px; } .tier.featured { margin-top: 12px; } }
 </style>
