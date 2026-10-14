@@ -4,6 +4,7 @@ import Waves from '../components/Waves.astro';
 import Torn from '../components/Torn.astro';
 import CtaBand from '../components/CtaBand.astro';
 import LoopVideo from '../components/LoopVideo.astro';
+import { spotsTotal, spotsLeft } from '../special';
 ---
 <Base
   title="Websites & Marketing for Women-Owned Businesses | She2She Media"
@@ -33,11 +34,13 @@ import LoopVideo from '../components/LoopVideo.astro';
       <path d="M40 40c80-40 220-30 230 30S120 130 70 100 120 20 210 60s60 120-30 130-150-20-110-60 140-10 160 40" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" opacity=".8" />
     </svg>
     <div class="container promo-grid">
-      <div class="promo-copy" data-stagger>
-        <span class="promo-pill">Limited offer · first 5 only</span>
+           <div class="promo-copy" data-stagger>
+        <span class="promo-pill">{spotsLeft > 0 ? `Limited offer · ${spotsLeft} of ${spotsTotal} spots left` : `All ${spotsTotal} spots claimed`}</span>
         <h2 id="promo-title">Website Rebrand Special</h2>
-        <p>For the first 5 women business owners who book a free consultation.</p>
-        <a href="/book-online" class="btn white">Claim a spot</a>
+        <p>For the first {spotsTotal} women business owners who sign on. In return, I ask for a short testimonial and permission to feature your new site in my portfolio.</p>
+        {spotsLeft > 0
+          ? <a href="/book-online" class="btn white">Claim a spot</a>
+          : <a href="/pricing" class="btn white">See current prices</a>}
       </div>
       <div class="paper-wrap">
         <div class="paper" data-stagger>
