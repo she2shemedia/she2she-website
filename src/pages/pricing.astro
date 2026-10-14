@@ -4,9 +4,9 @@ import CtaBand from '../components/CtaBand.astro';
 import { spotsTotal, spotsLeft } from '../special';
 
 const builds = [
-  { name: 'Starter', pages: 'Up to 3 pages', price: '$1,300', items: ['Design in your brand', 'Mobile-first build', 'Contact form or booking link', 'Basic SEO', '14 days of post-launch fixes'] },
-  { name: 'Standard', pages: '4 to 6 pages', price: '$1,750', items: ['Everything in Starter', 'Lead capture', 'Page plan and copy editing', '30 days of post-launch fixes'], featured: true },
-  { name: 'Premium', pages: '7 to 10 pages', price: '$4,000', items: ['Everything in Standard', 'Blog setup', 'Email signup integration', 'Advanced SEO', '30 days of priority support'] },
+  { name: 'Starter', pages: 'Up to 3 pages · about 2–3 weeks', price: '$1,300', items: ['Design in your brand', 'Mobile-first build', 'Contact form or booking link', 'Basic SEO', '14 days of post-launch fixes'] },
+  { name: 'Standard', pages: '4 to 6 pages · about 3–5 weeks', price: '$1,750', items: ['Everything in Starter', 'Lead capture', 'Page plan and copy editing', '30 days of post-launch fixes'], featured: true },
+  { name: 'Premium', pages: '7 to 10 pages · about 5–8 weeks', price: '$4,000', items: ['Everything in Standard', 'Blog setup', 'Email signup integration', 'Advanced SEO', '30 days of priority support'] },
 ];
 ---
 <Base
@@ -72,7 +72,11 @@ const builds = [
           </div>
         ))}
       </div>
-      <p class="fine">Extra pages are $150 each. Sites are built in modern code and hosted on Cloudflare, so they load fast and don't depend on a website builder's subscription.</p>
+      <div class="terms-row">
+        <p><strong>Paid in three parts:</strong> a third to secure your start date, a third when the site is built, and the final third at handover, when the site moves into your own accounts.</p>
+        <p><strong>Timelines</strong> start once I have your words and photos. A rebrand adds a week or two.</p>
+      </div>
+      <p class="fine">Extra pages are $150 each. Sites are built in modern code and hosted on Cloudflare, so they load fast and don't depend on a website builder's subscription. More details in the <a href="/faq">FAQ</a>.</p>
     </div>
   </section>
 
@@ -150,6 +154,9 @@ const builds = [
   .tier.featured { border: 2px solid var(--magenta); }
   .tier .pill { background: var(--magenta); color: #fff; position: absolute; top: -14px; left: 28px; margin: 0; }
   .pages { color: var(--muted); margin-bottom: .4em; }
+  .terms-row { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 28px; }
+  .terms-row p { margin: 0; background: var(--cream); border-radius: 16px; padding: 18px 22px; font-size: 15px; }
+  @media (max-width: 860px) { .terms-row { grid-template-columns: 1fr; } }
   .fine { font-size: 14px; color: var(--muted); margin-top: 20px; }
   .monthly { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 24px; }
   .addon { display: flex; align-items: center; justify-content: space-between; gap: 32px; margin-top: 24px; }
