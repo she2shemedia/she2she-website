@@ -1,5 +1,6 @@
 ---
 // The closing call to action used at the bottom of every page.
+// Headings can include <br class="br-desk"> for a line break that only applies on wider screens.
 import Torn from './Torn.astro';
 interface Props { heading: string; body?: string; above?: string }
 const { heading, body, above = '#fff' } = Astro.props;
@@ -10,7 +11,7 @@ const { heading, body, above = '#fff' } = Astro.props;
     <path d="M40 40c80-40 220-30 230 30S120 130 70 100 120 20 210 60s60 120-30 130-150-20-110-60 140-10 160 40" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" opacity=".75" />
   </svg>
   <div class="container inner">
-    <h2>{heading}</h2>
+    <h2 set:html={heading} />
     {body && <p>{body}</p>}
     <a href="/book-online" class="btn white">Book a free consultation</a>
   </div>
@@ -19,7 +20,10 @@ const { heading, body, above = '#fff' } = Astro.props;
   .band { background: var(--magenta); color: #fff; padding: 72px 0 88px; position: relative; overflow: hidden; }
   .inner { position: relative; max-width: 760px; text-align: center; }
   h2 { color: #fff; }
-  p { font-size: 1.15rem; margin: 0 auto 28px; max-width: 560px; }
+  p { font-size: 1.15rem; margin: 0 auto 28px; max-width: 720px; }
   .scribble { position: absolute; right: -40px; top: -10px; width: 320px; }
-  @media (max-width: 760px) { .scribble { width: 200px; right: -60px; opacity: .6; } }
+  @media (max-width: 760px) {
+    .scribble { width: 200px; right: -60px; opacity: .6; }
+    h2 :global(.br-desk) { display: none; }
+  }
 </style>
