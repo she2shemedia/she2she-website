@@ -68,6 +68,7 @@ const email = 'mailto:anita@she2shemedia.com?subject=' + encodeURIComponent('Que
 
     var SEEN_KEY = 's2s-chat-greeted';
     var DELAY = 10000; // how long before the chat greets a visitor, in milliseconds
+    var AFTER_POPUP = 20000; // if the audit popup showed first, how long after it closes
     var timer = null;
 
     function markSeen() { try { sessionStorage.setItem(SEEN_KEY, '1'); } catch (e) {} }
@@ -137,7 +138,7 @@ const email = 'mailto:anita@she2shemedia.com?subject=' + encodeURIComponent('Que
     }
 
     // Greet once per visit, never on the booking page, and not if they've already opened it.
-    if (!seen() && location.pathname.indexOf('/book-online') !== 0) {
+    function startGreeting(delay) {
       timer = setTimeout(function () {
         if (seen() || root.classList.contains('is-open')) return;
         markSeen();
@@ -147,7 +148,15 @@ const email = 'mailto:anita@she2shemedia.com?subject=' + encodeURIComponent('Que
         } else if (teaser) {
           teaser.hidden = false;
         }
-      }, DELAY);
+      }, delay);
+    }
+    if (!seen() && location.pathname.indexOf('/book-online') !== 0) {
+      // If the free audit popup is due, wait until it's closed so the two don't pop up together.
+      if (window.s2sAuditPopPending) {
+        document.addEventListener('s2s:auditpop-closed', function () { startGreeting(AFTER_POPUP); }, { once: true });
+      } else {
+        startGreeting(DELAY);
+      }
     }
   })();
 </script>

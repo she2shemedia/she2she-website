@@ -1,0 +1,102 @@
+---
+// Free website audit popup. Appears once after a short delay, then stays away for 30 days
+// after it's closed. Never shows on the audit page itself or the booking page.
+// While it's waiting or open, the chat widget holds its greeting until the popup is closed.
+---
+<div class="ap" id="audit-pop" hidden>
+  <div class="ap-backdrop" data-ap-close></div>
+  <div class="ap-card" role="dialog" aria-modal="true" aria-labelledby="ap-title" aria-describedby="ap-text" tabindex="-1">
+    <button type="button" class="ap-x" data-ap-close aria-label="Close">
+      <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" focusable="false"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" /></svg>
+    </button>
+    <div class="ap-top">
+      <img src="/images/anita-square.jpg" alt="" width="400" height="400" loading="lazy" />
+      <span class="ap-label">Free website audit</span>
+    </div>
+    <h2 id="ap-title">Is your website working as hard as you are?</h2>
+    <p id="ap-text">Send me your link and I'll email you a plain-language review with your top 3 fixes. Free, and no call required.</p>
+    <a href="/free-audit" class="btn ap-go" id="ap-go">Get my free audit</a>
+    <button type="button" class="ap-no" data-ap-close>No thanks</button>
+  </div>
+</div>
+
+<script is:inline>
+  (function () {
+    var DELAY = 10000;                 // how long before the popup appears, in milliseconds
+    var QUIET_DAYS = 30;               // how long it stays away after someone closes it
+    var KEY = 's2s-audit-pop';
+    var pop = document.getElementById('audit-pop');
+    if (!pop) return;
+    var path = location.pathname;
+    function store(v) { try { localStorage.setItem(KEY, v); } catch (e) {} }
+    function read() { try { return localStorage.getItem(KEY); } catch (e) { return null; } }
+    var last = read();
+    var skip = path.indexOf('/free-audit') === 0 || path.indexOf('/book-online') === 0 ||
+      last === 'done' || (last && Date.now() - Number(last) < QUIET_DAYS * 864e5);
+
+    // Lets the chat widget know whether to wait for this popup.
+    window.s2sAuditPopPending = !skip;
+    if (skip) return;
+
+    var card = pop.querySelector('.ap-card');
+    var before = null;
+    function close() {
+      pop.classList.remove('is-open');
+      store(String(Date.now()));
+      setTimeout(function () { pop.hidden = true; }, 250);
+      document.removeEventListener('keydown', onKey);
+      if (before && before.focus) before.focus();
+      window.s2sAuditPopPending = false;
+      document.dispatchEvent(new Event('s2s:auditpop-closed'));
+    }
+    function onKey(e) {
+      if (e.key === 'Escape') { close(); return; }
+      if (e.key !== 'Tab') return;
+      var f = card.querySelectorAll('a, button');
+      var first = f[0], lastEl = f[f.length - 1];
+      if (e.shiftKey && document.activeElement === first) { e.preventDefault(); lastEl.focus(); }
+      else if (!e.shiftKey && document.activeElement === lastEl) { e.preventDefault(); first.focus(); }
+    }
+    pop.querySelectorAll('[data-ap-close]').forEach(function (el) { el.addEventListener('click', close); });
+    document.getElementById('ap-go').addEventListener('click', function () { store('done'); });
+
+    setTimeout(function () {
+      var chat = document.querySelector('.chat.is-open');
+      if (chat) { window.s2sAuditPopPending = false; return; } // they're already chatting; don't interrupt
+      before = document.activeElement;
+      pop.hidden = false;
+      requestAnimationFrame(function () { pop.classList.add('is-open'); card.focus(); });
+      document.addEventListener('keydown', onKey);
+    }, DELAY);
+  })();
+</script>
+
+<style>
+  .ap { position: fixed; inset: 0; z-index: 70; display: grid; place-items: center; padding: 16px; }
+  .ap[hidden] { display: none; }
+  .ap-backdrop { position: absolute; inset: 0; background: rgba(29,26,28,.45); opacity: 0; transition: opacity .25s ease; }
+  .ap-card { position: relative; width: 100%; max-width: 440px; background: #fff; border-radius: 24px; border-top: 6px solid var(--magenta); padding: 32px 32px 24px; box-shadow: 0 30px 70px rgba(29,26,28,.3); text-align: center; opacity: 0; transform: translateY(24px) scale(.97); transition: opacity .3s ease, transform .35s cubic-bezier(.22,.61,.36,1); }
+  .ap-card:focus { outline: none; }
+  .ap.is-open .ap-backdrop { opacity: 1; }
+  .ap.is-open .ap-card { opacity: 1; transform: none; }
+  .ap-x { position: absolute; top: 12px; right: 12px; width: 40px; height: 40px; border-radius: 50%; border: 0; background: none; color: var(--muted); display: grid; place-items: center; cursor: pointer; }
+  .ap-x:hover { background: var(--magenta-soft); color: var(--magenta-dark); }
+  .ap-top { display: grid; justify-items: center; gap: 12px; margin-bottom: 14px; }
+  .ap-top img { width: 72px; height: 72px; border-radius: 50%; border: 3px solid var(--magenta-soft); }
+  .ap-label { font-size: 13px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--magenta-dark); }
+  .ap-card h2 { font-size: 1.6rem; margin-bottom: .4em; }
+  .ap-card p { color: var(--muted); margin-bottom: 22px; }
+  .ap-go { display: block; width: 100%; text-align: center; }
+  .ap-no { margin-top: 10px; background: none; border: 0; padding: 10px; font: 500 15px var(--sans); color: var(--muted); cursor: pointer; text-decoration: underline; text-underline-offset: 4px; }
+  .ap-no:hover { color: var(--magenta-dark); }
+  /* On phones it slides up from the bottom as a card, leaving the page visible above it */
+  @media (max-width: 600px) {
+    .ap { align-items: end; padding: 0; }
+    .ap-card { max-width: none; border-radius: 22px 22px 0 0; padding: 26px 22px 18px; }
+    .ap-top { grid-template-columns: auto auto; align-items: center; justify-content: center; margin-bottom: 8px; }
+    .ap-top img { width: 48px; height: 48px; }
+    .ap-card h2 { font-size: 1.35rem; }
+    .ap-card p { font-size: 15px; margin-bottom: 18px; }
+  }
+  @media (prefers-reduced-motion: reduce) { .ap-backdrop, .ap-card { transition: none; } }
+</style>
