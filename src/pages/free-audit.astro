@@ -1,0 +1,162 @@
+---
+import Base from '../layouts/Base.astro';
+// Requests are emailed to Anita through Web3Forms (same key as the note form on /book-online).
+const WEB3FORMS_KEY = '2ac767b0-0741-420d-bfe1-79cc7353daab';
+// How soon the audit arrives. Change this one line if the turnaround changes.
+const TURNAROUND = 'within 5 business days';
+---
+<Base
+  title="Free Website Audit for Women-Owned Businesses | She2She Media"
+  description="Send your website link and get a free, plain-language review with your top 3 fixes by email. No call required."
+>
+  <section class="section">
+    <div class="container audit">
+      <div class="info">
+        <span class="eyebrow">Free website audit</span>
+        <h1>Find out what your website is quietly costing you.</h1>
+        <span class="rule" aria-hidden="true"></span>
+        <p class="lead">Send me your link. I'll go through your site the way a new customer would, then email you a short, plain-language review with the top 3 things to fix first.</p>
+
+        <div class="block">
+          <h2 class="label">What I look at</h2>
+          <ul class="check">
+            <li><strong>First impression:</strong> can a visitor tell what you do in five seconds?</li>
+            <li><strong>Phones:</strong> how it looks and works on a phone, where most visitors are</li>
+            <li><strong>Speed:</strong> how long people wait before they see anything</li>
+            <li><strong>The path to you:</strong> whether it's easy to contact or book you, and whether your forms actually work</li>
+            <li><strong>Google basics:</strong> page titles, descriptions and whether your pages can be found</li>
+          </ul>
+        </div>
+
+        <div class="block">
+          <h2 class="label">What you get</h2>
+          <p>An email {TURNAROUND} with what's working, what isn't, and your top 3 fixes in order of impact. Many of them you'll be able to make yourself.</p>
+        </div>
+
+        <div class="block">
+          <h2 class="label">The fine print</h2>
+          <p>There isn't much. It's free, there's no call required, and no sales sequence afterwards. If you'd like help with the fixes, you know where I am.</p>
+        </div>
+      </div>
+
+      <div class="panel">
+        <form id="audit-form" class="form" action="https://api.web3forms.com/submit" method="POST" novalidate>
+          <input type="hidden" name="access_key" value={WEB3FORMS_KEY} />
+          <input type="hidden" name="subject" value="Free website audit request" />
+          <input type="hidden" name="from_name" value="She2She Media website" />
+          <input type="checkbox" name="botcheck" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true" />
+
+          <h2 class="form-title">Request your free audit</h2>
+
+          <div class="row">
+            <div class="field">
+              <label for="a-name">Your name</label>
+              <input id="a-name" name="name" type="text" autocomplete="name" required />
+            </div>
+            <div class="field">
+              <label for="a-email">Email</label>
+              <input id="a-email" name="email" type="email" autocomplete="email" required />
+            </div>
+          </div>
+          <div class="field">
+            <label for="a-site">Your website address</label>
+            <input id="a-site" name="website" type="text" inputmode="url" autocomplete="url" placeholder="yourbusiness.com" required />
+          </div>
+          <div class="field">
+            <label for="a-goal">What would you most like your website to do better? <span class="opt">(optional)</span></label>
+            <textarea id="a-goal" name="goal" rows="4"></textarea>
+          </div>
+          <label class="opt-in">
+            <input type="checkbox" name="newsletter" value="Yes, send me website tips by email" />
+            <span>Also send me occasional website and marketing tips by email. Unsubscribe any time.</span>
+          </label>
+
+          <p class="error" id="audit-error" role="alert" hidden></p>
+          <button type="submit" class="btn">Send my audit request</button>
+          <p class="privacy">I'll only use your details for your audit (and tips, if you tick the box). See the <a href="/privacy">privacy policy</a>.</p>
+        </form>
+
+        <div class="sent" id="audit-sent" hidden tabindex="-1">
+          <svg viewBox="0 0 48 48" width="48" height="48" aria-hidden="true" focusable="false"><circle cx="24" cy="24" r="22" fill="var(--magenta-soft)"/><path d="M15 24.5l6 6 12-13" fill="none" stroke="var(--magenta)" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <h2>Got it. Your audit is on my list.</h2>
+          <p>You'll hear from me {TURNAROUND}. In the meantime, the <a href="/blog">blog</a> covers the most common website fixes.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script is:inline>
+    (function () {
+      var form = document.getElementById('audit-form');
+      var err = document.getElementById('audit-error');
+      var sent = document.getElementById('audit-sent');
+      if (!form) return;
+      form.addEventListener('submit', function (e) {
+        e.preventDefault();
+        err.hidden = true;
+        if (!form.checkValidity()) {
+          err.textContent = 'Please add your name, a valid email and your website address.';
+          err.hidden = false;
+          var bad = form.querySelector(':invalid');
+          if (bad) bad.focus();
+          return;
+        }
+        var data = new FormData(form);
+        if (data.get('botcheck')) return;
+        if (!data.get('newsletter')) data.set('newsletter', 'No');
+        var btn = form.querySelector('button[type="submit"]');
+        btn.disabled = true; btn.textContent = 'Sending...';
+        fetch(form.action, { method: 'POST', headers: { Accept: 'application/json' }, body: data })
+          .then(function (r) { return r.json(); })
+          .then(function (res) {
+            if (!res.success) throw new Error();
+            form.hidden = true; sent.hidden = false; sent.focus();
+          })
+          .catch(function () {
+            err.innerHTML = 'Sorry, that didn\'t send. Please email your website link to <a href="mailto:anita@she2shemedia.com?subject=Free%20website%20audit">anita@she2shemedia.com</a> instead.';
+            err.hidden = false;
+            btn.disabled = false; btn.textContent = 'Send my audit request';
+          });
+      });
+    })();
+  </script>
+</Base>
+
+<style>
+  .audit { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 64px; align-items: start; }
+  h1 { font-size: clamp(2.2rem, 4.4vw, 3.2rem); margin-bottom: 0; }
+  .rule { display: block; width: 56px; height: 4px; border-radius: 2px; background: var(--magenta); margin: 24px 0; }
+  .lead { margin-bottom: 0; }
+  .block { border-top: 1px solid var(--line); margin-top: 32px; padding-top: 24px; }
+  .label { font-size: 13px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--magenta-dark); margin: 0 0 12px; }
+  .block p, .block .check { margin: 0; }
+  .block .check li { margin-bottom: .7em; }
+
+  .panel { position: sticky; top: calc(var(--header-h) + 24px); background: #fff; border: 1px solid var(--line); border-top: 4px solid var(--magenta); border-radius: var(--radius); padding: 32px; box-shadow: 0 24px 48px rgba(168,37,111,.08); }
+  .form-title { font-size: 1.5rem; margin-bottom: 20px; }
+  .row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .field { display: grid; gap: 6px; margin-bottom: 16px; }
+  .field label { font-weight: 600; font-size: 15px; color: var(--ink); }
+  .opt { font-weight: 400; color: var(--muted); }
+  .field input, .field textarea { font: 400 16px/1.5 var(--sans); color: var(--text); background: #fff; border: 1px solid #d8ced3; border-radius: 12px; padding: 12px 14px; width: 100%; }
+  .field textarea { resize: vertical; min-height: 110px; }
+  .field input:focus, .field textarea:focus { outline: none; border-color: var(--magenta); box-shadow: 0 0 0 3px rgba(202,50,141,.18); }
+  .opt-in { display: flex; gap: 12px; align-items: flex-start; font-size: 15px; color: var(--text); margin: 4px 0 20px; cursor: pointer; }
+  .opt-in input { width: 20px; height: 20px; margin: 2px 0 0; flex: none; accent-color: var(--magenta); }
+  .hp { position: absolute; left: -9999px; }
+  .error { background: var(--magenta-soft); color: var(--magenta-dark); border-radius: 10px; padding: 12px 14px; font-size: 15px; }
+  .form .btn { width: 100%; cursor: pointer; }
+  .form .btn:disabled { opacity: .7; cursor: default; }
+  .privacy { font-size: 13px; color: var(--muted); margin: 14px 0 0; text-align: center; }
+
+  .sent { text-align: center; padding: 40px 12px; }
+  .sent svg { margin: 0 auto 16px; }
+  .sent h2 { font-size: 1.5rem; }
+  .sent p { color: var(--muted); margin: 0; }
+
+  @media (max-width: 900px) {
+    .audit { grid-template-columns: 1fr; gap: 40px; }
+    .panel { position: static; padding: 24px 20px; }
+    .row { grid-template-columns: 1fr; gap: 0; }
+  }
+</style>

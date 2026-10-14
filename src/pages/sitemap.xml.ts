@@ -1,6 +1,6 @@
 import { posts } from '../posts';
 
-const pages = ['/', '/services', '/pricing', '/work', '/about', '/faq', '/book-online', '/blog', '/privacy', '/terms', '/disclaimer', '/accessibility'];
+const pages = ['/', '/services', '/pricing', '/work', '/about', '/faq', '/free-audit', '/book-online', '/blog', '/privacy', '/terms', '/disclaimer', '/accessibility'];
 
 export function GET() {
   const site = 'https://www.she2shemedia.com';
