@@ -1,5 +1,6 @@
 ---
 import Base from '../layouts/Base.astro';
+import Waves from '../components/Waves.astro';
 import Torn from '../components/Torn.astro';
 import CtaBand from '../components/CtaBand.astro';
 import LoopVideo from '../components/LoopVideo.astro';
@@ -20,7 +21,7 @@ import LoopVideo from '../components/LoopVideo.astro';
         <div class="frame">
           <img src="/images/anita.jpg" alt="Anita, founder of She2She Media, smiling in a magenta blouse with a castle behind her" width="720" height="765" fetchpriority="high" />
         </div>
-        <div class="waves deco" aria-hidden="true"></div>
+        <div class="deco" aria-hidden="true"><Waves width={120} height={220} /></div>
         <div class="hatch deco2" aria-hidden="true"></div>
       </div>
     </div>
