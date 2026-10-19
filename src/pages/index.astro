@@ -124,10 +124,30 @@ import { spotsTotal, spotsLeft } from '../special';
     </div>
   </section>
 
-  <CtaBand heading="Not sure what you need yet?" body="That's what the call is for. Bring your current site, or the lack of one, and we'll work out the next step together." />
+  <Torn top="#fff" bottom="var(--cream)" />
+  <section class="section cream testimonial" aria-label="What clients say">
+    <div class="container narrow">
+      <figure class="t-quote">
+        <span class="t-mark" aria-hidden="true">&ldquo;</span>
+        <blockquote>
+          <p>Working with Anita at She2She Media has been an absolute pleasure! She made the entire website design process feel easy and seamless, anticipating details we hadn't even thought of and guiding us every step of the way. She's incredibly knowledgeable and professional, yet warm, approachable, and genuinely fun to work with. We couldn't be happier with the experience and look forward to working with her for many years to come!</p>
+        </blockquote>
+        <figcaption>Mickie, <a href="https://www.dogsthatcook.com">Dogs That Cook</a></figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <CtaBand above="var(--cream)" heading="Not sure what you need yet?" body="That's what the call is for. Bring your current site, or the lack of one, and we'll work out the next step together." />
 </Base>
 
 <style>
+  .testimonial { text-align: center; }
+  .t-quote { margin: 0; }
+  .t-mark { display: block; font: 700 96px/.6 var(--sans); color: var(--magenta); height: 48px; }
+  .t-quote blockquote { margin: 0 0 20px; }
+  .t-quote p { font-size: clamp(1.15rem, 2.2vw, 1.4rem); line-height: 1.6; color: var(--ink); font-weight: 500; }
+  .t-quote figcaption { font-weight: 600; color: var(--muted); }
+  .t-quote figcaption a { font-weight: 600; }
   .hero { padding: 64px 0 72px; overflow: hidden; }
   .hero-grid { display: grid; grid-template-columns: 1.15fr .85fr; gap: 56px; align-items: center; }
   .copy .lead { margin-bottom: 32px; }

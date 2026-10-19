@@ -27,6 +27,13 @@ const projects = [
     built: "A searchable recipe database with filters by ingredient, diet and meal type, in a playful brand that doesn't get in the way of the food.",
     image: '/images/work/dogs-that-cook.jpg',
     video: '/images/work/dogs-that-cook.mp4',
+    quoteBy: 'Mickie, Dogs That Cook',
+    quote: [
+      'From our very first conversation, Anita at She2She Media made us feel like we were in the best possible hands. What could have been a complicated and overwhelming process became an exciting, collaborative, and genuinely enjoyable experience.',
+      "Anita has an incredible ability to understand your vision, bring it to life, and think through all the little details you didn't even realize needed attention. She's thoughtful, proactive, and exceptionally knowledgeable, always offering guidance and suggestions that make the end result even better.",
+      "What really sets Anita apart is how wonderful she is to work with. She's professional without ever being intimidating, patient with questions, generous with her expertise, and truly invested in getting things right. We felt supported every step of the way.",
+      "Our website continues to grow, and Anita remains an invaluable partner in that journey. We couldn't imagine working with anyone else, and we look forward to many more projects together!",
+    ],
     w: 1400, h: 716,
   },
   {
@@ -87,6 +94,14 @@ const projects = [
           {p.soon ? <p class="soon-note">The new site goes live soon.</p> : <a href={p.url}>Visit the site</a>}
         </div>
       </div>
+      {p.quote && (
+        <div class="container">
+          <figure class="quote">
+            <blockquote>{p.quote.map((q) => <p>{q}</p>)}</blockquote>
+            <figcaption>{p.quoteBy}, <a href={p.url}>{p.domain}</a></figcaption>
+          </figure>
+        </div>
+      )}
     </section>
   ))}
 
@@ -94,6 +109,13 @@ const projects = [
 </Base>
 
 <style>
+  .quote { position: relative; margin: 56px 0 0; background: #fff; border: 1px solid var(--line); border-left: 6px solid var(--magenta); border-radius: var(--radius); padding: 40px 44px 32px 72px; }
+  .quote::before { content: "\201C"; position: absolute; left: 22px; top: 6px; font: 700 88px/1 var(--sans); color: var(--magenta); }
+  .quote blockquote { margin: 0; }
+  .quote p { font-size: 1.05rem; }
+  .quote figcaption { font-weight: 600; color: var(--ink); }
+  .cream .quote { background: #fff; }
+  @media (max-width: 760px) { .quote { padding: 56px 22px 24px; } .quote::before { left: 18px; top: 4px; font-size: 72px; } }
   .intro { padding-bottom: 24px; }
   .two { display: grid; grid-template-columns: 1.05fr .95fr; gap: 56px; align-items: start; }
   .tag { display: inline-block; font-size: 13px; font-weight: 700; color: var(--magenta-dark); background: var(--magenta-soft); border-radius: 999px; padding: 4px 12px; margin-bottom: 12px; }
