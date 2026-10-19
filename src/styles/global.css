@@ -12,6 +12,7 @@
   --teal: #000000;
   --line: #e9e3e6;
   --sans: "Poppins", Arial, Helvetica, sans-serif;
+  --serif: "Gloock", Georgia, "Times New Roman", serif;
   --max: 1120px;
   --header-h: 96px;
   --radius: 24px;
@@ -23,8 +24,11 @@ html { scroll-padding-top: var(--header-h); -webkit-text-size-adjust: 100%; }
 body { margin: 0; background: var(--paper); color: var(--text); font: 400 17px/1.7 var(--sans); }
 img { max-width: 100%; height: auto; display: block; }
 h1, h2, h3, h4 { font-family: var(--sans); color: var(--ink); font-weight: 700; line-height: 1.15; margin: 0 0 .5em; letter-spacing: -.01em; }
+/* Page titles and section headings use Gloock, the logo's serif; smaller headings and labels stay in Poppins */
+h1, h2 { font-family: var(--serif); font-weight: 400; letter-spacing: -.005em; font-synthesis: none; }
 h1 { font-size: clamp(2.2rem, 5.2vw, 3.6rem); }
 h2 { font-size: clamp(1.7rem, 3.4vw, 2.5rem); }
+h2.label { font-family: var(--sans); }
 h3 { font-size: 1.25rem; line-height: 1.3; }
 p { margin: 0 0 1em; }
 a { color: var(--magenta-dark); text-underline-offset: 3px; }
