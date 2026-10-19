@@ -31,9 +31,6 @@ import { spotsTotal, spotsLeft } from '../special';
 
   <Torn top="#fff" bottom="var(--magenta)" />
   <section class="promo" aria-labelledby="promo-title">
-    <svg class="promo-scribble" viewBox="0 0 300 260" aria-hidden="true">
-      <path d="M40 40c80-40 220-30 230 30S120 130 70 100 120 20 210 60s60 120-30 130-150-20-110-60 140-10 160 40" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" opacity=".8" />
-    </svg>
     <div class="container promo-grid">
            <div class="promo-copy" data-stagger>
         <span class="promo-pill">{spotsLeft > 0 ? `Limited offer · ${spotsLeft} of ${spotsTotal} spots left` : `All ${spotsTotal} spots claimed`}</span>
@@ -60,7 +57,6 @@ import { spotsTotal, spotsLeft } from '../special';
         <img class="promo-badge" src="/images/she2she-badge.png" alt="" width="256" height="256" loading="lazy" />
       </div>
     </div>
-    <div class="hatch promo-hatch" aria-hidden="true"></div>
   </section>
   <Torn top="var(--magenta)" bottom="#fff" flip />
 
@@ -71,7 +67,6 @@ import { spotsTotal, spotsLeft } from '../special';
     </div>
   </section>
 
-  <Torn top="#fff" bottom="var(--cream)" />
   <section class="section cream">
     <div class="container">
       <span class="eyebrow">What I do</span>
@@ -95,7 +90,6 @@ import { spotsTotal, spotsLeft } from '../special';
       </div>
     </div>
   </section>
-  <Torn top="var(--cream)" bottom="#fff" flip />
 
   <section class="section">
     <div class="container">
@@ -110,7 +104,7 @@ import { spotsTotal, spotsLeft } from '../special';
     </div>
   </section>
 
-  <section class="section tight">
+  <section class="section work-section">
     <div class="container work">
       <a href="https://dogsthatcook.com" class="browser" aria-label="Visit dogsthatcook.com">
         <span class="chrome" aria-hidden="true"><i></i><i></i><i></i><b>dogsthatcook.com</b></span>
@@ -125,7 +119,6 @@ import { spotsTotal, spotsLeft } from '../special';
     </div>
   </section>
 
-  <Torn top="#fff" bottom="var(--cream)" />
   <section class="section cream testimonial" aria-label="What clients say">
     <div class="container narrow">
       <figure class="t-quote">
@@ -163,8 +156,6 @@ import { spotsTotal, spotsLeft } from '../special';
   .promo h2 { color: #fff; font-size: clamp(2.2rem, 4.6vw, 3.4rem); margin-bottom: .35em; }
   .promo-copy p { font-size: 1.15rem; max-width: 420px; margin-bottom: 28px; }
   .promo-pill { display: inline-block; background: #fff; color: var(--magenta-dark); font-size: 13px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; border-radius: 999px; padding: 8px 18px; margin-bottom: 18px; }
-  .promo-scribble { position: absolute; right: -30px; top: -20px; width: 340px; }
-  .promo-hatch { position: absolute; left: 0; bottom: 0; width: 220px; height: 54px; background: repeating-linear-gradient(-55deg, var(--teal) 0 3px, transparent 3px 14px); opacity: .9; }
   .paper-wrap { position: relative; }
   .paper { background: #fff; color: var(--ink); padding: 44px 36px 36px; transform: rotate(-1.6deg); box-shadow: 0 20px 40px rgba(60,0,35,.25);
     clip-path: polygon(0 3%, 4% 1%, 9% 3.5%, 14% .5%, 20% 3%, 26% 1%, 31% 3.5%, 37% .8%, 43% 2.8%, 49% .4%, 55% 3%, 61% 1.2%, 67% 3.4%, 73% .6%, 79% 2.7%, 85% .8%, 91% 3.2%, 96% 1%, 100% 2.6%, 100% 100%, 0 100%);
@@ -208,6 +199,7 @@ import { spotsTotal, spotsLeft } from '../special';
     .steps li:hover .num { animation: flip .8s ease; }
     @keyframes flip { from { transform: rotateY(0); } to { transform: rotateY(360deg); } }
   }
+  .work-section { padding-top: 56px; }
   .work { display: grid; grid-template-columns: 1.1fr .9fr; gap: 48px; align-items: center; }
   .browser { display: block; border-radius: 18px; overflow: hidden; border: 1px solid var(--line); box-shadow: 0 18px 40px rgba(0,0,0,.08); text-decoration: none; }
   .chrome { display: flex; align-items: center; gap: 6px; background: #f1edef; padding: 12px 16px; }
