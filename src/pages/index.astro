@@ -91,7 +91,7 @@ import { spotsTotal, spotsLeft } from '../special';
     </div>
   </section>
 
-  <section class="section">
+  <section class="section how">
     <div class="container">
       <span class="eyebrow">How it works</span>
       <h2>Four stages, no black box</h2>
@@ -194,6 +194,11 @@ import { spotsTotal, spotsLeft } from '../special';
   .svc:hover .price { color: var(--magenta-dark); }
   @media (prefers-reduced-motion: reduce) { .cards .svc:hover, .cards .svc:focus-visible { transform: none; } }
   .svc .price { margin-top: auto; font-size: 1.5rem; }
+  /* How it works sits on black to separate it from the cream cards above and the work below */
+  .how { background: var(--ink); color: #fff; }
+  .how h2, .how h3 { color: #fff; }
+  .how .eyebrow { color: var(--lilac); }
+  .how .steps p { color: rgba(255,255,255,.75); }
   .steps { list-style: none; padding: 0; margin: 32px 0 0; display: grid; grid-template-columns: repeat(4, 1fr); gap: 28px; }
   .steps li { position: relative; }
   .num { position: relative; display: inline-flex; width: 56px; height: 56px; border-radius: 50%; background: var(--magenta); color: #fff; font-weight: 700; font-size: 22px; align-items: center; justify-content: center; margin-bottom: 16px; z-index: 1; }
