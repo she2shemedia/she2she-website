@@ -66,3 +66,12 @@ a:focus-visible, button:focus-visible, summary:focus-visible { outline: 3px soli
    the visitor hasn't asked for reduced motion, so the page is fully visible without JavaScript. */
 .motion .reveal { opacity: 0; transform: translateY(32px); transition: opacity 1s cubic-bezier(.22,.61,.36,1) var(--d, 0ms), transform 1.2s cubic-bezier(.22,.61,.36,1) var(--d, 0ms); }
 .motion .reveal.in { opacity: 1; transform: none; }
+
+/* Page titles: after a short pause, every page's main heading glides up as the page opens.
+   This runs in CSS so it starts on first paint; the scroll script above can't reliably animate
+   things already on screen at load. Change --title-delay to make the pause longer or shorter. */
+:root { --title-delay: 300ms; }
+@media (prefers-reduced-motion: no-preference) {
+  main h1 { animation: title-rise 1.2s cubic-bezier(.22,.61,.36,1) var(--title-delay) both; }
+  @keyframes title-rise { from { opacity: 0; transform: translateY(32px); } to { opacity: 1; transform: none; } }
+}
