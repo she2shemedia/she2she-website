@@ -56,7 +56,11 @@ const year = new Date().getFullYear();
   h2 { font-family: var(--sans); font-weight: 700; font-size: 14px; letter-spacing: .12em; text-transform: uppercase; margin-bottom: 14px; color: #fff; }
   nav, .grid > div:last-child { display: flex; flex-direction: column; gap: 8px; }
   a:not(.btn) { color: #fff; text-decoration: none; }
-  a:not(.btn):hover { color: #fff; text-decoration: underline; text-decoration-color: var(--magenta); text-decoration-thickness: 2px; text-underline-offset: 4px; }
+  /* Text links: a magenta line slides in from the left on hover and out to the right, like the top menu */
+  a:not(.btn):not(.social a) { position: relative; align-self: flex-start; }
+  a:not(.btn):not(.social a)::after { content: ""; position: absolute; left: 0; right: 0; bottom: -3px; height: 2px; border-radius: 2px; background: var(--magenta); transform: scaleX(0); transform-origin: right; }
+  a:not(.btn):not(.social a):hover::after, a:not(.btn):not(.social a):focus-visible::after { transform: scaleX(1); transform-origin: left; }
+  @media (prefers-reduced-motion: no-preference) { a:not(.btn):not(.social a)::after { transition: transform .45s cubic-bezier(.22,.61,.36,1); } }
   .social { display: flex; gap: 12px; margin-top: 12px; flex-wrap: wrap; }
   .social a { display: inline-flex; align-items: center; justify-content: center; width: 44px; height: 44px; border-radius: 50%; border: 1px solid #3a3337; transition: background .15s, border-color .15s; }
   .social a:hover { background: var(--magenta); border-color: var(--magenta); text-decoration: none; }
