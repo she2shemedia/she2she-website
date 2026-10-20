@@ -1,4 +1,7 @@
 ---
+// The animated wordmark (S2S brush-draws, unfolds to She2She, MEDIA types out).
+// Built from the real logo shapes; its resting state is the normal logo.
+import logoSvg from '../assets/logo-anim.svg?raw';
 const path = Astro.url.pathname.replace(/\/$/, '') || '/';
 const links = [
   { href: '/services', label: 'Services' },
@@ -13,8 +16,20 @@ const isCurrent = (href: string) => path === href || (href === '/blog' && path.s
 <header class="site-header">
   <div class="container bar">
     <a href="/" class="brand" aria-label="She2She Media home">
-      <img src="/images/she2she-wordmark.svg" alt="She2She Media" width="368" height="120" />
+      <Fragment set:html={logoSvg} />
     </a>
+    <script is:inline>
+      // Animated logo: plays once per visit, on the first page someone lands on.
+      // Runs right after the logo is parsed, so the finished logo never flashes first.
+      (function () {
+        try {
+          if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+          if (sessionStorage.getItem('s2s-logo-played')) return;
+          sessionStorage.setItem('s2s-logo-played', '1');
+          document.querySelector('.site-header .logo-anim').classList.add('play');
+        } catch (e) {}
+      })();
+    </script>
     <nav aria-label="Main">
       <div class="links desktop">
         {links.map((l) => <a href={l.href} aria-current={isCurrent(l.href) ? 'page' : undefined}>{l.label}</a>)}
@@ -33,7 +48,7 @@ const isCurrent = (href: string) => path === href || (href === '/blog' && path.s
 <style>
   .site-header { position: sticky; top: 0; z-index: 50; background: rgba(255,255,255,.96); backdrop-filter: blur(6px); border-bottom: 1px solid var(--line); height: var(--header-h); display: flex; align-items: center; }
   .bar { display: flex; align-items: center; justify-content: space-between; gap: 24px; }
-  .brand img { width: auto; height: 50px; }
+  .brand :global(.logo-anim) { height: 50px; width: calc(50px * 3.063); }
   .brand { display: block; }
   nav { display: flex; align-items: center; gap: 28px; }
   .menu { display: none; }
@@ -52,7 +67,7 @@ const isCurrent = (href: string) => path === href || (href === '/blog' && path.s
   .cta { padding: 13px 22px; font-size: 15px; white-space: nowrap; }
   .short { display: none; }
   @media (max-width: 900px) {
-    .brand img { height: 44px; }
+    .brand :global(.logo-anim) { height: 44px; width: calc(44px * 3.063); }
     nav { gap: 12px; }
     .desktop { display: none; }
     .menu { display: block; position: static; }
@@ -64,5 +79,5 @@ const isCurrent = (href: string) => path === href || (href === '/blog' && path.s
     .cta { padding: 11px 16px; font-size: 14px; }
   }
   @media (max-width: 520px) { .long { display: none; } .short { display: inline; } }
-  @media (max-width: 420px) { .brand img { height: 38px; } .cta { font-size: 13px; padding: 10px 14px; } }
+  @media (max-width: 420px) { .brand :global(.logo-anim) { height: 38px; width: calc(38px * 3.063); } .cta { font-size: 13px; padding: 10px 14px; } }
 </style>
