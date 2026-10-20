@@ -64,6 +64,11 @@ const year = new Date().getFullYear();
   .social { display: flex; gap: 12px; margin-top: 12px; flex-wrap: wrap; }
   .social a { display: inline-flex; align-items: center; justify-content: center; width: 44px; height: 44px; border-radius: 50%; border: 1px solid #3a3337; transition: background .15s, border-color .15s; }
   .social a:hover { background: var(--magenta); border-color: var(--magenta); text-decoration: none; }
+  /* Coin spin: the icon flips around its vertical axis a couple of times and settles, like a coin spun on a table */
+  @media (prefers-reduced-motion: no-preference) {
+    .social a:hover, .social a:focus-visible { animation: coin-spin .9s cubic-bezier(.2,.7,.3,1); }
+    @keyframes coin-spin { from { transform: perspective(300px) rotateY(0); } to { transform: perspective(300px) rotateY(720deg); } }
+  }
   .legal { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px 24px; padding-top: 32px; padding-bottom: 24px; margin-top: 40px; border-top: 1px solid #3a3337; color: #cfc6cb; font-size: 14px; }
   .legal nav { flex-direction: row; flex-wrap: wrap; gap: 8px 20px; }
   @media (max-width: 760px) { .grid { grid-template-columns: 1fr 1fr; } .about { grid-column: 1 / -1; } }
