@@ -179,7 +179,7 @@ const email = 'mailto:anita@she2shemedia.com?subject=' + encodeURIComponent('Que
   .panel { position: absolute; right: 0; bottom: 78px; width: 360px; max-width: calc(100vw - 32px); background: #fff; border-radius: 22px; overflow: hidden; box-shadow: 0 24px 60px rgba(29,26,28,.22); opacity: 0; transform: translateY(12px) scale(.98); transform-origin: bottom right; transition: opacity .2s, transform .2s; }
   .shown .panel { opacity: 1; transform: none; }
 
-  .head { background: var(--ink); color: #fff; border-bottom: 3px solid var(--magenta); display: flex; align-items: center; gap: 14px; padding: 18px 16px 18px 20px; }
+  .head { background: var(--magenta); color: #fff; display: flex; align-items: center; gap: 14px; padding: 18px 16px 18px 20px; }
   .avatar { position: relative; flex: none; width: 52px; height: 52px; border-radius: 50%; background: #fff; display: grid; place-items: center; }
   .mono { font: 400 25px/1 var(--serif); color: var(--magenta); letter-spacing: -.02em; transform: translateY(1px); }
   .mono b { font-weight: 400; color: var(--ink); }
@@ -190,21 +190,21 @@ const email = 'mailto:anita@she2shemedia.com?subject=' + encodeURIComponent('Que
   .close:hover { background: rgba(255,255,255,.15); }
 
   /* Soft pink with faint doodles, like the old Wix chat. */
-  .body { padding: 20px; background-color: #fcf2f7; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180' viewBox='0 0 180 180'%3E%3Cg fill='none' stroke='%23e2d5dc' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='28' cy='30' r='9'/%3E%3Cpath d='M66 32q10-13 20 0t20 0'/%3E%3Ccircle cx='150' cy='22' r='7'/%3E%3Ccircle cx='150' cy='38' r='8'/%3E%3Cpath d='M38 78c-12 4-14 22 0 24s16-14 4-16-8 8-2 8'/%3E%3Cpath d='M84 104l8-15 8 15 8-15'/%3E%3Cpath d='M141 82l-5 28M152 82l-5 28M131 91h26M128 101h26'/%3E%3Cpath d='M24 132q-13 20 0 40'/%3E%3Ccircle cx='82' cy='152' r='6'/%3E%3Cpath d='M128 140c12-10 22 2 12 10s-2 22 12 12'/%3E%3C/g%3E%3C/svg%3E"); background-size: 180px 180px; }
-  .bubble { background: #fff; border-radius: 18px 18px 18px 4px; padding: 14px 16px; margin: 0 0 18px; font-size: 15px; line-height: 1.55; color: var(--text); box-shadow: 0 2px 6px rgba(29,26,28,.05); }
+  .body { padding: 20px; background-color: var(--ink); background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180' viewBox='0 0 180 180'%3E%3Cg fill='none' stroke='%23342c30' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='28' cy='30' r='9'/%3E%3Cpath d='M66 32q10-13 20 0t20 0'/%3E%3Ccircle cx='150' cy='22' r='7'/%3E%3Ccircle cx='150' cy='38' r='8'/%3E%3Cpath d='M38 78c-12 4-14 22 0 24s16-14 4-16-8 8-2 8'/%3E%3Cpath d='M84 104l8-15 8 15 8-15'/%3E%3Cpath d='M141 82l-5 28M152 82l-5 28M131 91h26M128 101h26'/%3E%3Cpath d='M24 132q-13 20 0 40'/%3E%3Ccircle cx='82' cy='152' r='6'/%3E%3Cpath d='M128 140c12-10 22 2 12 10s-2 22 12 12'/%3E%3C/g%3E%3C/svg%3E"); background-size: 180px 180px; }
+  .bubble { background: var(--magenta-soft); border-radius: 18px 18px 18px 4px; padding: 14px 16px; margin: 0 0 18px; font-size: 15px; line-height: 1.55; color: var(--text); box-shadow: 0 2px 6px rgba(29,26,28,.05); }
 
   .actions { display: grid; gap: 10px; }
   .action { display: flex; align-items: center; gap: 12px; padding: 13px 16px; border-radius: 14px; text-decoration: none; font-weight: 600; font-size: 15px; transition: transform .15s, background .15s; }
   .action:hover { transform: translateY(-1px); }
   .wa { background: var(--magenta); color: #fff; }
   .wa:hover { background: var(--magenta-dark); color: #fff; }
-  .mail { background: #fff; color: var(--ink); border: 1px solid var(--line); }
-  .mail:hover { color: var(--magenta-dark); border-color: var(--magenta); }
+  .mail { background: var(--magenta-soft); color: var(--ink); border: 1px solid var(--magenta-soft); }
+  .mail:hover { background: #fff; color: var(--magenta-dark); border-color: #fff; }
 
-  .quick-label { margin: 18px 0 8px; font-size: 12px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); }
+  .quick-label { margin: 18px 0 8px; font-size: 12px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: #cfc6cb; }
   .quick { display: flex; flex-wrap: wrap; gap: 8px; }
-  .quick a { font-size: 14px; font-weight: 500; color: var(--magenta-dark); background: #fff; border: 1px solid var(--line); border-radius: 999px; padding: 7px 14px; text-decoration: none; }
-  .quick a:hover { border-color: var(--magenta); color: var(--magenta); }
+  .quick a { font-size: 14px; font-weight: 500; color: var(--magenta-dark); background: var(--magenta-soft); border: 1px solid var(--magenta-soft); border-radius: 999px; padding: 7px 14px; text-decoration: none; }
+  .quick a:hover { background: #fff; border-color: #fff; color: var(--magenta-dark); }
 
   @media (max-width: 480px) {
     .chat { right: 14px; bottom: 14px; }
