@@ -17,7 +17,7 @@ import CtaBand from '../components/CtaBand.astro';
       <div class="story">
         <span class="eyebrow">About</span>
         <h1>Hi, I'm Anita.</h1>
-        <p class="lead">I run She2She Media, a small web design and marketing studio for women-owned businesses. It's me, not a team, which means you talk to the person doing the work.</p>
+        <p class="lead">I run She2She Media, a small branding, website and social media agency for women-owned businesses. It's me, not a team, which means you talk to the person doing the work.</p>
         <p>Before She2She, I spent years as an executive assistant across many industries including legal, avionics, and most recently in the franchise world. Franchising runs on systems: the same standards, the same playbook, location after location. That's where I learned that most "marketing problems" are really process problems, and that the person running a business doesn't need more ideas. She needs fewer decisions.</p>
         <p>After experiencing a layoff in 2023, I decided it was time to take my years of experience and launch my own business, as many women who have been cast aside in the corporate world do.</p>
         <p>These days I work online and live my dream of traveling the world as a digital nomad, which is a good test of whether a system actually works. Everything I do for clients is written down, planned ahead and checked, because nothing can live in my head when the view out the window changes frequently.</p>
@@ -25,7 +25,7 @@ import CtaBand from '../components/CtaBand.astro';
 
         <aside class="bio" aria-labelledby="bio-heading">
           <h2 id="bio-heading">Short bio</h2>
-          <p>Anita is the founder of She2She Media, a web design and marketing studio for women-owned businesses. After years as an executive assistant in the legal, avionics and franchise industries, she launched her own business in 2023. She builds clear, fast websites and handles social media for owners who'd rather be running their business, working online as a digital nomad. She also writes children's books as A. M. French.</p>
+          <p>Anita is the founder of She2She Media, a branding, website and social media agency for women-owned businesses. After years as an executive assistant in the legal, avionics and franchise industries, she launched her own business in 2023. She builds clear, fast websites and handles social media for owners who'd rather be running their business, working online as a digital nomad. She also writes children's books as A. M. French.</p>
           <p class="one-line"><strong>One line:</strong> Anita is the founder of She2She Media, building websites and handling social media for women-owned businesses.</p>
           <p class="note">Need a bio or headshot for an event or article? Feel free to use these, or email <a href="mailto:anita@she2shemedia.com">anita@she2shemedia.com</a>.</p>
         </aside>
@@ -42,6 +42,18 @@ import CtaBand from '../components/CtaBand.astro';
         <li>Your final OK before anything goes live</li>
         <li>Systems you can understand, not a black box</li>
       </ul>
+
+      <section class="facts" aria-labelledby="facts-heading">
+        <h2 id="facts-heading">She2She Media at a glance</h2>
+        <dl>
+          <div><dt>What this is</dt><dd>A branding, website and social media agency for women-owned businesses</dd></div>
+          <div><dt>Who it's for</dt><dd>Women-owned small businesses</dd></div>
+          <div><dt>Services</dt><dd>Branding, website design and social media management</dd></div>
+          <div><dt>Founded</dt><dd>2023</dd></div>
+          <div><dt>Founder</dt><dd>Anita Marie, who runs She2She Media and does the work herself</dd></div>
+          <div><dt>Based</dt><dd>United States, working remotely with clients</dd></div>
+        </dl>
+      </section>
     </div>
   </section>
 
@@ -61,4 +73,12 @@ import CtaBand from '../components/CtaBand.astro';
   .expect { list-style: none; padding: 0; margin: 24px 0 0; display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
   .expect li { background: #fff; border-radius: 16px; padding: 20px 22px; border-left: 0; border-top: 5px solid var(--magenta); font-weight: 500; }
   @media (max-width: 860px) { .about { grid-template-columns: 1fr; gap: 40px; } .photo { position: relative; top: 0; max-width: 380px; } .expect { grid-template-columns: 1fr; } }
+  .facts { margin-top: 56px; }
+  .facts h2 { margin-bottom: 20px; }
+  .facts dl { margin: 0; background: #fff; border-radius: 16px; padding: 8px 24px; }
+  .facts dl > div { display: grid; grid-template-columns: 160px 1fr; gap: 16px; padding: 14px 0; border-bottom: 1px solid rgba(202,50,141,.15); }
+  .facts dl > div:last-child { border-bottom: 0; }
+  .facts dt { font-weight: 600; color: var(--magenta-dark); }
+  .facts dd { margin: 0; }
+  @media (max-width: 560px) { .facts dl > div { grid-template-columns: 1fr; gap: 4px; } }
 </style>
