@@ -20,6 +20,46 @@ interface Props {
 const { title, description, image = '/images/og-default.jpg', type = 'website' } = Astro.props;
 const canonical = new URL(Astro.url.pathname, Astro.site);
 const ogImage = new URL(image, Astro.site);
+
+// Business details for search engines and AI tools. Keep in step with the About page facts and pricing.
+const business = {
+  '@context': 'https://schema.org',
+  '@type': 'ProfessionalService',
+  '@id': 'https://www.she2shemedia.com/#business',
+  name: 'She2She Media',
+  legalName: 'She2She Media LLC',
+  description: 'She2She Media is a branding, website and social media agency for women-owned businesses.',
+  slogan: 'Branding. Websites. Socials. For Women Who Mean Business.',
+  url: 'https://www.she2shemedia.com/',
+  logo: 'https://www.she2shemedia.com/images/she2she-wordmark.png',
+  image: 'https://www.she2shemedia.com/images/og-default.jpg',
+  email: 'anita@she2shemedia.com',
+  telephone: '+1-678-435-9858',
+  foundingDate: '2023',
+  founder: { '@type': 'Person', name: 'Anita Marie', jobTitle: 'Founder', url: 'https://www.she2shemedia.com/about' },
+  address: { '@type': 'PostalAddress', addressCountry: 'US' },
+  areaServed: 'Worldwide',
+  audience: { '@type': 'BusinessAudience', audienceType: 'Women-owned small businesses' },
+  priceRange: '$150–$4,000',
+  knowsAbout: ['Branding', 'Website design', 'Social media management', 'Small business websites'],
+  sameAs: [
+    'https://www.linkedin.com/company/she2shemedia',
+    'https://instagram.com/she2shemedia',
+    'https://facebook.com/she2shemedia',
+  ],
+  hasOfferCatalog: {
+    '@type': 'OfferCatalog',
+    name: 'Services',
+    itemListElement: [
+      { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Branding (color palette, fonts and brand style guide)' }, price: '750', priceCurrency: 'USD' },
+      { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Website design, Starter (up to 3 pages)' }, price: '1300', priceCurrency: 'USD' },
+      { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Website design, Standard (4 to 6 pages)' }, price: '1750', priceCurrency: 'USD' },
+      { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Website design, Premium (7 to 10 pages)' }, price: '4000', priceCurrency: 'USD' },
+      { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Social media management (12 posts a month)' }, price: '500', priceCurrency: 'USD', priceSpecification: { '@type': 'UnitPriceSpecification', price: '500', priceCurrency: 'USD', unitText: 'month' } },
+      { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Website care plan' }, price: '150', priceCurrency: 'USD', priceSpecification: { '@type': 'UnitPriceSpecification', price: '150', priceCurrency: 'USD', unitText: 'month' } },
+    ],
+  },
+};
 ---
 <!doctype html>
 <html lang="en">
@@ -41,6 +81,7 @@ const ogImage = new URL(image, Astro.site);
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="google-site-verification" content="t_ZiKJzqgi1oMkVLO9sTePi_aw002mYi4ctYFiRYDTU" />
     <meta name="msvalidate.01" content="A08049197893CFD525AA1F1AA9C3ECA5" />
+    <script type="application/ld+json" set:html={JSON.stringify(business)} />
     <slot name="head" />
   </head>
   <body>
