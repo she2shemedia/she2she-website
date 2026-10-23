@@ -3,10 +3,16 @@ import Base from '../layouts/Base.astro';
 import CtaBand from '../components/CtaBand.astro';
 import { spotsTotal, spotsLeft } from '../special';
 
-const builds = [
-  { name: 'Starter', pages: 'Up to 3 pages · about 2–3 weeks', price: '$1,300', wix: '$1,600', items: ['Design in your brand', 'Mobile-first build', 'Contact form or booking link', 'Basic SEO', '14 days of post-launch fixes'] },
-  { name: 'Standard', pages: '4 to 6 pages · about 3–5 weeks', price: '$1,750', wix: '$2,150', items: ['Everything in Starter', 'Lead capture', 'Page plan and copy editing', '30 days of post-launch fixes'], featured: true },
-  { name: 'Premium', pages: '7 to 10 pages · about 5–8 weeks', price: '$4,000', wix: '$4,900', items: ['Everything in Standard', 'Blog setup', 'Email signup integration', 'Advanced SEO', '30 days of priority support'] },
+const codeBuilds = [
+  { name: 'Starter', pages: 'Up to 3 pages · about 2–3 weeks', price: '$1,300', items: ['Design in your brand', 'Mobile-first build', 'Contact form or booking link', 'Basic SEO', '14 days of post-launch fixes'] },
+  { name: 'Standard', pages: '4 to 6 pages · about 3–5 weeks', price: '$1,750', items: ['Everything in Starter', 'Lead capture', 'Page plan and copy editing', '30 days of post-launch fixes'], featured: true },
+  { name: 'Premium', pages: '7 to 10 pages · about 5–8 weeks', price: '$4,000', items: ['Everything in Standard', 'Blog setup', 'Email signup integration', 'Advanced SEO', '30 days of priority support'] },
+];
+
+const wixBuilds = [
+  { name: 'Starter', pages: 'Up to 3 pages · about 2–3 weeks', price: '$1,600', items: ['Design in your brand', 'Mobile-first build', 'Contact form or booking link', 'Basic SEO', 'Recorded walkthrough of how to edit your site', '14 days of post-launch fixes'] },
+  { name: 'Standard', pages: '4 to 6 pages · about 3–5 weeks', price: '$2,150', items: ['Everything in Starter', 'Lead capture', 'Page plan and copy editing', '30 days of post-launch fixes'], featured: true },
+  { name: 'Premium', pages: '7 to 10 pages · about 5–8 weeks', price: '$4,900', items: ['Everything in Standard', 'Blog setup', 'Email signup integration', 'Advanced SEO', '30 days of priority support'] },
 ];
 ---
 <Base
@@ -61,29 +67,6 @@ const builds = [
 
   <section class="section">
     <div class="container">
-      <h2>Website builds <span class="sub">one-time</span></h2>
-      <div class="tiers" data-stagger>
-        {builds.map((b) => (
-          <div class:list={['card', 'tier', { featured: b.featured }]}>
-            {b.featured && <span class="pill">Recommended</span>}
-            <h3>{b.name}</h3>
-            <p class="pages">{b.pages}</p>
-            <p class="price">{b.price}</p>
-            <p class="wix-price">On Wix: {b.wix}</p>
-            <ul class="check">{b.items.map((i) => <li>{i}</li>)}</ul>
-          </div>
-        ))}
-      </div>
-      <div class="terms-row">
-        <p><strong>Paid in three parts:</strong> a third to secure your start date, a third when the site is built, and the final third at handover, when the site moves into your own accounts.</p>
-        <p><strong>Timelines</strong> start once I have your words and photos. A rebrand adds a week or two.</p>
-      </div>
-      <p class="fine">Extra pages are $150 each. More details in the <a href="/faq">FAQ</a>.</p>
-    </div>
-  </section>
-
-  <section class="section">
-    <div class="container">
       <h2>Two ways to build</h2>
       <div class="ways" data-stagger>
         <div class="card way">
@@ -97,6 +80,7 @@ const builds = [
             <dt>Handover</dt><dd>The site and code move into your own accounts</dd>
             <dt>Help later</dt><dd>Included in Website care</dd>
           </dl>
+          <a href="#done-for-you" class="btn">See prices</a>
         </div>
         <div class="card way">
           <h3>Do it yourself</h3>
@@ -109,9 +93,53 @@ const builds = [
             <dt>Handover</dt><dd>A recorded walkthrough of how to edit your site, with a layout set up to be hard to break</dd>
             <dt>Help later</dt><dd>$75 an hour, as needed</dd>
           </dl>
+          <a href="#do-it-yourself" class="btn">See prices</a>
         </div>
       </div>
       <p class="ways-note"><strong>Same design, same care. The difference is who keeps it up to date.</strong> Website care is month to month, so you can cancel any time you don't need it. Either way, the site is yours.</p>
+    </div>
+  </section>
+
+  <section id="done-for-you" class="section cream">
+    <div class="container">
+      <span class="eyebrow">Done for you</span>
+      <h2>Website prices, built in code</h2>
+      <p class="section-lead">A one-time price for the build. Updates afterwards through Website care, if you want them.</p>
+      <div class="tiers" data-stagger>
+        {codeBuilds.map((b) => (
+          <div class:list={['card', 'tier', { featured: b.featured }]}>
+            {b.featured && <span class="pill">Recommended</span>}
+            <h3>{b.name}</h3>
+            <p class="pages">{b.pages}</p>
+            <p class="price">{b.price}</p>
+            <ul class="check">{b.items.map((i) => <li>{i}</li>)}</ul>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section id="do-it-yourself" class="section">
+    <div class="container">
+      <span class="eyebrow">Do it yourself</span>
+      <h2>Website prices, built on Wix</h2>
+      <p class="section-lead">A one-time price for the build. Your Wix plan is paid separately, directly to Wix.</p>
+      <div class="tiers" data-stagger>
+        {wixBuilds.map((b) => (
+          <div class:list={['card', 'tier', { featured: b.featured }]}>
+            {b.featured && <span class="pill">Recommended</span>}
+            <h3>{b.name}</h3>
+            <p class="pages">{b.pages}</p>
+            <p class="price">{b.price}</p>
+            <ul class="check">{b.items.map((i) => <li>{i}</li>)}</ul>
+          </div>
+        ))}
+      </div>
+      <div class="terms-row">
+        <p><strong>Paid in three parts:</strong> a third to secure your start date, a third when the site is built, and the final third at handover, when the site moves into your own accounts.</p>
+        <p><strong>Timelines</strong> start once I have your words and photos. A rebrand adds a week or two.</p>
+      </div>
+      <p class="fine">Payment terms and timelines are the same for both. Extra pages are $150 each. More details in the <a href="/faq">FAQ</a>.</p>
     </div>
   </section>
 
@@ -194,13 +222,16 @@ const builds = [
   @media (max-width: 860px) { .terms-row { grid-template-columns: 1fr; } }
   .code-only { font-size: 15px; margin: -8px 0 28px; }
   .code-only a { color: #fff; text-decoration: underline; }
-  .wix-price { color: var(--muted); font-size: 15px; margin: -.5em 0 1em; }
+  .section-lead { color: var(--muted); max-width: 640px; margin: 0; }
   .ways { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 24px; }
   .way-for { color: var(--muted); margin: 0 0 1em; }
   .way dl { margin: 0; }
   .way dt { font-size: 12px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--magenta-dark); margin-top: 14px; }
   .way dd { margin: 2px 0 0; }
   .ways-note { margin-top: 24px; max-width: 720px; }
+  .way { display: flex; flex-direction: column; }
+  .way .btn { align-self: flex-start; margin-top: auto; }
+  .way dl { margin-bottom: 24px; }
   @media (max-width: 860px) { .ways { grid-template-columns: 1fr; } }
   .fine { font-size: 14px; color: var(--muted); margin-top: 20px; }
   .monthly { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 24px; }
