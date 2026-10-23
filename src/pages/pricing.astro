@@ -205,9 +205,10 @@ const wixBuilds = [
   .offer { background: #fff; color: var(--ink); border-radius: 18px; padding: 24px; box-shadow: 0 14px 30px rgba(60,0,35,.2);
     background-image: radial-gradient(rgba(0,0,0,.035) 1px, transparent 1px); background-size: 4px 4px; }
   .special .offer h3 { color: var(--ink); }
-  .offer { transition: transform .25s ease, box-shadow .25s ease; }
+  .offer, .tier { transition: transform .25s ease, box-shadow .25s ease; }
   .offer:hover { transform: translateY(-10px); box-shadow: 0 26px 44px rgba(60,0,35,.3); }
-  @media (prefers-reduced-motion: reduce) { .offer:hover { transform: none; } }
+  .tier:hover { transform: translateY(-10px); box-shadow: 0 26px 44px rgba(168,37,111,.18); }
+  @media (prefers-reduced-motion: reduce) { .offer:hover, .tier:hover { transform: none; } }
   .offer .price { color: var(--magenta-dark); }
   .offer s { font-size: 1.1rem; font-weight: 500; color: var(--muted); margin-left: 6px; }
   .offer p:not(.price) { color: var(--muted); }
