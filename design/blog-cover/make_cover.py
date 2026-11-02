@@ -68,12 +68,13 @@ def main(photo_path, line1, line2, out_path):
     d = ImageDraw.Draw(canvas)
     cx = 349
     longest = max(line1, line2, key=len)
-    size = 40
+    size = 48
     font = ImageFont.truetype(os.path.join(HERE, "Poppins-Bold.ttf"), size)
     while d.textlength(longest, font=font) > 590 and size > 26:
         size -= 1
         font = ImageFont.truetype(os.path.join(HERE, "Poppins-Bold.ttf"), size)
-    for text, y in ((line1, 569), (line2, 627)):
+    gap = round(size * 1.45)
+    for text, y in ((line1, 569), (line2, 569 + gap)):
         d.text((cx, y), text, font=font, fill=(0, 0, 0), anchor="ms")
 
     logo = Image.open(os.path.join(ROOT, "public/images/she2she-wordmark.png")).convert("RGBA")
