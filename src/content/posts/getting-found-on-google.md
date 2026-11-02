@@ -31,7 +31,7 @@ A better page title says what you do and who you do it for. For example:
 - Instead of "Home," try "Career Coaching for Women in Tech | Jane Smith Coaching"
 - Instead of "Services," try "Business Coaching Packages for New Founders"
 
-Use the words your clients would actually type into Google, not the clever name you gave your signature program. They're searching for "confidence coach for women," not "The Radiance Method."
+Use the words your clients would actually type into Google. Someone looking for help types "confidence coach for women"; she has no way of knowing your program is called "The Radiance Method" until she finds you.
 
 ### Write the way your clients search
 
