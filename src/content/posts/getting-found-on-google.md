@@ -8,7 +8,7 @@ image: "/images/blog/getting-found-on-google.jpg"
 
 Last week I asked on LinkedIn what you'd most like help with, and the answer was clear: getting found on Google.
 
-It makes sense. You can have a beautiful website, but if the only people visiting it are the ones you've personally sent the link to, it isn't doing much work for you. The good news is that showing up on Google isn't reserved for big companies with marketing teams. Most of what moves the needle for a small service business is simple, and much of it you can do in an afternoon.
+It makes sense. You can have a beautiful website, but if the only people visiting it are the ones you've personally sent the link to, it isn't doing much work for you. The good news is that showing up on Google isn't reserved for big companies with marketing teams. Most of what helps a small service business show up is simple, and much of it you can do in an afternoon.
 
 Here's where I'd start.
 
@@ -59,9 +59,9 @@ Pull up your own website on your phone and try booking a call. If anything feels
 
 ### Give it time
 
-Here's the honest part: Google doesn't respond overnight. Changes to your page titles or profile can take a few weeks to show up, and building real visibility usually takes a few months of steady attention.
+One thing to know before you start: Google doesn't respond overnight. Changes to your page titles or profile can take a few weeks to show up, and building real visibility usually takes a few months of steady attention.
 
-That's not a reason to wait. It's a reason to start now, so that three months from today, the people searching for exactly what you offer can actually find you.
+So it's worth starting now. Three months from today, the people searching for exactly what you offer will have a much better chance of finding you.
 
 ### Want a second pair of eyes?
 
