@@ -1,6 +1,6 @@
 ---
 title: "How to Choose Brand Colors and Fonts That Still Feel Right in Three Years"
-date: "2026-11-04"
+date: "2026-12-02"
 author: "Anita Marie"
 description: "Trends come and go, but your brand shouldn't have to. Here's a practical way to choose colors and fonts you won't want to redo in a year."
 image: "/images/blog/how-to-choose-brand-colors-and-fonts-that-still-feel-right-in-three-years.jpg"
