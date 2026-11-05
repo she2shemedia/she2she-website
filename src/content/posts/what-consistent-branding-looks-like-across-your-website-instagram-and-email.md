@@ -1,6 +1,6 @@
 ---
 title: "What Consistent Branding Looks Like Across Your Website, Instagram and Email"
-date: "2026-11-04"
+date: "2026-12-09"
 author: "Anita Marie"
 description: "Consistent branding doesn't mean everything looks identical. Here's what to keep the same across your website, Instagram and email so people recognize you right away."
 image: "/images/blog/what-consistent-branding-looks-like-across-your-website-instagram-and-email.jpg"
