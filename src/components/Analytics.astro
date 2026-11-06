@@ -12,21 +12,9 @@ const GA_ID = 'G-GYKX1HG133';
       <div class="cc-backdrop"></div>
       <div class="cc-card" role="dialog" aria-modal="true" aria-labelledby="cc-title" aria-describedby="cc-text" tabindex="-1">
         <div class="cc-band" aria-hidden="true"></div>
-        <svg class="cc-cookie" viewBox="0 0 160 150" width="140" height="131" aria-hidden="true" focusable="false">
-          <ellipse cx="80" cy="140" rx="44" ry="7" fill="#e9e3e6" />
-          <!-- cookie with a bite out of the top right -->
-          <path d="M80 18c9 0 17 2 24 6-3 5-1 12 5 14 2 7 9 10 15 7 5 8 8 17 8 27 0 30-23 54-52 54S28 102 28 72 51 18 80 18z" fill="#e2a65c" stroke="#b97a35" stroke-width="3" />
-          <circle cx="58" cy="44" r="5" fill="#6b3f24" /><circle cx="97" cy="47" r="4" fill="#6b3f24" />
-          <circle cx="46" cy="78" r="4.5" fill="#6b3f24" /><circle cx="108" cy="86" r="5" fill="#6b3f24" />
-          <circle cx="70" cy="104" r="4" fill="#6b3f24" /><circle cx="96" cy="108" r="3.5" fill="#6b3f24" />
-          <!-- face -->
-          <path d="M60 68q6-7 12 0M88 68q6-7 12 0" fill="none" stroke="#1d1a1c" stroke-width="3" stroke-linecap="round" />
-          <circle cx="58" cy="80" r="5" fill="#ca328d" opacity=".35" /><circle cx="102" cy="80" r="5" fill="#ca328d" opacity=".35" />
-          <path d="M70 82q10 11 20 0z" fill="#1d1a1c" stroke="#1d1a1c" stroke-width="2" stroke-linejoin="round" />
-          <!-- little magenta bow -->
-          <path d="M66 30l-9-6v12zM66 30l9-6v12z" fill="#ca328d" /><circle cx="66" cy="30" r="3" fill="#a8256f" />
-        </svg>
-        <h2 id="cc-title">A quick cookie question</h2>
+        <h2 id="cc-title">Doesn't everyone love cookies?</h2>
+        <img class="cc-cookie" src="/images/cookie-duo.webp" alt="" width="520" height="491" loading="lazy" decoding="async" />
+        <div class="cc-body">
         <p id="cc-text">
           May I use Google Analytics cookies to see how visitors find and use this site? It helps me make it more useful.
           No ads, nothing sold, and the site works just the same either way.
@@ -36,6 +24,7 @@ const GA_ID = 'G-GYKX1HG133';
           <button type="button" class="btn ghost cc-no" data-cc="denied">No thanks</button>
         </div>
         <a class="cc-more" href="/privacy#cookies">Read more</a>
+        </div>
       </div>
     </div>
 
@@ -149,28 +138,31 @@ const GA_ID = 'G-GYKX1HG133';
   .cc { position: fixed; inset: 0; z-index: 75; display: grid; place-items: center; padding: 16px; }
   .cc[hidden] { display: none; }
   .cc-backdrop { position: absolute; inset: 0; background: rgba(29,26,28,.45); opacity: 0; transition: opacity .25s ease; }
-  .cc-card { position: relative; width: 100%; max-width: 460px; background: #fff; border-radius: 24px; overflow: hidden; padding: 0 32px 22px; box-shadow: 0 30px 70px rgba(29,26,28,.3); text-align: center; opacity: 0; transform: translateY(24px) scale(.97); transition: opacity .3s ease, transform .35s cubic-bezier(.22,.61,.36,1); }
+  /* Computers: title in white on the magenta band, the cookie duo small in the bottom-left corner, text centered beside them */
+  .cc-card { position: relative; width: 100%; max-width: 640px; display: grid; grid-template-columns: 196px 1fr; grid-template-areas: "title title" "img body"; background: #fff; border-radius: 24px; overflow: hidden; box-shadow: 0 30px 70px rgba(29,26,28,.3); text-align: center; opacity: 0; transform: translateY(24px) scale(.97); transition: opacity .3s ease, transform .35s cubic-bezier(.22,.61,.36,1); }
   .cc-card:focus { outline: none; }
   .cc.is-open .cc-backdrop { opacity: 1; }
   .cc.is-open .cc-card { opacity: 1; transform: none; }
-  .cc-band { position: absolute; left: 0; right: 0; top: 0; height: 96px; background: var(--magenta); }
-  .cc-cookie { position: relative; display: block; margin: 22px auto 6px; }
-  .cc-card h2 { font-size: 1.75rem; margin-bottom: .4em; }
-  .cc-card p { color: var(--muted); font-size: 16px; line-height: 1.6; margin-bottom: 22px; }
+  .cc-band { display: none; position: absolute; left: 0; right: 0; top: 0; height: 74px; background: var(--magenta); }
+  .cc-card h2 { grid-area: title; margin: 0; padding: 26px 32px 24px; background: var(--magenta); color: #fff; font-size: 1.75rem; }
+  .cc-cookie { grid-area: img; position: relative; display: block; width: 190px; max-width: none; height: auto; align-self: end; margin: 0 0 6px 12px; }
+  .cc-body { grid-area: body; position: relative; align-self: center; padding: 24px 36px 22px 20px; }
+  .cc-card p { color: var(--muted); font-size: 16px; line-height: 1.6; margin: 0 auto 22px; max-width: 372px; text-align: justify; text-align-last: center; }
   .cc-actions { display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; }
   .cc-actions .btn { cursor: pointer; padding: 13px 28px; font-size: 15px; }
   .cc-actions .cc-no { border-color: var(--magenta); color: var(--magenta-dark); }
   .cc-actions .cc-no:hover { background: var(--magenta-soft); border-color: var(--magenta); color: var(--magenta-dark); }
   .cc-more { display: inline-block; margin-top: 14px; padding: 6px; font-weight: 600; font-size: 15px; color: var(--ink); text-underline-offset: 4px; }
   .cc-more:hover { color: var(--magenta-dark); }
-  /* On phones it slides up from the bottom as a card, like the audit popup */
-  @media (max-width: 600px) {
+  /* On phones it slides up from the bottom as one column, with the duo on the band above the title */
+  @media (max-width: 640px) {
     .cc { align-items: end; padding: 0; }
-    .cc-card { max-width: none; border-radius: 22px 22px 0 0; padding: 0 20px calc(16px + env(safe-area-inset-bottom)); }
-    .cc-band { height: 74px; }
-    .cc-cookie { width: 108px; height: 101px; margin-top: 16px; }
-    .cc-card h2 { font-size: 1.45rem; }
-    .cc-card p { font-size: 15px; margin-bottom: 18px; }
+    .cc-card { max-width: none; grid-template-columns: 1fr; grid-template-areas: "img" "title" "body"; border-radius: 22px 22px 0 0; }
+    .cc-band { display: block; }
+    .cc-cookie { width: 150px; margin: 10px auto 4px; }
+    .cc-card h2 { background: none; color: var(--ink); padding: 0 20px; margin-bottom: .4em; font-size: 1.45rem; }
+    .cc-body { padding: 0 20px calc(16px + env(safe-area-inset-bottom)); }
+    .cc-card p { font-size: 15px; margin-bottom: 18px; max-width: none; text-align: center; }
     .cc-actions .btn { flex: 1 1 140px; }
   }
   @media (prefers-reduced-motion: reduce) { .cc-backdrop, .cc-card { transition: none; } }
