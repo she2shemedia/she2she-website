@@ -21,7 +21,7 @@ She2She Media, LLC is a one-person business run by me, Anita. This policy explai
 
 **When you contact me or request a free audit.** The "Send a note" form and the free website audit form ask for your name, email address, and your business name or website, plus anything you write in the message box. I use this to reply to you and, for audits, to review your site and email you the results.
 
-**When you book a consultation.** Booking through the calendar collects your name, email address and any answers you give to the booking questions. I use this to schedule and hold the call, which takes place on Zoom.
+**When you book a consultation.** Booking through the calendar collects your name, email address and any answers you give to the booking questions. I use this to schedule and hold the call, which takes place on Zoho Meeting.
 
 **When you join my email list.** If you tick the box to receive website and marketing tips, or sign up another way, I'll add your name and email address to my mailing list. I'll only email you if you've opted in, and every email has an unsubscribe link.
 
@@ -39,9 +39,9 @@ I use a small number of trusted services to run the business. Each one only rece
 
 - **Cloudflare** hosts this website and provides the anonymous visitor statistics. Like any web host, it processes technical information such as IP addresses to deliver the site and keep it secure.
 - **Web3Forms** delivers messages from the contact and audit forms to my inbox.
-- **Zoho** handles my email (Zoho Mail), my mailing list (Zoho Campaigns) and client invoices. If you pay an invoice by card, the payment is processed by Zoho's payment partner; I never see or store your full card details.
+- **Zoho** handles my email (Zoho Mail), my mailing list (Zoho Campaigns), consultation calls (Zoho Meeting) and client invoices. If you pay an invoice by card, the payment is processed by Zoho's payment partner; I never see or store your full card details.
 - **Google** (Google Analytics) provides visitor statistics, only if you've accepted analytics cookies. Google may process this information in the United States.
-- **Calendly** runs the booking calendar, and **Zoom** hosts the consultation calls.
+- **Calendly** runs the booking calendar.
 - **WhatsApp** (Meta) handles any conversation you start there.
 
 I don't share your information with anyone else unless the law requires it.
