@@ -1,0 +1,131 @@
+---
+// Google Analytics 4 with a cookie banner.
+// Nothing from Google loads until a visitor clicks "Accept". "No thanks" means GA never loads.
+// The choice is remembered for 12 months, and the "Cookie settings" link in the footer reopens the banner.
+// While GA_ID is empty, this component does nothing at all (no banner, no tracking).
+const GA_ID = '';
+---
+{GA_ID && (
+  <>
+    <div class="cc" id="cookie-banner" role="region" aria-label="Cookie choice" hidden>
+      <p class="cc-text">
+        Can I use Google Analytics cookies to see how visitors use this site? It helps me understand what's useful.
+        No ads and nothing sold. <a href="/privacy#cookies">Privacy policy</a>
+      </p>
+      <div class="cc-actions">
+        <button type="button" class="btn cc-yes" data-cc="granted">Accept</button>
+        <button type="button" class="cc-no" data-cc="denied">No thanks</button>
+      </div>
+    </div>
+
+    <script is:inline define:vars={{ GA_ID }}>
+      (function () {
+        var KEY = 's2s-consent';
+        var KEEP_DAYS = 365;
+        var loaded = false;
+        var banner = document.getElementById('cookie-banner');
+        var root = document.documentElement;
+
+        window.dataLayer = window.dataLayer || [];
+        window.gtag = function () { window.dataLayer.push(arguments); };
+
+        // Lets other scripts on the site record an event. Does nothing unless GA has loaded.
+        window.s2sTrack = function (name, params) { if (loaded) window.gtag('event', name, params || {}); };
+
+        function read() {
+          try {
+            var v = JSON.parse(localStorage.getItem(KEY) || 'null');
+            if (v && Date.now() - v.t < KEEP_DAYS * 864e5) return v.c;
+          } catch (e) {}
+          return null;
+        }
+        function save(c) { try { localStorage.setItem(KEY, JSON.stringify({ c: c, t: Date.now() })); } catch (e) {} }
+
+        function loadGA() {
+          if (loaded) return;
+          loaded = true;
+          window.gtag('consent', 'default', {
+            analytics_storage: 'granted',
+            ad_storage: 'denied', ad_user_data: 'denied', ad_personalization: 'denied'
+          });
+          window.gtag('js', new Date());
+          window.gtag('config', GA_ID, { allow_google_signals: false, allow_ad_personalization_signals: false });
+          var s = document.createElement('script');
+          s.async = true;
+          s.src = 'https://www.googletagmanager.com/gtag/js?id=' + GA_ID;
+          document.head.appendChild(s);
+        }
+
+        // Removes GA cookies if someone changes their mind after accepting.
+        function clearGA() {
+          var host = location.hostname.replace(/^www\./, '');
+          document.cookie.split(';').forEach(function (c) {
+            var name = c.split('=')[0].trim();
+            if (name.indexOf('_ga') !== 0) return;
+            ['', '; domain=' + host, '; domain=.' + host].forEach(function (d) {
+              document.cookie = name + '=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/' + d;
+            });
+          });
+        }
+
+        // On phones the banner sits along the bottom, so lift the chat button above it.
+        function lift() { root.style.setProperty('--cc-h', banner.offsetHeight + 'px'); }
+        function show() {
+          banner.hidden = false;
+          root.classList.add('cc-open');
+          requestAnimationFrame(lift);
+          window.addEventListener('resize', lift);
+        }
+        function hide() {
+          banner.hidden = true;
+          root.classList.remove('cc-open');
+          window.removeEventListener('resize', lift);
+        }
+
+        banner.querySelectorAll('[data-cc]').forEach(function (b) {
+          b.addEventListener('click', function () {
+            var c = b.getAttribute('data-cc');
+            var was = read();
+            save(c);
+            hide();
+            if (c === 'granted') loadGA();
+            else if (was === 'granted') { clearGA(); location.reload(); }
+          });
+        });
+
+        document.addEventListener('click', function (e) {
+          var t = e.target.closest && e.target.closest('[data-cookie-settings]');
+          if (t) { e.preventDefault(); show(); }
+        });
+
+        // Counts completed Calendly bookings (only fires on the booking page).
+        window.addEventListener('message', function (e) {
+          if (e.origin.indexOf('calendly.com') === -1 || !e.data || e.data.event !== 'calendly.event_scheduled') return;
+          window.s2sTrack('book_consultation', { method: 'calendly' });
+        });
+
+        var choice = read();
+        if (choice === 'granted') loadGA();
+        else if (choice === null) show();
+      })();
+    </script>
+  </>
+)}
+
+<style>
+  .cc { position: fixed; left: 20px; bottom: 20px; z-index: 65; width: min(420px, calc(100vw - 40px)); background: #fff; border-radius: 20px; border-top: 5px solid var(--magenta); box-shadow: 0 18px 48px rgba(29,26,28,.22); padding: 20px 22px 18px; font-size: 15px; line-height: 1.55; }
+  .cc[hidden] { display: none; }
+  .cc-text { margin: 0 0 14px; color: var(--text); }
+  .cc-actions { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
+  .cc-yes { cursor: pointer; padding: 10px 26px; }
+  .cc-no { background: none; border: 0; padding: 10px 4px; font: 500 15px var(--sans); color: var(--muted); cursor: pointer; text-decoration: underline; text-underline-offset: 4px; }
+  .cc-no:hover { color: var(--magenta-dark); }
+  @media (max-width: 700px) {
+    .cc { left: 0; bottom: 0; width: 100%; border-radius: 20px 20px 0 0; padding: 18px 18px calc(16px + env(safe-area-inset-bottom)); font-size: 14px; }
+    :global(html.cc-open .chat) { bottom: calc(var(--cc-h, 150px) + 14px); }
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    .cc { animation: cc-up .35s cubic-bezier(.22,.61,.36,1) both; }
+    @keyframes cc-up { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: none; } }
+  }
+</style>

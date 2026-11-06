@@ -171,7 +171,7 @@ const WEB3FORMS_KEY = '2ac767b0-0741-420d-bfe1-79cc7353daab';
           .then(function (r) { return r.json(); })
           .then(function (res) {
             if (!res.success) throw new Error();
-            form.hidden = true; sent.hidden = false; sent.focus();
+            form.hidden = true; sent.hidden = false; sent.focus(); if (window.s2sTrack) window.s2sTrack('generate_lead', { form: 'note' });
           })
           .catch(function () {
             err.innerHTML = 'Sorry, that didn\'t send. Please email me at <a href="mailto:anita@she2shemedia.com">anita@she2shemedia.com</a> instead.';

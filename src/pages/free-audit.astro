@@ -110,7 +110,7 @@ const TURNAROUND = 'within 5 business days';
           .then(function (r) { return r.json(); })
           .then(function (res) {
             if (!res.success) throw new Error();
-            form.hidden = true; sent.hidden = false; sent.focus();
+            form.hidden = true; sent.hidden = false; sent.focus(); if (window.s2sTrack) window.s2sTrack('generate_lead', { form: 'audit' });
           })
           .catch(function () {
             err.innerHTML = 'Sorry, that didn\'t send. Please email your website link to <a href="mailto:anita@she2shemedia.com?subject=Free%20website%20audit">anita@she2shemedia.com</a> instead.';
