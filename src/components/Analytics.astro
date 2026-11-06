@@ -139,15 +139,15 @@ const GA_ID = 'G-GYKX1HG133';
   .cc[hidden] { display: none; }
   .cc-backdrop { position: absolute; inset: 0; background: rgba(29,26,28,.45); opacity: 0; transition: opacity .25s ease; }
   /* Computers: title in white on the magenta band, the cookie duo small in the bottom-left corner, text centered beside them */
-  .cc-card { position: relative; width: 100%; max-width: 640px; display: grid; grid-template-columns: 150px 1fr; grid-template-areas: "title title" "img body"; background: #fff; border-radius: 24px; overflow: hidden; box-shadow: 0 30px 70px rgba(29,26,28,.3); text-align: center; opacity: 0; transform: translateY(24px) scale(.97); transition: opacity .3s ease, transform .35s cubic-bezier(.22,.61,.36,1); }
+  .cc-card { position: relative; width: 100%; max-width: 640px; display: grid; grid-template-columns: 196px 1fr; grid-template-areas: "title title" "img body"; background: #fff; border-radius: 24px; overflow: hidden; box-shadow: 0 30px 70px rgba(29,26,28,.3); text-align: center; opacity: 0; transform: translateY(24px) scale(.97); transition: opacity .3s ease, transform .35s cubic-bezier(.22,.61,.36,1); }
   .cc-card:focus { outline: none; }
   .cc.is-open .cc-backdrop { opacity: 1; }
   .cc.is-open .cc-card { opacity: 1; transform: none; }
   .cc-band { display: none; position: absolute; left: 0; right: 0; top: 0; height: 74px; background: var(--magenta); }
   .cc-card h2 { grid-area: title; margin: 0; padding: 26px 32px 24px; background: var(--magenta); color: #fff; font-size: 1.75rem; }
-  .cc-cookie { grid-area: img; position: relative; display: block; width: 150px; max-width: none; height: auto; align-self: end; margin: 0 0 6px 14px; }
-  .cc-body { grid-area: body; position: relative; align-self: center; padding: 24px 36px 22px 16px; }
-  .cc-card p { color: var(--muted); font-size: 16px; line-height: 1.6; margin-bottom: 22px; }
+  .cc-cookie { grid-area: img; position: relative; display: block; width: 190px; max-width: none; height: auto; align-self: end; margin: 0 0 6px 12px; }
+  .cc-body { grid-area: body; position: relative; align-self: center; padding: 24px 36px 22px 20px; }
+  .cc-card p { color: var(--muted); font-size: 16px; line-height: 1.6; margin: 0 auto 22px; max-width: 372px; text-align: justify; text-align-last: center; }
   .cc-actions { display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; }
   .cc-actions .btn { cursor: pointer; padding: 13px 28px; font-size: 15px; }
   .cc-actions .cc-no { border-color: var(--magenta); color: var(--magenta-dark); }
@@ -162,7 +162,7 @@ const GA_ID = 'G-GYKX1HG133';
     .cc-cookie { width: 150px; margin: 10px auto 4px; }
     .cc-card h2 { background: none; color: var(--ink); padding: 0 20px; margin-bottom: .4em; font-size: 1.45rem; }
     .cc-body { padding: 0 20px calc(16px + env(safe-area-inset-bottom)); }
-    .cc-card p { font-size: 15px; margin-bottom: 18px; }
+    .cc-card p { font-size: 15px; margin-bottom: 18px; max-width: none; text-align: center; }
     .cc-actions .btn { flex: 1 1 140px; }
   }
   @media (prefers-reduced-motion: reduce) { .cc-backdrop, .cc-card { transition: none; } }
