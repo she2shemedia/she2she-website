@@ -3,8 +3,8 @@
 // Nothing from Google loads until a visitor clicks "Accept". "No thanks" means GA never loads.
 // The choice is remembered for 12 months, and the "Cookie settings" link in the footer reopens the pop-up.
 // While the pop-up is open, the free audit popup waits (see AuditPopup.astro).
-// While GA_ID is empty, this component does nothing at all (no pop-up, no tracking).
-const GA_ID = '';
+// GA_ID is the measurement ID for the she2shemedia.com property in Google Analytics. Set it to '' to switch everything off.
+const GA_ID = 'G-GYKX1HG133';
 ---
 {GA_ID && (
   <>
