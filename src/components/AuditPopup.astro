@@ -60,14 +60,20 @@
     pop.querySelectorAll('[data-ap-close]').forEach(function (el) { el.addEventListener('click', close); });
     document.getElementById('ap-go').addEventListener('click', function () { store('done'); });
 
-    setTimeout(function () {
+    function open() {
+      // If the cookie pop-up is still waiting for an answer, show this a few seconds after it closes instead.
+      if (window.s2sConsentPending) {
+        document.addEventListener('s2s:consent-closed', function () { setTimeout(open, 4000); }, { once: true });
+        return;
+      }
       var chat = document.querySelector('.chat.is-open');
       if (chat) { window.s2sAuditPopPending = false; return; } // they're already chatting; don't interrupt
       before = document.activeElement;
       pop.hidden = false;
       requestAnimationFrame(function () { pop.classList.add('is-open'); card.focus(); });
       document.addEventListener('keydown', onKey);
-    }, DELAY);
+    }
+    setTimeout(open, DELAY);
   })();
 </script>
 

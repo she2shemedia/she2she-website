@@ -1,20 +1,41 @@
 ---
-// Google Analytics 4 with a cookie banner.
+// Google Analytics 4 with a cookie pop-up.
 // Nothing from Google loads until a visitor clicks "Accept". "No thanks" means GA never loads.
-// The choice is remembered for 12 months, and the "Cookie settings" link in the footer reopens the banner.
-// While GA_ID is empty, this component does nothing at all (no banner, no tracking).
+// The choice is remembered for 12 months, and the "Cookie settings" link in the footer reopens the pop-up.
+// While the pop-up is open, the free audit popup waits (see AuditPopup.astro).
+// While GA_ID is empty, this component does nothing at all (no pop-up, no tracking).
 const GA_ID = '';
 ---
 {GA_ID && (
   <>
-    <div class="cc" id="cookie-banner" role="region" aria-label="Cookie choice" hidden>
-      <p class="cc-text">
-        Can I use Google Analytics cookies to see how visitors use this site? It helps me understand what's useful.
-        No ads and nothing sold. <a href="/privacy#cookies">Privacy policy</a>
-      </p>
-      <div class="cc-actions">
-        <button type="button" class="btn cc-yes" data-cc="granted">Accept</button>
-        <button type="button" class="cc-no" data-cc="denied">No thanks</button>
+    <div class="cc" id="cookie-banner" hidden>
+      <div class="cc-backdrop"></div>
+      <div class="cc-card" role="dialog" aria-modal="true" aria-labelledby="cc-title" aria-describedby="cc-text" tabindex="-1">
+        <div class="cc-band" aria-hidden="true"></div>
+        <svg class="cc-cookie" viewBox="0 0 160 150" width="140" height="131" aria-hidden="true" focusable="false">
+          <ellipse cx="80" cy="140" rx="44" ry="7" fill="#e9e3e6" />
+          <!-- cookie with a bite out of the top right -->
+          <path d="M80 18c9 0 17 2 24 6-3 5-1 12 5 14 2 7 9 10 15 7 5 8 8 17 8 27 0 30-23 54-52 54S28 102 28 72 51 18 80 18z" fill="#e2a65c" stroke="#b97a35" stroke-width="3" />
+          <circle cx="58" cy="44" r="5" fill="#6b3f24" /><circle cx="97" cy="47" r="4" fill="#6b3f24" />
+          <circle cx="46" cy="78" r="4.5" fill="#6b3f24" /><circle cx="108" cy="86" r="5" fill="#6b3f24" />
+          <circle cx="70" cy="104" r="4" fill="#6b3f24" /><circle cx="96" cy="108" r="3.5" fill="#6b3f24" />
+          <!-- face -->
+          <path d="M60 68q6-7 12 0M88 68q6-7 12 0" fill="none" stroke="#1d1a1c" stroke-width="3" stroke-linecap="round" />
+          <circle cx="58" cy="80" r="5" fill="#ca328d" opacity=".35" /><circle cx="102" cy="80" r="5" fill="#ca328d" opacity=".35" />
+          <path d="M70 82q10 11 20 0z" fill="#1d1a1c" stroke="#1d1a1c" stroke-width="2" stroke-linejoin="round" />
+          <!-- little magenta bow -->
+          <path d="M66 30l-9-6v12zM66 30l9-6v12z" fill="#ca328d" /><circle cx="66" cy="30" r="3" fill="#a8256f" />
+        </svg>
+        <h2 id="cc-title">A quick cookie question</h2>
+        <p id="cc-text">
+          May I use Google Analytics cookies to see how visitors find and use this site? It helps me make it more useful.
+          No ads, nothing sold, and the site works just the same either way.
+        </p>
+        <div class="cc-actions">
+          <button type="button" class="btn cc-yes" data-cc="granted">Accept</button>
+          <button type="button" class="btn ghost cc-no" data-cc="denied">No thanks</button>
+        </div>
+        <a class="cc-more" href="/privacy#cookies">Read more</a>
       </div>
     </div>
 
@@ -23,8 +44,9 @@ const GA_ID = '';
         var KEY = 's2s-consent';
         var KEEP_DAYS = 365;
         var loaded = false;
-        var banner = document.getElementById('cookie-banner');
-        var root = document.documentElement;
+        var pop = document.getElementById('cookie-banner');
+        var card = pop.querySelector('.cc-card');
+        var before = null;
 
         window.dataLayer = window.dataLayer || [];
         window.gtag = function () { window.dataLayer.push(arguments); };
@@ -68,21 +90,31 @@ const GA_ID = '';
           });
         }
 
-        // On phones the banner sits along the bottom, so lift the chat button above it.
-        function lift() { root.style.setProperty('--cc-h', banner.offsetHeight + 'px'); }
+        // Keeps keyboard focus inside the pop-up while it's open.
+        function onKey(e) {
+          if (e.key !== 'Tab') return;
+          var f = card.querySelectorAll('a, button');
+          var first = f[0], last = f[f.length - 1];
+          if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+          else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+        }
         function show() {
-          banner.hidden = false;
-          root.classList.add('cc-open');
-          requestAnimationFrame(lift);
-          window.addEventListener('resize', lift);
+          window.s2sConsentPending = true;
+          before = document.activeElement;
+          pop.hidden = false;
+          requestAnimationFrame(function () { pop.classList.add('is-open'); card.focus(); });
+          document.addEventListener('keydown', onKey);
         }
         function hide() {
-          banner.hidden = true;
-          root.classList.remove('cc-open');
-          window.removeEventListener('resize', lift);
+          pop.classList.remove('is-open');
+          setTimeout(function () { pop.hidden = true; }, 250);
+          document.removeEventListener('keydown', onKey);
+          if (before && before.focus) before.focus();
+          window.s2sConsentPending = false;
+          document.dispatchEvent(new Event('s2s:consent-closed'));
         }
 
-        banner.querySelectorAll('[data-cc]').forEach(function (b) {
+        pop.querySelectorAll('[data-cc]').forEach(function (b) {
           b.addEventListener('click', function () {
             var c = b.getAttribute('data-cc');
             var was = read();
@@ -106,26 +138,40 @@ const GA_ID = '';
 
         var choice = read();
         if (choice === 'granted') loadGA();
-        else if (choice === null) show();
+        // The privacy page explains the choice in full, so the pop-up doesn't cover it.
+        else if (choice === null && location.pathname.indexOf('/privacy') !== 0) show();
       })();
     </script>
   </>
 )}
 
 <style>
-  .cc { position: fixed; left: 20px; bottom: 20px; z-index: 65; width: min(420px, calc(100vw - 40px)); background: #fff; border-radius: 20px; border-top: 5px solid var(--magenta); box-shadow: 0 18px 48px rgba(29,26,28,.22); padding: 20px 22px 18px; font-size: 15px; line-height: 1.55; }
+  .cc { position: fixed; inset: 0; z-index: 75; display: grid; place-items: center; padding: 16px; }
   .cc[hidden] { display: none; }
-  .cc-text { margin: 0 0 14px; color: var(--text); }
-  .cc-actions { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
-  .cc-yes { cursor: pointer; padding: 10px 26px; }
-  .cc-no { background: none; border: 0; padding: 10px 4px; font: 500 15px var(--sans); color: var(--muted); cursor: pointer; text-decoration: underline; text-underline-offset: 4px; }
-  .cc-no:hover { color: var(--magenta-dark); }
-  @media (max-width: 700px) {
-    .cc { left: 0; bottom: 0; width: 100%; border-radius: 20px 20px 0 0; padding: 18px 18px calc(16px + env(safe-area-inset-bottom)); font-size: 14px; }
-    :global(html.cc-open .chat) { bottom: calc(var(--cc-h, 150px) + 14px); }
+  .cc-backdrop { position: absolute; inset: 0; background: rgba(29,26,28,.45); opacity: 0; transition: opacity .25s ease; }
+  .cc-card { position: relative; width: 100%; max-width: 460px; background: #fff; border-radius: 24px; overflow: hidden; padding: 0 32px 22px; box-shadow: 0 30px 70px rgba(29,26,28,.3); text-align: center; opacity: 0; transform: translateY(24px) scale(.97); transition: opacity .3s ease, transform .35s cubic-bezier(.22,.61,.36,1); }
+  .cc-card:focus { outline: none; }
+  .cc.is-open .cc-backdrop { opacity: 1; }
+  .cc.is-open .cc-card { opacity: 1; transform: none; }
+  .cc-band { position: absolute; left: 0; right: 0; top: 0; height: 96px; background: var(--magenta); }
+  .cc-cookie { position: relative; display: block; margin: 22px auto 6px; }
+  .cc-card h2 { font-size: 1.75rem; margin-bottom: .4em; }
+  .cc-card p { color: var(--muted); font-size: 16px; line-height: 1.6; margin-bottom: 22px; }
+  .cc-actions { display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; }
+  .cc-actions .btn { cursor: pointer; padding: 13px 28px; font-size: 15px; }
+  .cc-actions .cc-no { border-color: var(--magenta); color: var(--magenta-dark); }
+  .cc-actions .cc-no:hover { background: var(--magenta-soft); border-color: var(--magenta); color: var(--magenta-dark); }
+  .cc-more { display: inline-block; margin-top: 14px; padding: 6px; font-weight: 600; font-size: 15px; color: var(--ink); text-underline-offset: 4px; }
+  .cc-more:hover { color: var(--magenta-dark); }
+  /* On phones it slides up from the bottom as a card, like the audit popup */
+  @media (max-width: 600px) {
+    .cc { align-items: end; padding: 0; }
+    .cc-card { max-width: none; border-radius: 22px 22px 0 0; padding: 0 20px calc(16px + env(safe-area-inset-bottom)); }
+    .cc-band { height: 74px; }
+    .cc-cookie { width: 108px; height: 101px; margin-top: 16px; }
+    .cc-card h2 { font-size: 1.45rem; }
+    .cc-card p { font-size: 15px; margin-bottom: 18px; }
+    .cc-actions .btn { flex: 1 1 140px; }
   }
-  @media (prefers-reduced-motion: no-preference) {
-    .cc { animation: cc-up .35s cubic-bezier(.22,.61,.36,1) both; }
-    @keyframes cc-up { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: none; } }
-  }
+  @media (prefers-reduced-motion: reduce) { .cc-backdrop, .cc-card { transition: none; } }
 </style>
