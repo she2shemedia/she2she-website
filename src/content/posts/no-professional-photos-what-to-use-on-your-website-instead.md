@@ -2,7 +2,7 @@
 title: "No Professional Photos? What to Use on Your Website Instead"
 date: "2026-11-11"
 author: "Anita Marie"
-description: "Waiting on a photo shoot before you update your website? Here's what you can use right now, from phone photos done well to simple brand graphics."
+description: "Waiting on a photo shoot before you update your website? You can use phone photos done well and simple brand graphics right now."
 image: "/images/blog/no-professional-photos-what-to-use-on-your-website-instead.jpg"
 ---
 
@@ -10,11 +10,11 @@ One of the most common reasons I hear for putting off a new website is "I need t
 
 I understand why. You want to look the part. But a photo shoot takes time, money and a fair bit of courage, so it slides down the list, and your website stays exactly as it is.
 
-The good news is that you can have a polished website that feels like you without a professional shoot. Here's what I suggest to clients in that spot.
+The good news is that you can have a polished website that feels like you without a professional shoot. These are the suggestions I give clients in that spot.
 
 ### Real photos of you still matter most
 
-First, one thing worth saying. For a coach or service provider, people are deciding whether they'd like to work with *you*. A real photo of your face helps them feel that connection faster than anything else on the page.
+For a coach or service provider, people are deciding whether they'd like to work with *you*. A real photo of your face helps them feel that connection faster than anything else on the page.
 
 So the goal is to find a way to show up as yourself, even if the photo didn't come from a studio.
 
