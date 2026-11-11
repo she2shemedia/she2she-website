@@ -3,7 +3,7 @@ title: "No Professional Photos? What to Use on Your Website Instead"
 date: "2026-11-11"
 author: "Anita Marie"
 description: "Waiting on a photo shoot before you update your website? You can use phone photos done well and simple brand graphics right now."
-image: "/images/blog/no-professional-photos-what-to-use-on-your-website-instead.jpg"
+image: "/images/blog/no-professional-photos-what-to-use-on-your-website-instead-2.jpg"
 ---
 
 One of the most common reasons I hear for putting off a new website is "I need to get professional photos done first."
