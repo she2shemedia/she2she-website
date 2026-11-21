@@ -1,0 +1,11 @@
+{"posts":[
+ {"name":"2026-11-09_mobile-check","slides":[
+  {"type":"tcover","label":"Findable","title":"The 2-Minute **Mobile** Check","sub":"Getting found on Google, part 2."},
+  {"type":"inner","num":"01","title":"Open your site on your phone","body":"Not your laptop. Your phone is where most visitors meet you."},
+  {"type":"inner","num":"02","title":"Read it without zooming","body":"If you're pinching the screen, so are your visitors.","example":["Rule of thumb","Body text around 16px and up."]},
+  {"type":"inner","num":"03","title":"Tap the main button","body":"Does it work first time, without hitting the wrong thing?"},
+  {"type":"inner","num":"04","title":"Find contact details in one scroll","body":"Phone number or booking link, near the top."},
+  {"type":"closer","title":"Any “no”? That’s **this month’s fix**.","body":"It’ll do more for you than a new logo."}]},
+ {"name":"2026-11-10_single","slides":[{"type":"text_cover","label":"Show up","title":"Plan December’s posts in November","sub":"Key dates, offers, hours, three posts ready."}]},
+ {"name":"2026-11-13_poll","slides":[{"type":"poll","label":"Quick question","title":"What would help most this month?","options":["Website","Google","Social posts","Time"],"sub":"Vote in the comments."}]}
+]}
