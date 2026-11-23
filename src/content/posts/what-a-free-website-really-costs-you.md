@@ -51,17 +51,17 @@ A good provider will answer all five without hesitating. If the answers get vagu
 
 ### A monthly plan that ends with you owning it
 
-Not every business owner has $1,300–$4,000 sitting around for a new website, and they shouldn't have to wait until they do. So She2She is launching the Pay-As-You-Grow Plan.
+Not every business owner has $1,300–$2,800 sitting around for a new website, and they shouldn't have to wait until they do. So She2She is launching the Pay-As-You-Grow Plan.
 
 - **Nothing down.** Your site gets built and launched without a big upfront payment.
 - **12 fixed monthly payments, then you're done.**
   - 3-page website: $125 a month, $1,500 in total
   - 5-page website: $150 a month, $1,800 in total
-  - 8-page website: $350 a month, $4,200 in total
+  - 8-page website: $250 a month, $3,000 in total
 - **It's yours at the end.** After the last payment, the site, the code and the domain are handed over to your own accounts. No license, no strings.
 - **Care is optional after that.** Want me to keep handling updates? The website care plan is there at $150 a month. Want to run it yourself? That's fine too.
 
-I believe in being upfront about money, so here's the part most "free website" ads leave out: paying monthly costs a little more than paying in full. The 3-page site is $1,300 upfront or $1,500 over 12 months, the 5-page site is $1,750 or $1,800, and the 8-page site is $4,000 or $4,200. That difference covers the risk I take building your site before it's paid for. You'll know the full total before you sign, and it never changes.
+I believe in being upfront about money, so here's the part most "free website" ads leave out: paying monthly costs a little more than paying in full. The 3-page site is $1,300 upfront or $1,500 over 12 months, the 5-page site is $1,750 or $1,800, and the 8-page site is $2,800 or $3,000. That difference covers the risk I take building your site before it's paid for. You'll know the full total before you sign, and it never changes.
 
 You get the easy start of a pay-monthly website without renting it for the rest of your business's life.
 
