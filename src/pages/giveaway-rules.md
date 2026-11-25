@@ -42,7 +42,7 @@ I'll email the winner at the address they entered with by December 1, 2026. The 
 
 ## 7. The prize
 
-One winner receives one 3-page website designed and built in code by She2She Media. Approximate retail value: **$297**, the price of the same website under She2She Media's current rebrand special, which carries the same testimonial and portfolio terms as this prize (section 9). The prize includes:
+One winner receives one 3-page website designed and built in code by She2She Media. Approximate retail value: **$1,300**. The prize includes:
 
 - A new 3-page website (for example Home, About and Contact) in the winner's existing brand
 - Mobile-first design, a contact form or booking link, and basic SEO
