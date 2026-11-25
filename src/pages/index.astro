@@ -125,6 +125,16 @@ import { giveawayClosesIso } from '../giveaway';
         <span class="eyebrow">Recent work</span>
         <h2>Dogs That Cook</h2>
         <p>A real recipe blog, hosted by two Jack Russell terriers. I built a searchable recipe database with filters by ingredient, diet and meal type, in a playful brand that doesn't get in the way of the food.</p>
+      </div>
+    </div>
+    <div class="container work work-flip">
+      <a href="https://elevarefranchise.com" class="browser" aria-label="Visit elevarefranchise.com">
+        <span class="chrome" aria-hidden="true"><i></i><i></i><i></i><b>elevarefranchise.com</b></span>
+        <img class="shot-img" src="/images/work/elevare.jpg" alt="The Elevare Franchise Solutions website homepage" width="1400" height="724" loading="lazy" decoding="async" />
+      </a>
+      <div>
+        <h2>Elevare Franchise Solutions</h2>
+        <p>Fractional franchise leadership for emerging and growing franchise brands. I built a new website, a brand standards guide, a HubSpot contact form and branded email templates, so the online presence matches the level of the work.</p>
         <a href="/work">See more work</a>
       </div>
     </div>
@@ -231,6 +241,9 @@ import { giveawayClosesIso } from '../giveaway';
   }
   .work-section { padding-top: 56px; }
   .work { display: grid; grid-template-columns: 1.1fr .9fr; gap: 48px; align-items: center; }
+  /* The second project sits below the first, with the screenshot on the right for a zigzag */
+  .work-flip { margin-top: 72px; }
+  @media (min-width: 901px) { .work-flip { grid-template-columns: .9fr 1.1fr; } .work-flip .browser { order: 2; } }
   .browser { display: block; border-radius: 18px; overflow: hidden; border: 1px solid var(--line); box-shadow: 0 18px 40px rgba(0,0,0,.08); text-decoration: none; }
   .chrome { display: flex; align-items: center; gap: 6px; background: #f1edef; padding: 12px 16px; }
   .chrome i { width: 10px; height: 10px; border-radius: 50%; background: var(--lilac); }
