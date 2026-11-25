@@ -1,0 +1,187 @@
+---
+import Base from '../layouts/Base.astro';
+// Giveaway entries are emailed to Anita through Web3Forms (same key as the audit form).
+const WEB3FORMS_KEY = '2ac767b0-0741-420d-bfe1-79cc7353daab';
+
+// ---- Giveaway settings: change these lines if anything moves ----
+const NAME = 'The Actually Free Website Giveaway';
+const CLOSES_TEXT = 'Monday, November 30 at 11am Eastern';
+const DRAW_TEXT = 'Monday, November 30 at 12pm Eastern';
+// Entries close at this moment (11am Eastern = 16:00 UTC). The form hides itself after this.
+const CLOSES_ISO = '2026-11-30T16:00:00Z';
+---
+<Base
+  title={`Win a Free 3-Page Website | ${NAME} | She2She Media`}
+  description="Women-owned businesses in the US can enter to win a free 3-page website, built in code and yours to keep. No monthly fee, no contract. Winner drawn November 30."
+>
+  <section class="section">
+    <div class="container give">
+      <div class="info">
+        <span class="eyebrow">Black Friday giveaway</span>
+        <h1>Win a 3-page website. Free, and actually free.</h1>
+        <span class="rule" aria-hidden="true"></span>
+        <p class="lead">One women-owned business wins a brand new 3-page website, designed and built by me. No monthly fee, no contract, no catch in the fine print. When it's done, it's yours.</p>
+        <p class="aside">Yes, I just wrote a whole <a href="/post/what-a-free-website-really-costs-you">blog post</a> about "free" websites. This is the kind without the subscription.</p>
+
+        <div class="block">
+          <h2 class="label">What you win</h2>
+          <ul class="check">
+            <li>A new 3-page website (for example Home, About and Contact) in your existing brand</li>
+            <li>Built in code, mobile-first, with a contact form or booking link</li>
+            <li>The copy written for you, or I'll use yours if you already have it</li>
+            <li>Basic SEO, so Google knows what each page is about</li>
+            <li>14 days of post-launch fixes, then a free handover to your own accounts</li>
+          </ul>
+          <p class="small">Usually $1,300. Your brand (colors, fonts, logo) needs to be ready to go, and the domain name is yours to buy. Monthly website care is optional, never required.</p>
+        </div>
+
+        <div class="block">
+          <h2 class="label">Who can enter</h2>
+          <p>Women-owned businesses in the US, with an owner who's 18 or over. With a website or without one: either way, the prize is a brand new site, not an update to your current one.</p>
+        </div>
+
+        <div class="block">
+          <h2 class="label">How it works</h2>
+          <ol class="steps">
+            <li>Enter below by {CLOSES_TEXT}. One entry per business.</li>
+            <li>I draw one winner at random on {DRAW_TEXT}.</li>
+            <li>The winner hears from me by email and has 10 days to reply.</li>
+            <li>I build the site, aiming to have it live by the end of December.</li>
+          </ol>
+          <p class="small">Didn't win? Everyone who enters gets a thank-you offer by email after the draw.</p>
+        </div>
+      </div>
+
+      <div class="panel">
+        <form id="give-form" class="form" action="https://api.web3forms.com/submit" method="POST" novalidate>
+          <input type="hidden" name="access_key" value={WEB3FORMS_KEY} />
+          <input type="hidden" name="subject" value="Giveaway entry" />
+          <input type="hidden" name="from_name" value="She2She Media website" />
+          <input type="checkbox" name="botcheck" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true" />
+
+          <h2 class="form-title">Enter the giveaway</h2>
+
+          <div class="row">
+            <div class="field">
+              <label for="g-name">Your name</label>
+              <input id="g-name" name="name" type="text" autocomplete="name" required />
+            </div>
+            <div class="field">
+              <label for="g-email">Email</label>
+              <input id="g-email" name="email" type="email" autocomplete="email" required />
+            </div>
+          </div>
+          <div class="field">
+            <label for="g-biz">Business name</label>
+            <input id="g-biz" name="business" type="text" autocomplete="organization" required />
+          </div>
+          <div class="field">
+            <label for="g-site">Current website <span class="opt">(leave blank if you don't have one yet)</span></label>
+            <input id="g-site" name="website" type="text" inputmode="url" autocomplete="url" placeholder="yourbusiness.com" />
+          </div>
+          <label class="opt-in">
+            <input type="checkbox" name="confirm" value="Yes" required />
+            <span>My business is women-owned, I'm 18 or over and live in the US, and I agree to the <a href="/giveaway-rules" target="_blank" rel="noopener">giveaway rules</a>. I understand entering adds me to the She2She email list, and I can unsubscribe any time.</span>
+          </label>
+
+          <p class="error" id="give-error" role="alert" hidden></p>
+          <button type="submit" class="btn">Enter the giveaway</button>
+          <p class="privacy">Free to enter, no purchase necessary. See the <a href="/privacy">privacy policy</a>.</p>
+        </form>
+
+        <div class="sent" id="give-sent" hidden tabindex="-1">
+          <svg viewBox="0 0 48 48" width="48" height="48" aria-hidden="true" focusable="false"><circle cx="24" cy="24" r="22" fill="var(--magenta-soft)"/><path d="M15 24.5l6 6 12-13" fill="none" stroke="var(--magenta)" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <h2>You're in. Good luck.</h2>
+          <p>I'll draw the winner on {DRAW_TEXT} and email them directly. Know another woman who needs a website? Send her this page.</p>
+        </div>
+
+        <div class="sent" id="give-closed" hidden>
+          <h2>Entries are closed.</h2>
+          <p>Thank you to everyone who entered. If you'd still like a new website, the <a href="/pricing">pricing page</a> has every option, including paying monthly.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script is:inline define:vars={{ closesAt: CLOSES_ISO }}>
+    (function () {
+      var form = document.getElementById('give-form');
+      var err = document.getElementById('give-error');
+      var sent = document.getElementById('give-sent');
+      var closed = document.getElementById('give-closed');
+      if (!form) return;
+      if (Date.now() >= Date.parse(closesAt)) { form.hidden = true; closed.hidden = false; return; }
+      form.addEventListener('submit', function (e) {
+        e.preventDefault();
+        err.hidden = true;
+        if (Date.now() >= Date.parse(closesAt)) { form.hidden = true; closed.hidden = false; return; }
+        if (!form.checkValidity()) {
+          err.textContent = 'Please add your name, email and business name, and tick the box to confirm.';
+          err.hidden = false;
+          var bad = form.querySelector(':invalid');
+          if (bad) bad.focus();
+          return;
+        }
+        var data = new FormData(form);
+        if (data.get('botcheck')) return;
+        if (!data.get('website')) data.set('website', 'No website yet');
+        var btn = form.querySelector('button[type="submit"]');
+        btn.disabled = true; btn.textContent = 'Sending...';
+        fetch(form.action, { method: 'POST', headers: { Accept: 'application/json' }, body: data })
+          .then(function (r) { return r.json(); })
+          .then(function (res) {
+            if (!res.success) throw new Error();
+            form.hidden = true; sent.hidden = false; sent.focus(); if (window.s2sTrack) window.s2sTrack('generate_lead', { form: 'giveaway' });
+          })
+          .catch(function () {
+            err.innerHTML = 'Sorry, that didn\'t send. Please email your name, business name and website to <a href="mailto:anita@she2shemedia.com?subject=Giveaway%20entry">anita@she2shemedia.com</a> instead, and I\'ll enter you.';
+            err.hidden = false;
+            btn.disabled = false; btn.textContent = 'Enter the giveaway';
+          });
+      });
+    })();
+  </script>
+</Base>
+
+<style>
+  .give { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 64px; align-items: start; }
+  h1 { font-size: clamp(2.2rem, 4.4vw, 3.2rem); margin-bottom: 0; }
+  .rule { display: block; width: 56px; height: 4px; border-radius: 2px; background: var(--magenta); margin: 24px 0; }
+  .lead { margin-bottom: 0; }
+  .aside { font-size: 15px; color: var(--muted); margin: 16px 0 0; }
+  .block { border-top: 1px solid var(--line); margin-top: 32px; padding-top: 24px; }
+  .label { font-size: 13px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--magenta-dark); margin: 0 0 12px; }
+  .block p, .block .check { margin: 0; }
+  .block .check li { margin-bottom: .7em; }
+  .block .small { font-size: 15px; color: var(--muted); margin-top: 12px; }
+  .steps { margin: 0; padding-left: 1.3em; }
+  .steps li { margin-bottom: .6em; padding-left: .2em; }
+  .steps li::marker { color: var(--magenta); font-weight: 700; }
+
+  .panel { position: sticky; top: calc(var(--header-h) + 24px); background: #fff; border: 1px solid var(--line); border-top: 4px solid var(--magenta); border-radius: var(--radius); padding: 32px; box-shadow: 0 24px 48px rgba(168,37,111,.08); }
+  .form-title { font-size: 1.5rem; margin-bottom: 20px; }
+  .row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .field { display: grid; gap: 6px; margin-bottom: 16px; }
+  .field label { font-weight: 600; font-size: 15px; color: var(--ink); }
+  .opt { font-weight: 400; color: var(--muted); }
+  .field input { font: 400 16px/1.5 var(--sans); color: var(--text); background: #fff; border: 1px solid #d8ced3; border-radius: 12px; padding: 12px 14px; width: 100%; }
+  .field input:focus { outline: none; border-color: var(--magenta); box-shadow: 0 0 0 3px rgba(202,50,141,.18); }
+  .opt-in { display: flex; gap: 12px; align-items: flex-start; font-size: 14px; line-height: 1.55; color: var(--text); margin: 4px 0 20px; cursor: pointer; }
+  .opt-in input { width: 20px; height: 20px; margin: 2px 0 0; flex: none; accent-color: var(--magenta); }
+  .hp { position: absolute; left: -9999px; }
+  .error { background: var(--magenta-soft); color: var(--magenta-dark); border-radius: 10px; padding: 12px 14px; font-size: 15px; }
+  .form .btn { width: 100%; cursor: pointer; }
+  .form .btn:disabled { opacity: .7; cursor: default; }
+  .privacy { font-size: 13px; color: var(--muted); margin: 14px 0 0; text-align: center; }
+
+  .sent { text-align: center; padding: 40px 12px; }
+  .sent svg { margin: 0 auto 16px; }
+  .sent h2 { font-size: 1.5rem; }
+  .sent p { color: var(--muted); margin: 0; }
+
+  @media (max-width: 900px) {
+    .give { grid-template-columns: 1fr; gap: 40px; }
+    .panel { position: static; padding: 24px 20px; }
+    .row { grid-template-columns: 1fr; gap: 0; }
+  }
+</style>
