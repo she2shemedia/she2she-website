@@ -34,11 +34,11 @@ Entering adds you to the She2She Media email list. You can unsubscribe at any ti
 
 ## 5. Choosing the winner
 
-On **Monday, November 30, 2026 at 12:00pm Eastern Time**, I'll number every eligible entry in the order it was received and choose one winner with a random number generator. The draw will be recorded. Your odds of winning depend on how many eligible entries there are.
+On **Monday, November 30, 2026 at 12:00pm Eastern Time**, I'll number every eligible entry in the order it was received and use a random number generator to choose one winner, then a first runner-up and a second runner-up from the remaining entries. The draw will be recorded. Your odds of winning depend on how many eligible entries there are.
 
 ## 6. Notifying the winner
 
-I'll email the winner at the address they entered with by December 1, 2026. The winner has **10 days** from that email to reply and confirm they're eligible. If the winner doesn't reply in time, isn't eligible, or declines the prize, I'll draw another winner from the remaining entries.
+I'll email the winner at the address they entered with by December 1, 2026. The winner must reply and confirm they're eligible by **Thursday, December 10, 2026 at 11:59pm Eastern Time**. If the winner doesn't reply by then, isn't eligible, or declines the prize, the prize goes to the **first runner-up**, who will then have 5 days from my email to reply. If the first runner-up doesn't reply in time, isn't eligible, or declines, the prize goes to the second runner-up on the same terms. If no one claims it, I may draw again from the remaining entries.
 
 ## 7. The prize
 
@@ -47,13 +47,15 @@ One winner receives one 3-page website designed and built in code by She2She Med
 - A new 3-page website (for example Home, About and Contact) in the winner's existing brand
 - Mobile-first design, a contact form or booking link, and basic SEO
 - Website copy written by She2She Media, or the winner's own copy if they already have it
-- 14 days of post-launch fixes, then a handover to the winner's own accounts
+- 2 rounds of revisions, then a handover to the winner's own accounts
+
+**Revisions.** A round of revisions is one consolidated list of changes sent together, which I make in one batch. Two rounds are included. Changes after that, or new features and pages, are available at She2She Media's regular rates.
 
 **Ownership.** When the website is finished and handed over, the website and all of its files belong to the winner, with no strings attached. There is no contract, subscription or ongoing fee. After handover, She2She Media has no obligation to make further changes. Future updates can be made through She2She Media's website care plan at its regular price, or the winner may give their files to any developer of their choice.
 
 The prize does **not** include: a domain name or domain renewal; branding, a logo, or brand design (the winner's colors, fonts and logo need to be decided already); photography; additional pages; a Wix build; changes to or migration of an existing website; or ongoing website care. Optional services, such as website care or branding, are available at She2She Media's regular prices and are never required.
 
-**Timeline.** I aim to have the website live by December 31, 2026. That depends on the winner sending their logo, brand details, any existing copy and photos, and their feedback promptly. If the winner doesn't respond to project emails for 30 days, the prize may be forfeited.
+**Timeline.** I aim to have the website live by December 31, 2026. That depends on the winner sending their logo, brand details, any existing copy and photos, and their feedback promptly. If the prize passes to a runner-up, the timeline moves back by the same amount. If the winner doesn't respond to project emails for 30 days, the prize may be forfeited.
 
 The prize can't be exchanged for cash or transferred to another person or business. I may substitute features of equal or greater value if something listed isn't available.
 
