@@ -5,11 +5,22 @@ import Torn from '../components/Torn.astro';
 import CtaBand from '../components/CtaBand.astro';
 import LoopVideo from '../components/LoopVideo.astro';
 import { spotsTotal, spotsLeft } from '../special';
+import { giveawayClosesIso } from '../giveaway';
 ---
 <Base
   title="Websites & Marketing for Women-Owned Businesses | She2She Media"
   description="Clear, fast websites and social media for women-owned businesses. Plain language, real prices, and a free 30-minute consultation."
 >
+  <!-- Giveaway banner: hides itself once entries close (date in src/giveaway.ts). Delete this block after the giveaway. -->
+  <a href="/giveaway" class="give-bar" id="give-bar">
+    <span class="gb-tag">Giveaway</span>
+    <span class="gb-text">Win a 3-page website, <span class="gb-em">"actually free."</span> Entries close Monday, November 30 at 11am Eastern.</span>
+    <span class="gb-cta">Enter now <span aria-hidden="true">&rarr;</span></span>
+  </a>
+  <script is:inline define:vars={{ closesAt: giveawayClosesIso }}>
+    if (Date.now() >= Date.parse(closesAt)) { var gb = document.getElementById('give-bar'); if (gb) gb.remove(); }
+  </script>
+
   <section class="hero">
     <div class="container hero-grid">
       <div class="copy" data-stagger>
@@ -237,4 +248,10 @@ import { spotsTotal, spotsLeft } from '../special';
     .paper-wrap { max-width: 480px; }
   }
   @media (max-width: 520px) { .steps { grid-template-columns: 1fr; } .paper { padding: 36px 24px 28px; } .promo-badge { width: 84px; height: 84px; right: -6px; } .deco { right: -12px; } .deco2 { left: -10px; } }
+
+  .give-bar { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 8px 16px; padding: 12px 24px; background: var(--ink); color: #fff; text-decoration: none; font-size: 15px; line-height: 1.4; text-align: center; }
+  .give-bar:hover .gb-cta, .give-bar:focus-visible .gb-cta { text-decoration: underline; }
+  .gb-tag { font-size: 12px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; background: var(--magenta); color: #fff; padding: 4px 10px; border-radius: 999px; }
+  .gb-em { font-family: var(--serif); font-size: 1.1em; color: var(--lilac); }
+  .gb-cta { font-weight: 600; color: var(--lilac); white-space: nowrap; }
 </style>

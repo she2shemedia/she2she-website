@@ -1,5 +1,6 @@
 ---
 import Base from '../layouts/Base.astro';
+import { giveawayClosesIso } from '../giveaway';
 // Giveaway entries are emailed to Anita through Web3Forms (same key as the audit form).
 const WEB3FORMS_KEY = '2ac767b0-0741-420d-bfe1-79cc7353daab';
 
@@ -7,8 +8,8 @@ const WEB3FORMS_KEY = '2ac767b0-0741-420d-bfe1-79cc7353daab';
 const NAME = 'The She2She "Actually Free" Website Giveaway';
 const CLOSES_TEXT = 'Monday, November 30 at 11am Eastern';
 const DRAW_TEXT = 'Monday, November 30 at 12pm Eastern';
-// Entries close at this moment (11am Eastern = 16:00 UTC). The form hides itself after this.
-const CLOSES_ISO = '2026-11-30T16:00:00Z';
+// The closing moment lives in src/giveaway.ts (shared with the home page banner).
+const CLOSES_ISO = giveawayClosesIso;
 ---
 <Base
   title={`Win a Free 3-Page Website | ${NAME} | She2She Media`}
