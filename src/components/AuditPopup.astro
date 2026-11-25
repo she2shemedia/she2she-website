@@ -22,7 +22,10 @@
 
 <script is:inline>
   (function () {
-    var DELAY = 10000;                 // how long before the popup appears, in milliseconds
+    var DELAY = 30000;                 // shows after 30 seconds on the page...
+    var SCROLL_POINT = 0.5;            // ...or once they've scrolled halfway down, whichever comes first
+    var MIN_TIME = 10000;              // but never in the first 10 seconds, even for fast scrollers
+    var AFTER_COOKIES = 10000;         // and not until 10 seconds after the cookie pop-up closes
     var QUIET_DAYS = 30;               // how long it stays away after someone closes it
     var KEY = 's2s-audit-pop';
     var pop = document.getElementById('audit-pop');
@@ -40,6 +43,8 @@
 
     var card = pop.querySelector('.ap-card');
     var before = null;
+    var started = Date.now();
+    var shown = false;
     function close() {
       pop.classList.remove('is-open');
       store(String(Date.now()));
@@ -60,12 +65,19 @@
     pop.querySelectorAll('[data-ap-close]').forEach(function (el) { el.addEventListener('click', close); });
     document.getElementById('ap-go').addEventListener('click', function () { store('done'); });
 
+    var waitingForCookies = false;
     function open() {
-      // If the cookie pop-up is still waiting for an answer, show this a few seconds after it closes instead.
+      if (shown) return;
+      // If the cookie pop-up is still waiting for an answer, show this a while after it closes instead.
       if (window.s2sConsentPending) {
-        document.addEventListener('s2s:consent-closed', function () { setTimeout(open, 4000); }, { once: true });
+        if (!waitingForCookies) {
+          waitingForCookies = true;
+          document.addEventListener('s2s:consent-closed', function () { setTimeout(open, AFTER_COOKIES); }, { once: true });
+        }
         return;
       }
+      shown = true;
+      window.removeEventListener('scroll', onScroll);
       var chat = document.querySelector('.chat.is-open');
       if (chat) { window.s2sAuditPopPending = false; return; } // they're already chatting; don't interrupt
       before = document.activeElement;
@@ -73,7 +85,20 @@
       requestAnimationFrame(function () { pop.classList.add('is-open'); card.focus(); });
       document.addEventListener('keydown', onKey);
     }
-    setTimeout(open, DELAY);
+
+    var timer = setTimeout(open, DELAY);
+    var scrolled = false;
+    function onScroll() {
+      if (scrolled || shown) return;
+      var h = document.documentElement.scrollHeight - window.innerHeight;
+      if (h <= 0 || window.scrollY / h < SCROLL_POINT) return;
+      scrolled = true;
+      window.removeEventListener('scroll', onScroll);
+      clearTimeout(timer);
+      var left = MIN_TIME - (Date.now() - started);
+      setTimeout(open, left > 0 ? left : 0);
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
   })();
 </script>
 

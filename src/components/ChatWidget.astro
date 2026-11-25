@@ -65,8 +65,8 @@ const email = 'mailto:anita@she2shemedia.com?subject=' + encodeURIComponent('Que
     if (!launcher || !panel) return;
 
     var SEEN_KEY = 's2s-chat-greeted';
-    var DELAY = 10000; // how long before the chat greets a visitor, in milliseconds
-    var AFTER_POPUP = 20000; // if the audit popup showed first, how long after it closes
+    var DELAY = 60000; // how long before the chat greets a visitor, in milliseconds
+    var AFTER_POPUP = 45000; // if the audit popup showed first, how long after it closes
     var timer = null;
 
     function markSeen() { try { sessionStorage.setItem(SEEN_KEY, '1'); } catch (e) {} }
@@ -141,11 +141,8 @@ const email = 'mailto:anita@she2shemedia.com?subject=' + encodeURIComponent('Que
         if (seen() || root.classList.contains('is-open')) return;
         markSeen();
         chime();
-        if (window.matchMedia('(min-width: 768px)').matches) {
-          open(true);
-        } else if (teaser) {
-          teaser.hidden = false;
-        }
+        // A small speech bubble on every screen size, rather than opening the full chat panel.
+        if (teaser) teaser.hidden = false;
       }, delay);
     }
     if (!seen() && location.pathname.indexOf('/book-online') !== 0) {
