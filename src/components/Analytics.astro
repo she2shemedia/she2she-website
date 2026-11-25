@@ -32,6 +32,7 @@ const GA_ID = 'G-GYKX1HG133';
       (function () {
         var KEY = 's2s-consent';
         var KEEP_DAYS = 365;
+        var SHOW_DELAY = 2000; // pause before the pop-up first appears, in milliseconds
         var loaded = false;
         var pop = document.getElementById('cookie-banner');
         var card = pop.querySelector('.cc-card');
@@ -91,7 +92,8 @@ const GA_ID = 'G-GYKX1HG133';
           window.s2sConsentPending = true;
           before = document.activeElement;
           pop.hidden = false;
-          requestAnimationFrame(function () { pop.classList.add('is-open'); card.focus(); });
+          // Two frames so the browser draws the hidden starting position before sliding up.
+          requestAnimationFrame(function () { requestAnimationFrame(function () { pop.classList.add('is-open'); card.focus(); }); });
           document.addEventListener('keydown', onKey);
         }
         function hide() {
@@ -128,7 +130,12 @@ const GA_ID = 'G-GYKX1HG133';
         var choice = read();
         if (choice === 'granted') loadGA();
         // The privacy page explains the choice in full, so the pop-up doesn't cover it.
-        else if (choice === null && location.pathname.indexOf('/privacy') !== 0) show();
+        // It appears after a short pause (SHOW_DELAY) so the page settles first. The audit popup
+        // is told straight away that the cookie pop-up is coming, so it keeps waiting its turn.
+        else if (choice === null && location.pathname.indexOf('/privacy') !== 0) {
+          window.s2sConsentPending = true;
+          setTimeout(show, SHOW_DELAY);
+        }
       })();
     </script>
   </>
@@ -139,10 +146,11 @@ const GA_ID = 'G-GYKX1HG133';
   .cc[hidden] { display: none; }
   .cc-backdrop { position: absolute; inset: 0; background: rgba(29,26,28,.45); opacity: 0; transition: opacity .25s ease; }
   /* Computers: title in white on the magenta band, the cookie duo small in the bottom-left corner, text centered beside them */
-  .cc-card { position: relative; width: 100%; max-width: 680px; display: grid; grid-template-columns: 236px 1fr; grid-template-areas: "title title" "img body"; background: #fff; border-radius: 24px; overflow: hidden; box-shadow: 0 30px 70px rgba(29,26,28,.3); text-align: center; opacity: 0; transform: translateY(24px) scale(.97); transition: opacity .3s ease, transform .35s cubic-bezier(.22,.61,.36,1); }
+  .cc-card { position: relative; width: 100%; max-width: 680px; display: grid; grid-template-columns: 236px 1fr; grid-template-areas: "title title" "img body"; background: #fff; border-radius: 24px; overflow: hidden; box-shadow: 0 30px 70px rgba(29,26,28,.3); text-align: center; opacity: 0; transform: translateY(90px) scale(.98); transition: opacity .3s ease, transform .35s cubic-bezier(.22,.61,.36,1); }
   .cc-card:focus { outline: none; }
-  .cc.is-open .cc-backdrop { opacity: 1; }
-  .cc.is-open .cc-card { opacity: 1; transform: none; }
+  .cc.is-open .cc-backdrop { opacity: 1; transition: opacity .9s ease; }
+  /* Opening: a slow, gentle slide up (1.6s). Closing still uses the quicker timing above. */
+  .cc.is-open .cc-card { opacity: 1; transform: none; transition: opacity 1.1s ease, transform 1.6s cubic-bezier(.16,.84,.3,1); }
   .cc-band { display: none; position: absolute; left: 0; right: 0; top: 0; height: 74px; background: var(--magenta); }
   .cc-card h2 { grid-area: title; margin: 0; padding: 26px 32px 24px; background: var(--magenta); color: #fff; font-size: 1.75rem; }
   .cc-cookie { grid-area: img; position: relative; display: block; width: 228px; max-width: none; height: auto; align-self: end; margin: 0 0 10px 14px; }
@@ -165,5 +173,5 @@ const GA_ID = 'G-GYKX1HG133';
     .cc-card p { font-size: 15px; margin-bottom: 18px; max-width: none; text-align: center; }
     .cc-actions .btn { flex: 1 1 140px; }
   }
-  @media (prefers-reduced-motion: reduce) { .cc-backdrop, .cc-card { transition: none; } }
+  @media (prefers-reduced-motion: reduce) { .cc-backdrop, .cc-card, .cc.is-open .cc-backdrop, .cc.is-open .cc-card { transition: none; } }
 </style>
