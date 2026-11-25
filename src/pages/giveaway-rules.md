@@ -1,11 +1,11 @@
 ---
 layout: ../layouts/Prose.astro
 title: Giveaway Rules | She2She Media
-description: Official rules for The Actually Free Website Giveaway from She2She Media.
+description: Official rules for the She2She "Actually Free" Website Giveaway from She2She Media.
 heading: Giveaway Rules
 ---
 
-**The Actually Free Website Giveaway**
+**The She2She "Actually Free" Website Giveaway**
 No purchase necessary to enter or win. A purchase will not increase your chances of winning.
 
 ## 1. Sponsor
@@ -42,12 +42,14 @@ I'll email the winner at the address they entered with by December 1, 2026. The 
 
 ## 7. The prize
 
-One winner receives one 3-page website designed and built in code by She2She Media. Approximate retail value: **$1,300**. The prize includes:
+One winner receives one 3-page website designed and built in code by She2She Media. Approximate retail value: **$297**, the price of the same website under She2She Media's current rebrand special, which carries the same testimonial and portfolio terms as this prize (section 9). The prize includes:
 
 - A new 3-page website (for example Home, About and Contact) in the winner's existing brand
 - Mobile-first design, a contact form or booking link, and basic SEO
 - Website copy written by She2She Media, or the winner's own copy if they already have it
-- 14 days of post-launch fixes, then a handover to the winner's own accounts, after which the website belongs to the winner
+- 14 days of post-launch fixes, then a handover to the winner's own accounts
+
+**Ownership.** When the website is finished and handed over, the website and all of its files belong to the winner, with no strings attached. There is no contract, subscription or ongoing fee. After handover, She2She Media has no obligation to make further changes. Future updates can be made through She2She Media's website care plan at its regular price, or the winner may give their files to any developer of their choice.
 
 The prize does **not** include: a domain name or domain renewal; branding, a logo, or brand design (the winner's colors, fonts and logo need to be decided already); photography; additional pages; a Wix build; changes to or migration of an existing website; or ongoing website care. Optional services, such as website care or branding, are available at She2She Media's regular prices and are never required.
 
@@ -57,11 +59,14 @@ The prize can't be exchanged for cash or transferred to another person or busine
 
 ## 8. Taxes
 
-The winner is responsible for any taxes on the prize. Because the approximate retail value is $600 or more, the winner will need to provide a completed IRS Form W-9, and She2She Media will issue a Form 1099 for the prize value. Please talk to a tax professional if you have questions about how this affects you.
+The winner is responsible for any taxes on the prize. Please talk to a tax professional if you have questions about how this affects you.
 
-## 9. Showing the finished website
+## 9. Testimonial and showing the finished website
 
-By accepting the prize, the winner agrees that She2She Media may show the finished website, the business name and the winner's first name on the She2She Media website and social media, without further payment. A testimonial is welcome but not required.
+The prize costs the winner no money. In return, as a condition of accepting the prize, the winner agrees to:
+
+- Provide a short written testimonial about working with She2She Media once the website is live
+- Allow She2She Media to show the finished website, the testimonial, the business name and the winner's first name on the She2She Media website and social media, without further payment
 
 ## 10. Privacy
 
