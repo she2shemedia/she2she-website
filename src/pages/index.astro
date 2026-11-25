@@ -12,10 +12,11 @@ import { giveawayClosesIso } from '../giveaway';
   description="Clear, fast websites and social media for women-owned businesses. Plain language, real prices, and a free 30-minute consultation."
 >
   <!-- Giveaway banner: hides itself once entries close (date in src/giveaway.ts). Delete this block after the giveaway. -->
-  <a href="/giveaway" class="give-bar" id="give-bar">
-    <span class="gb-tag">Giveaway</span>
-    <span class="gb-text">Win a 3-page website, <span class="gb-em">"actually free."</span> Entries close Monday, November 30 at 11am Eastern.</span>
-    <span class="gb-cta">Enter now <span aria-hidden="true">&rarr;</span></span>
+  <a href="/giveaway" class="give-bar" id="give-bar" aria-label="Giveaway: win a 3-page website, actually free. Entries close Monday, November 30 at 11am Eastern. Enter now.">
+    <span class="gb-track" aria-hidden="true">
+      <span class="gb-set"><span class="gb-item"><span class="gb-tag">Giveaway</span><span class="gb-text">Win a 3-page website, <span class="gb-em">"actually free."</span> Entries close Monday, November 30 at 11am Eastern.</span><span class="gb-cta">Enter now &rarr;</span></span><span class="gb-item"><span class="gb-tag">Giveaway</span><span class="gb-text">Win a 3-page website, <span class="gb-em">"actually free."</span> Entries close Monday, November 30 at 11am Eastern.</span><span class="gb-cta">Enter now &rarr;</span></span><span class="gb-item"><span class="gb-tag">Giveaway</span><span class="gb-text">Win a 3-page website, <span class="gb-em">"actually free."</span> Entries close Monday, November 30 at 11am Eastern.</span><span class="gb-cta">Enter now &rarr;</span></span></span>
+      <span class="gb-set"><span class="gb-item"><span class="gb-tag">Giveaway</span><span class="gb-text">Win a 3-page website, <span class="gb-em">"actually free."</span> Entries close Monday, November 30 at 11am Eastern.</span><span class="gb-cta">Enter now &rarr;</span></span><span class="gb-item"><span class="gb-tag">Giveaway</span><span class="gb-text">Win a 3-page website, <span class="gb-em">"actually free."</span> Entries close Monday, November 30 at 11am Eastern.</span><span class="gb-cta">Enter now &rarr;</span></span><span class="gb-item"><span class="gb-tag">Giveaway</span><span class="gb-text">Win a 3-page website, <span class="gb-em">"actually free."</span> Entries close Monday, November 30 at 11am Eastern.</span><span class="gb-cta">Enter now &rarr;</span></span></span>
+    </span>
   </a>
   <script is:inline define:vars={{ closesAt: giveawayClosesIso }}>
     if (Date.now() >= Date.parse(closesAt)) { var gb = document.getElementById('give-bar'); if (gb) gb.remove(); }
@@ -249,9 +250,20 @@ import { giveawayClosesIso } from '../giveaway';
   }
   @media (max-width: 520px) { .steps { grid-template-columns: 1fr; } .paper { padding: 36px 24px 28px; } .promo-badge { width: 84px; height: 84px; right: -6px; } .deco { right: -12px; } .deco2 { left: -10px; } }
 
-  .give-bar { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 8px 16px; padding: 12px 24px; background: var(--ink); color: #fff; text-decoration: none; font-size: 15px; line-height: 1.4; text-align: center; }
-  .give-bar:hover .gb-cta, .give-bar:focus-visible .gb-cta { text-decoration: underline; }
+  .give-bar { display: block; overflow: hidden; background: var(--ink); color: #fff; text-decoration: none; font-size: 15px; line-height: 1.4; padding: 12px 0; white-space: nowrap; }
+  .gb-track { display: flex; width: max-content; animation: gb-scroll 40s linear infinite; }
+  .give-bar:hover .gb-track, .give-bar:focus-visible .gb-track { animation-play-state: paused; }
+  .gb-set { display: flex; flex: none; }
+  .gb-item { display: inline-flex; align-items: center; gap: 14px; padding-right: 56px; }
   .gb-tag { font-size: 12px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; background: var(--magenta); color: #fff; padding: 4px 10px; border-radius: 999px; }
-  .gb-em { font-family: var(--serif); font-size: 1.1em; color: var(--lilac); }
-  .gb-cta { font-weight: 600; color: var(--lilac); white-space: nowrap; }
+  .gb-em, .gb-cta { color: var(--magenta); -webkit-text-stroke: 2px #fff; paint-order: stroke fill; }
+  .gb-em { font-family: var(--serif); font-size: 1.2em; letter-spacing: .01em; }
+  .gb-cta { font-weight: 700; }
+  .give-bar:hover .gb-cta, .give-bar:focus-visible .gb-cta { text-decoration: underline; }
+  @keyframes gb-scroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+  @media (prefers-reduced-motion: reduce) {
+    .gb-track { animation: none; width: auto; justify-content: center; }
+    .gb-set + .gb-set, .gb-set .gb-item + .gb-item { display: none; }
+    .gb-item { padding: 0 16px; white-space: normal; flex-wrap: wrap; justify-content: center; text-align: center; }
+  }
 </style>
