@@ -63,8 +63,19 @@ const year = new Date().getFullYear();
   a:not(.btn):not(.social a):hover::after, a:not(.btn):not(.social a):focus-visible::after { transform: scaleX(1); transform-origin: left; }
   @media (prefers-reduced-motion: no-preference) { a:not(.btn):not(.social a)::after { transition: transform .45s cubic-bezier(.22,.61,.36,1); } }
   .social { display: flex; gap: 12px; margin-top: 12px; flex-wrap: wrap; }
-  .social a { display: inline-flex; align-items: center; justify-content: center; width: 44px; height: 44px; border-radius: 50%; border: 1px solid #3a3337; transition: background .15s, border-color .15s; }
-  .social a:hover { background: var(--magenta); border-color: var(--magenta); text-decoration: none; }
+  /* Glossy 3D magenta buttons with white icons; on hover they flip to white with a magenta icon */
+  .social a { display: inline-flex; align-items: center; justify-content: center; width: 48px; height: 48px; border-radius: 50%; border: 0; color: #fff; text-decoration: none;
+    background:
+      radial-gradient(circle at 32% 24%, rgba(255,255,255,.6) 0, rgba(255,255,255,.18) 18%, rgba(255,255,255,0) 34%),
+      radial-gradient(circle at 50% 45%, #e04aa2 0%, #ca328d 55%, #94195f 100%);
+    box-shadow: inset 0 -4px 7px rgba(60,0,35,.35), inset 0 3px 5px rgba(255,255,255,.3), 0 5px 12px rgba(0,0,0,.5); }
+  .social a svg { filter: drop-shadow(0 1.5px 1px rgba(60,0,35,.35)); }
+  .social a:hover, .social a:focus-visible { color: var(--magenta);
+    background:
+      radial-gradient(circle at 32% 24%, rgba(255,255,255,1) 0, rgba(255,255,255,.6) 18%, rgba(255,255,255,0) 34%),
+      radial-gradient(circle at 50% 45%, #ffffff 0%, #f6eaf1 55%, #d8bfcd 100%);
+    box-shadow: inset 0 -4px 7px rgba(120,40,90,.25), inset 0 3px 5px rgba(255,255,255,.8), 0 5px 12px rgba(0,0,0,.5); }
+  .social a:hover svg, .social a:focus-visible svg { filter: drop-shadow(0 1px 1px rgba(120,20,80,.25)); }
   /* Coin spin: the icon flips around its vertical axis a couple of times and settles, like a coin spun on a table */
   @media (prefers-reduced-motion: no-preference) {
     .social a:hover, .social a:focus-visible { animation: coin-spin 2.2s cubic-bezier(.08,.8,.2,1); }
