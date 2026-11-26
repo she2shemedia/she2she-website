@@ -6,6 +6,31 @@ import CtaBand from '../components/CtaBand.astro';
 import LoopVideo from '../components/LoopVideo.astro';
 import { spotsTotal, spotsLeft } from '../special';
 import { giveawayClosesIso } from '../giveaway';
+
+// Recent work slider on the homepage. To add a client, add an entry here: the recording
+// and still image go in public/images/work/. Projects show in this order.
+const projects = [
+  {
+    name: 'Dogs That Cook',
+    url: 'https://dogsthatcook.com',
+    domain: 'dogsthatcook.com',
+    video: '/images/work/dogs-that-cook.mp4',
+    poster: '/images/work/dogs-that-cook.jpg',
+    w: 1400, h: 716,
+    alt: 'A screen recording scrolling down the Dogs That Cook website homepage and its animations',
+    blurb: "A real recipe blog, hosted by two Jack Russell terriers. I built a searchable recipe database with filters by ingredient, diet and meal type, in a playful brand that doesn't get in the way of the food.",
+  },
+  {
+    name: 'Elevare Franchise Solutions',
+    url: 'https://elevarefranchise.com',
+    domain: 'elevarefranchise.com',
+    video: '/images/work/elevare.mp4',
+    poster: '/images/work/elevare.jpg',
+    w: 1400, h: 724,
+    alt: 'A screen recording scrolling down the Elevare Franchise Solutions website homepage',
+    blurb: 'Fractional franchise leadership for emerging and growing franchise brands. I built a new website, a brand standards guide, a HubSpot contact form and branded email templates, so the online presence matches the level of the work.',
+  },
+];
 ---
 <Base
   title="Websites & Marketing for Women-Owned Businesses | She2She Media"
@@ -115,30 +140,150 @@ import { giveawayClosesIso } from '../giveaway';
     </div>
   </section>
 
-  <section class="section work-section">
-    <div class="container work">
-      <a href="https://dogsthatcook.com" class="browser" aria-label="Visit dogsthatcook.com">
-        <span class="chrome" aria-hidden="true"><i></i><i></i><i></i><b>dogsthatcook.com</b></span>
-        <LoopVideo src="/images/work/dogs-that-cook.mp4" poster="/images/work/dogs-that-cook.jpg" alt="A screen recording scrolling down the Dogs That Cook website homepage and its animations" width={1400} height={716} />
-      </a>
-      <div>
-        <span class="eyebrow">Recent work</span>
-        <h2>Dogs That Cook</h2>
-        <p>A real recipe blog, hosted by two Jack Russell terriers. I built a searchable recipe database with filters by ingredient, diet and meal type, in a playful brand that doesn't get in the way of the food.</p>
+  <section class="section work-section" aria-roledescription="carousel" aria-label="Recent work">
+    <div class="container">
+      <div class="work-clip">
+        <div class="work-track">
+          {projects.map((p, i) => (
+            <div class="work slide" role="group" aria-roledescription="slide" aria-label={`${i + 1} of ${projects.length}: ${p.name}`} data-name={p.name}>
+              <a href={p.url} class="browser" aria-label={`Visit ${p.domain}`} tabindex={i === 0 ? undefined : -1}>
+                <span class="chrome" aria-hidden="true"><i></i><i></i><i></i><b>{p.domain}</b></span>
+                <LoopVideo src={p.video} poster={p.poster} alt={p.alt} width={p.w} height={p.h} managed />
+              </a>
+              <div>
+                <span class="eyebrow">Recent work</span>
+                <h2>{p.name}</h2>
+                <p>{p.blurb}</p>
+              </div>
+            </div>
+          ))}
+        </div>
       </div>
-    </div>
-    <div class="container work work-flip">
-      <a href="https://elevarefranchise.com" class="browser" aria-label="Visit elevarefranchise.com">
-        <span class="chrome" aria-hidden="true"><i></i><i></i><i></i><b>elevarefranchise.com</b></span>
-        <LoopVideo src="/images/work/elevare.mp4" poster="/images/work/elevare.jpg" alt="A screen recording scrolling down the Elevare Franchise Solutions website homepage" width={1400} height={724} />
-      </a>
-      <div>
-        <h2>Elevare Franchise Solutions</h2>
-        <p>Fractional franchise leadership for emerging and growing franchise brands. I built a new website, a brand standards guide, a HubSpot contact form and branded email templates, so the online presence matches the level of the work.</p>
-        <a href="/work">See more work</a>
+      <div class="work-controls">
+        <button class="ws-arrow" type="button" data-prev aria-label="Previous project">
+          <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <div class="ws-dots">
+          {projects.map((p, i) => (
+            <button class="ws-dot" type="button" data-dot={i} aria-label={`Show ${p.name}`} aria-current={i === 0 ? 'true' : undefined}></button>
+          ))}
+        </div>
+        <button class="ws-arrow" type="button" data-next aria-label="Next project">
+          <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M9 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <a href="/work" class="ws-more">See more work</a>
       </div>
     </div>
   </section>
+
+  <script>
+    // Recent work slider. Each project's recording plays once, then the whole project
+    // (screenshot and description) swipes left to the next one, looping round endlessly.
+    // It pauses off screen, waits while someone is hovering or using the controls,
+    // and never moves on its own for visitors who've turned on "reduce motion".
+    const section = document.querySelector<HTMLElement>('.work-section');
+    const track = section?.querySelector<HTMLElement>('.work-track');
+    if (section && track && track.children.length > 1) {
+      const GAP = 80;               // space between projects while they slide, in pixels
+      const FALLBACK = 14000;       // if a recording can't play, move on after this long
+      const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const names = Array.from(track.children).map((el) => (el as HTMLElement).dataset.name);
+      const dots = Array.from(section.querySelectorAll<HTMLButtonElement>('.ws-dot'));
+      let busy = false, visible = false, holding = false, timer = 0;
+
+      const slides = () => Array.from(track.children) as HTMLElement[];
+      const current = () => names.indexOf(slides()[0].dataset.name);
+      const video = (el: Element) => el.querySelector('video') as HTMLVideoElement | null;
+      const shift = (n: number) => `translateX(calc(${-n} * (100% + ${GAP}px)))`;
+
+      function settle() {
+        slides().forEach((el, i) => {
+          const v = video(el);
+          if (v && i > 0) { v.pause(); v.currentTime = 0; }
+          el.setAttribute('aria-hidden', i === 0 ? 'false' : 'true');
+          el.querySelectorAll('a').forEach((a) => (i === 0 ? a.removeAttribute('tabindex') : a.setAttribute('tabindex', '-1')));
+        });
+        dots.forEach((d, i) => (i === current() ? d.setAttribute('aria-current', 'true') : d.removeAttribute('aria-current')));
+        play();
+      }
+
+      function play() {
+        clearTimeout(timer);
+        if (!visible || reduce) return;
+        const v = video(slides()[0]);
+        if (!v) { timer = window.setTimeout(next, FALLBACK); return; }
+        v.muted = true;
+        v.play().catch(() => { timer = window.setTimeout(next, FALLBACK); });
+      }
+
+      function move(steps: number) {
+        if (busy || steps === 0) return;
+        busy = true;
+        clearTimeout(timer);
+        const kids = slides();
+        const n = Math.abs(steps);
+        if (steps > 0) {
+          // Slide left by n projects, then move the ones that left to the end of the line.
+          track.style.transform = shift(n);
+          const done = () => {
+            for (let i = 0; i < n; i++) track.appendChild(kids[i]);
+            track.style.transition = 'none';
+            track.style.transform = 'none';
+            void track.offsetWidth;
+            track.style.transition = '';
+            busy = false; settle();
+          };
+          reduce ? done() : track.addEventListener('transitionend', done, { once: true });
+        } else {
+          // Going back: bring the earlier projects in from the left.
+          for (let i = 0; i < n; i++) track.prepend(slides()[kids.length - 1]);
+          track.style.transition = 'none';
+          track.style.transform = shift(n);
+          void track.offsetWidth;
+          track.style.transition = '';
+          track.style.transform = 'none';
+          const done = () => { busy = false; settle(); };
+          reduce ? done() : track.addEventListener('transitionend', done, { once: true });
+        }
+      }
+      const next = () => move(1);
+
+      slides().forEach((el) => {
+        const v = video(el);
+        v?.addEventListener('ended', () => {
+          if (v !== video(slides()[0])) return;
+          if (holding) { v.currentTime = 0; v.play().catch(() => {}); } else next();
+        });
+      });
+
+      section.querySelector('[data-next]')?.addEventListener('click', () => move(1));
+      section.querySelector('[data-prev]')?.addEventListener('click', () => move(-1));
+      dots.forEach((d, i) => d.addEventListener('click', () => move(i - current())));
+
+      // Hold still while someone is looking closely or using the keyboard inside it.
+      const clip = section.querySelector('.work-clip')!;
+      clip.addEventListener('mouseenter', () => (holding = true));
+      clip.addEventListener('mouseleave', () => (holding = false));
+      section.addEventListener('focusin', (e) => { if ((e.target as HTMLElement).matches(':focus-visible')) holding = true; });
+      section.addEventListener('focusout', () => (holding = false));
+
+      // Swipe on phones and tablets.
+      let x0 = 0, y0 = 0;
+      clip.addEventListener('touchstart', (e) => { const t = (e as TouchEvent).touches[0]; x0 = t.clientX; y0 = t.clientY; }, { passive: true });
+      clip.addEventListener('touchend', (e) => {
+        const t = (e as TouchEvent).changedTouches[0];
+        const dx = t.clientX - x0, dy = t.clientY - y0;
+        if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy)) move(dx < 0 ? 1 : -1);
+      }, { passive: true });
+
+      new IntersectionObserver(([e]) => {
+        visible = e.isIntersecting;
+        if (visible) play(); else { clearTimeout(timer); video(slides()[0])?.pause(); }
+      }, { threshold: 0.35 }).observe(section);
+
+      settle();
+    }
+  </script>
 
   <section class="section cream testimonial" aria-label="What clients say">
     <div class="container narrow">
@@ -241,9 +386,21 @@ import { giveawayClosesIso } from '../giveaway';
   }
   .work-section { padding-top: 56px; }
   .work { display: grid; grid-template-columns: 1.1fr .9fr; gap: 48px; align-items: center; }
-  /* The second project sits below the first, with the screenshot on the right for a zigzag */
-  .work-flip { margin-top: 72px; }
-  @media (min-width: 901px) { .work-flip { grid-template-columns: .9fr 1.1fr; } .work-flip .browser { order: 2; } }
+  /* Recent work slider: one project at a time, sliding left. The clip's padding leaves room
+     for the screenshot's shadow; the 80px gap keeps the next project out of sight. */
+  .work-clip { overflow: hidden; margin: -24px -24px -48px; padding: 24px 24px 48px; }
+  .work-track { display: flex; gap: 80px; transition: transform 1.1s cubic-bezier(.65,0,.35,1); will-change: transform; }
+  .slide { flex: 0 0 100%; min-width: 0; }
+  .work-controls { display: flex; align-items: center; gap: 14px; margin-top: 36px; }
+  .ws-arrow { width: 44px; height: 44px; border-radius: 50%; border: 1px solid var(--line); background: #fff; color: var(--ink); display: grid; place-items: center; cursor: pointer; transition: background .2s, color .2s, border-color .2s; }
+  .ws-arrow:hover, .ws-arrow:focus-visible { background: var(--magenta); border-color: var(--magenta); color: #fff; }
+  .ws-dots { display: flex; gap: 4px; }
+  .ws-dot { width: 28px; height: 28px; border: 0; background: none; padding: 0; cursor: pointer; display: grid; place-items: center; }
+  .ws-dot::before { content: ""; width: 10px; height: 10px; border-radius: 999px; background: var(--lilac); transition: width .4s ease, background .4s ease; }
+  .ws-dot[aria-current="true"]::before { width: 26px; background: var(--magenta); }
+  .ws-more { margin-left: auto; }
+  @media (prefers-reduced-motion: reduce) { .work-track { transition: none; } }
+  @media (max-width: 600px) { .ws-more { margin-left: 0; flex-basis: 100%; } .work-controls { flex-wrap: wrap; } }
   .browser { display: block; border-radius: 18px; overflow: hidden; border: 1px solid var(--line); box-shadow: 0 18px 40px rgba(0,0,0,.08); text-decoration: none; }
   .chrome { display: flex; align-items: center; gap: 6px; background: #f1edef; padding: 12px 16px; }
   .chrome i { width: 10px; height: 10px; border-radius: 50%; background: var(--lilac); }

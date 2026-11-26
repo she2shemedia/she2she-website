@@ -7,8 +7,11 @@ interface Props {
   alt: string;      // what the recording shows, read out by screen readers
   width: number;
   height: number;
+  // Set by the homepage slider, which plays each recording once and then moves to the next
+  // project itself. Managed videos don't loop and aren't started by the script below.
+  managed?: boolean;
 }
-const { src, poster, alt, width, height } = Astro.props;
+const { src, poster, alt, width, height, managed = false } = Astro.props;
 ---
 <video
   class="shot-img loop-video"
@@ -18,7 +21,8 @@ const { src, poster, alt, width, height } = Astro.props;
   height={height}
   aria-label={alt}
   muted
-  loop
+  loop={!managed}
+  data-managed={managed ? '' : undefined}
   playsinline
   preload="none"
   disablepictureinpicture
@@ -27,7 +31,7 @@ const { src, poster, alt, width, height } = Astro.props;
 <script>
   // Plays each video only while it's on screen, so it doesn't use data or battery out of view.
   // Visitors who've turned on "reduce motion" keep the still image.
-  const videos = document.querySelectorAll<HTMLVideoElement>('video.loop-video');
+  const videos = document.querySelectorAll<HTMLVideoElement>('video.loop-video:not([data-managed])');
   const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   if (!reduce && 'IntersectionObserver' in window) {
     const io = new IntersectionObserver((entries) => {
