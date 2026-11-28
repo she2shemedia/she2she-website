@@ -49,6 +49,16 @@ Whether it's a free website, a pay-monthly plan or a traditional build, these fi
 
 A good provider will answer all five without hesitating. If the answers get vague, that tells you something too.
 
+### Is there an alternative to a free website where you actually own it?
+
+Yes. There are three common routes, and all three leave the site in your name:
+
+- **Pay for a build up front.** A designer builds the site, then hands the domain, code and content over to your own accounts. After that, hosting can cost very little.
+- **A payment plan with an end date.** The same handover, with the cost spread over a set number of months. Once the last payment is made, the site is yours.
+- **Build it yourself on a website builder.** Wix and Squarespace keep the hosting, but the account, the domain and your words are yours. You can take your content and domain elsewhere if you leave.
+
+The question that separates these from a "free" website is the same every time: when the payments stop, does the website stay with you?
+
 ### A monthly plan that ends with you owning it
 
 Not every business owner has $1,300–$2,800 sitting around for a new website, and they shouldn't have to wait until they do. So She2She is launching the Pay-As-You-Grow Plan.
