@@ -4,18 +4,31 @@ import Base from '../layouts/Base.astro';
 const WEB3FORMS_KEY = '2ac767b0-0741-420d-bfe1-79cc7353daab';
 // How soon the audit arrives. Change this one line if the turnaround changes.
 const TURNAROUND = 'within 5 business days';
+
+// Short questions, also given to Google as FAQ schema so search and AI tools can quote them.
+const auditFaqs = [
+  { q: 'Is the website audit really free?', a: "Yes. There's no cost, no call required and no sales emails afterwards." },
+  { q: 'How long does it take?', a: `You'll get your review by email ${TURNAROUND}.` },
+  { q: 'Who is it for?', a: 'Small business owners, especially women-owned businesses, who want to know what to fix first on their website.' },
+];
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: auditFaqs.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })),
+};
 ---
 <Base
-  title="Free Website Audit for Women-Owned Businesses | She2She Media"
-  description="Send your website link and get a free, plain-language review with your top 3 fixes by email. No call required."
+  title="Free Website Audit for Small and Women-Owned Businesses | She2She Media"
+  description="She2She Media offers a free website audit for small businesses. Send your link and get a plain-language review with your top 3 fixes by email within 5 business days. No call required."
 >
+  <script slot="head" type="application/ld+json" set:html={JSON.stringify(schema)} />
   <section class="section">
     <div class="container audit">
       <div class="info">
         <span class="eyebrow">Free website audit</span>
         <h1>Find out what your website is quietly costing you.</h1>
         <span class="rule" aria-hidden="true"></span>
-        <p class="lead">Send me your URL. I'll go through your site the way a new customer would, then email you a short, plain-language review with the top 3 things to fix first.</p>
+        <p class="lead">She2She Media offers a free website audit for small businesses, especially women-owned ones. Send me your URL. I'll go through your site the way a new customer would, then email you a short, plain-language review with the top 3 things to fix first.</p>
 
         <div class="block">
           <h2 class="label">What I look at</h2>
@@ -36,6 +49,9 @@ const TURNAROUND = 'within 5 business days';
         <div class="block">
           <h2 class="label">The fine print</h2>
           <p>There isn't much. It's free, there's no call required, and no sales sequence afterwards. If you'd like help with the fixes, you know where I am.</p>
+          <dl class="qa">
+            {auditFaqs.map((f) => (<><dt>{f.q}</dt><dd>{f.a}</dd></>))}
+          </dl>
         </div>
       </div>
 
@@ -131,6 +147,9 @@ const TURNAROUND = 'within 5 business days';
   .label { font-size: 13px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--magenta-dark); margin: 0 0 12px; }
   .block p, .block .check { margin: 0; }
   .block .check li { margin-bottom: .7em; }
+  .qa { margin: 20px 0 0; }
+  .qa dt { font-weight: 600; color: var(--ink); margin-top: 14px; }
+  .qa dd { margin: 4px 0 0; }
 
   .panel { position: sticky; top: calc(var(--header-h) + 24px); background: #fff; border: 1px solid var(--line); border-top: 4px solid var(--magenta); border-radius: var(--radius); padding: 32px; box-shadow: 0 24px 48px rgba(168,37,111,.08); }
   .form-title { font-size: 1.5rem; margin-bottom: 20px; }
